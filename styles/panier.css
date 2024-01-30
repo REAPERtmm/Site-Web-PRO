@@ -1,0 +1,92 @@
+
+body{
+    background-color: rgb(245, 237, 237);
+}
+.div1{
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    margin: 2%;
+}
+.div2{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2%;
+    border: 3px solid;
+}
+.div3{
+    width: 98%;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;    
+}
+.div4{
+    width: auto;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2%;
+}
+.sd3-1{
+    display: flex ;
+    justify-content: left;
+    align-items: center;
+    margin: 2% ;
+}
+.sd3-2 {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    margin: 2%;
+}
+.sd4-1{
+    display: flex;
+    flex-flow: column;
+    width: 35%;
+    justify-content: left;
+    border: 2px solid;
+    justify-content: space-between;
+    padding: 1%;
+}
+.sd4-2{
+    margin: 2%;
+    width: 25%;
+    display: flex;
+    justify-content: right;
+    padding: 0% , 5%;
+}
+.bouton_coeur{
+    
+    width: 20px;
+    height: 20px;
+}
+.étape {
+    width: 5%;
+    background-color:lightgray ;
+    border:solid 2px ;
+    margin: 0% 0.1%;
+    width: 10%;
+    font-size: 100%;
+}
+.bouton_continuer {
+    background-color: lightgray;
+    border: solid 2px;
+    border-radius: 25%,5%;
+    width:fit-content;
+}
+.text_1{
+    font-size:100%;
+    margin: 1%;
+}
+.text_2{
+    font-size: 100%;
+}
+.text_3{
+    font-size: 120%;
+    padding: 0 10%;
+}
