@@ -13,7 +13,7 @@ body{
     display: flex;
     flex-flow: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     margin: 2%;
     border: 3px solid;
 }
@@ -31,6 +31,17 @@ body{
     justify-content: space-between;
     align-items: center;
     margin: 2%;
+}
+.dv2-1{
+    display: flex;
+    align-items: center;
+    flex-flow: row;
+    justify-content: space-between;
+}
+.dv2-2{
+    display: flex;
+    align-items:start;
+    flex-flow: row;
 }
 .sd3-1{
     display: flex ;
@@ -61,9 +72,8 @@ body{
     padding: 0% , 5%;
 }
 .bouton_coeur{
-    
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
 }
 .étape {
     width: 5%;
@@ -89,4 +99,52 @@ body{
 .text_3{
     font-size: 120%;
     padding: 0 10%;
+}
+.produit{
+    padding: 0 350% 0 0;
+    font-size:100%;
+    margin: 0 20%;
+}
+.prix{
+    padding: 0 40% 0 0;
+    font-size:100%;
+}
+.quant{
+    padding: 0 50% 0 0;
+    font-size:100%;
+}
+
+
+.img_pr{
+    margin: 0 2% 3% 3%;
+    width: 40%;
+}
+.nom_pr{
+    font-size: 100%;
+    margin: 0 10% 0 0;
+    padding: 5% 0;
+}
+.prix_pr{
+    font-size: 100%;
+    margin: 0 12% 0 0;
+    padding: 5% 0;
+}
+.quant_pr{
+    font-size: 100%;
+    margin: 0 6% 0 0;
+    padding: 5% 0;
+}
+.bouton_modifier{
+    margin: 4% 0;
+    width: 10%;
+}
+.modifier {
+    width: 30%;
+}
+.delet{
+    margin: 5% 0 0 2%;
+}
+.coeur{
+    align-items: flex-start;
+    width: 100%;
 }
