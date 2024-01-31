@@ -1,0 +1,20 @@
+
+#footer-img {
+    width: 50%;
+}
+
+.img-product-1{
+    background-image: url("../Assets/product-1.jpg");
+    background-position: center;
+    background-size: cover;
+    width: 70%;
+    height: 250px;
+}
+
+#acheter  {  
+margin: 20px;
+background-image: linear-gradient(to right, white, grey);
+width: 20%;
+height: 50px;
+
+}
