@@ -14,7 +14,7 @@ body{
     flex-flow: column;
     justify-content: center;
     align-items: flex-start;
-    margin: 2%;
+    margin: 0 2%;
     border: 3px solid;
 }
 .div3{
@@ -47,13 +47,13 @@ body{
     display: flex ;
     justify-content: left;
     align-items: center;
-    margin: 2% ;
+    margin: 0 2% ;
 }
 .sd3-2 {
     display: flex;
     align-items: center;
     justify-content: right;
-    margin: 2%;
+    margin: 0 2%;
 }
 .sd4-1{
     display: flex;
@@ -101,12 +101,12 @@ body{
     padding: 0 10%;
 }
 .produit{
-    padding: 0 350% 0 0;
+    padding: 0 390% 0 0;
     font-size:100%;
     margin: 0 20%;
 }
 .prix{
-    padding: 0 40% 0 0;
+    padding: 0 80% 0 0;
     font-size:100%;
 }
 .quant{
