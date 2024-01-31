@@ -1,0 +1,124 @@
+*{
+    margin: 0;
+}
+
+
+.ligne1 {
+    width: 100%;
+    text-align: start;
+    text-indent: 7.8%;
+    padding-top: 3%;
+}
+
+.right {
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10%;
+    padding-top: 3%;
+}
+
+.ligne2 {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-bottom: 2%;
+}
+
+.choice-text {
+    padding-right: 5%;
+    padding-left: 5%;
+}
+
+.left {
+    display: flex;
+    width: 70%;
+    align-items: center;
+    padding-top: 3%;
+}
+
+.box-choice {
+    background-color: lightgray;
+    padding-left: 7%;
+    padding-right: 7%;
+    border: 1px black solid;
+}
+
+
+.save-box {
+    background-color: lightgray;
+    border: 1px black solid;
+    max-width: 70%;
+}
+
+
+.custom-mid {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.img-line {
+    width: 60%;
+    margin: auto;
+    padding-bottom: 2%;
+    padding-top: 2%;
+}
+
+.other-choice {
+    text-align: start;
+    padding-left: 5%;
+}
+
+.mid-keycaps-text {
+    margin: 0;
+}
+
+.help {
+    color: red;
+    font-size: 14px;
+}
+
+.keycaps-choice-box {
+    max-width: fit-content;
+    background-color: lightgray;
+    padding-left: 5%;
+    padding-right: 5%;
+
+}
+
+.dot {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 1px black solid;
+}
+
+.grey {
+    background-color: #bbb;
+}
+
+.black {
+    background-color: rgb(48, 47, 47);
+}
+
+.peru {
+    background-color:peru;
+}
+
+.backplate {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-bottom: 1%;
+}
+
+.backplate-color-text{
+    padding-top: 3%;
+    padding-bottom: 1%;
+}
+
+.backplate-text {
+    padding-left: 2%;
+}
