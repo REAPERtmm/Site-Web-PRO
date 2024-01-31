@@ -16,68 +16,50 @@
     <link href="https://fonts.cdnfonts.com/css/penguin" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/login.css">
 </head>
 <body>
     
     <header class="unselectable">
         <div class="header">
-            <div class="header_top">
-                <div class="logo">
-                    <img src="../Assets/logo-removebg-preview.png" alt="Logo" class="logo-img">
-                    <p class="logo-name">SNOWSTORM.GG</p>
+            <div class="header-grp">
+                <div class="header_top">
+                    <div class="logo">
+                        <img src="../Assets/logo-removebg-preview.png" alt="Logo" class="logo-img">
+                        <p class="logo-name">SNOWSTORM.GG</p>
+                    </div>
+                    <div class="logo">
+                        <a href="../(page)/Search.html"><i class="fa-solid fa-cart-shopping fa-beat"></i></a>
+                        <a href="../(page)/login.html"><i class="fa-solid fa-user fa-beat"></i></a>
+                        <img src="../Assets/france-flag.webp" alt="France flag" height="40px" width="40px">
+                    </div>
                 </div>
-                <div class="logo">
-                    <a href="../(page)/Search.html"><i class="fa-solid fa-cart-shopping fa-beat"></i></a>
-                    <a href="../(page)/login.html"><i class="fa-solid fa-user fa-beat"></i></a>
-                    <img src="../Assets/france-flag.webp" alt="France flag" height="40px" width="40px">
+
+                <div class="header_bot">
+                    <div class="navbar_link">
+                        <a href="../index.html">NOS PRODUITS</a>
+                        <a href="../index.html">PERSONNALISER</a>
+                        <a href="./Search.html">GALERIE</a>
+                        <a href="../index.html">SUPPORT/SAV</a>
+                        <a href="../index.html">FAQ</a>
+                        <a href="../index.html">CONTACT</a>
+                    </div>
+                    <div class="navbar_search">
+                        <form action="" class="search">
+                            <input type="search" placeholder="Rechercher un produit">
+                        </form>
+                    </div>
                 </div>
             </div>
-
-            <div class="header_bot">
-                <div class="navbar_link">
-                    <a href="../index.html">NOS PRODUITS</a>
-                    <a href="../index.html">PERSONNALISER</a>
-                    <a href="./(page)/Search.html">GALERIE</a>
-                    <a href="../index.html">SUPPORT/SAV</a>
-                    <a href="../index.html">FAQ</a>
-                    <a href="../index.html">CONTACT</a>
-                </div>
-                <div class="navbar_search">
-                    <form action="" class="search">
-                        <input type="text" placeholder="Rechercher un produit">
-                    </form>
-                </div>
+            <div class="header__navbar--toggle">
+                <span class="header__navbar--toggle-icons"></span>
             </div>
         </div>
     </header>
 
     <section>
         <form action="" method="get">
-            <h3>Formulaire de connexion</h3>
-            <div>
-                <div>
-                    <label for="Email">Email</label>
-                    <input type="email" name="Email" placeholder="Email" id="Email" required>
-                </div>
-                <div>
-                    <label for="password">Mot de passe</label>
-                    <input type="password" name="password" placeholder="Password" id="password" required>
-                </div>
-                <div>
-                    <input type="checkbox" id="toggle-register" name="toggle-register"/>
-                    <label for="toggle-register">Se souvenir de moi</label>
-                </div>
-            </div>
-            <div>
-                <a href=""><i class="fab fa-google"></i> Google</a>
-                <input type="submit" value="Connexion"/>
-            </div>
-        </form>
-<<<<<<< Updated upstream
-=======
-
-        <form action="" method="get">
-            <h3 class="form-title">Formulaire d'inscription</h3>
+            <h3 class="form-title">Formulaire de connexion</h3>
             <div class="form-content">
                 <div>
                     <label for="Email">Email</label>
@@ -87,32 +69,17 @@
                     <label for="password">Mot de passe</label>
                     <input type="password" name="password" placeholder="Password" id="password" required>
                 </div>
-                <div>
-                    <label for="password-verified">Confirmer le mot de passe</label>
-                    <input type="password" name="password-verified" placeholder="Password" id="password-verified" required>
-                </div>
-                <div>
-                    <label for="nom">Nom</label>
-                    <input type="text" name="nom" placeholder="Nom" id="nom" required>
-                </div>
-                <div>
-                    <label for="prenom">Prénom</label>
-                    <input type="text" name="prenom" placeholder="Prenom" id="prenom" required>
-                </div>
-                <div>
-                    <label for="date">Date de naissance</label>
-                    <input type="date" name="date" id="date" required>
+                <div class="checkbox">
+                    <input type="checkbox" id="toggle-register" name="toggle-register"/>
+                    <label for="toggle-register">Se souvenir de moi</label>
                 </div>
             </div>
             <div class="form-submit">
                 <a class="social-btn" href=""><i class="fab fa-google"></i> Google</a>
-                <input class="button" type="submit" value="Valider"/>
+                <input class="button" type="submit" value="Connexion"/>
             </div>
         </form>
->>>>>>> Stashed changes
     </section>
-
-    <div class="test"></div>
 
     <footer class="footer">
         <div class="footer-container unselectable">
@@ -150,6 +117,8 @@
             </div>
         </div>
     </footer>
+    
+    <script src="../script/app.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Clavier1",
+        "price": "6854.45€",
+        "link": "../Assets/Clavier1.webp",
+        "avis": "avis tres jnqzhibzj dfbqzb fubqzfubqzf"
+    },
+    {
+        "name": "Clavier2",
+        "price": "0.55€",
+        "link": "../Assets/Clavier2.webp",
+        "avis": "avis tres jnqzhibzj dfbqzb fubqzfubqzf"
+    },
+    {
+        "name": "Clavier3",
+        "price": "123.16€",
+        "link": "../Assets/Clavier3.jpg",
+        "avis": "avis tres jnqzhibzj dfbqzb fubqzfubqzf"
+    },
+    {
+        "name": "Clavier4",
+        "price": "99.99€",
+        "link": "../Assets/Clavier4.jpg",
+        "avis": "avis tres jnqzhibzj dfbqzb fubqzfubqzf"
+    }
+]

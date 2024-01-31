@@ -1,0 +1,90 @@
+body, html{
+    background-color: #5684C1;
+}
+
+section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    min-width: 80%;
+    margin: 2em auto;
+    gap: 4em;
+}
+
+section a {
+    color: black;
+}
+
+section form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    align-items: center;
+}
+.form-title {
+    grid-column: 1;
+    grid-row: 1;
+}
+.form-content {
+    grid-column: 1;
+    grid-row: 2;
+}
+.form-content label{
+    align-self: flex-start;
+    margin: 0;
+}
+.form-submit {
+    grid-column: 2;
+    grid-row: 2;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+section form div {
+    display: flex;
+    flex-direction: column;
+}
+
+.checkbox {
+    display: block;
+    align-self: start;
+}
+
+section label{
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
+}
+section input[type="text"], section input[type="password"], section input[type="email"], section input[type="date"]{
+    height: 2.5em;
+    width: 100%;
+    border-style: solid;
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+}
+section input[type="submit"]{
+    border-style: solid;
+    border-radius: 3px;
+    padding: 10px 20px;
+    background-color: #2181ff;
+    cursor: pointer;
+    width: 100%;
+}
+section input[type="submit"]:hover{
+    background-color: #094FAC;
+}
+
+.social-btn {
+    border-style: solid;
+    border-radius: 3px;
+    border-width: 2px;
+    width: 100%;
+    background-color: #87D9FF;
+    padding: 5px;
+}
