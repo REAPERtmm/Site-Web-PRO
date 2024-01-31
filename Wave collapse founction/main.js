@@ -1,6 +1,6 @@
 // CONSTANTES :
 const WIDTH = 750;                  // int : Taille du Canevas
-const GRIDSIZE = 15;                 // int : nombre de Cell par ligne
+const GRIDSIZE = 25;                 // int : nombre de Cell par ligne
 const CELLSIZE = WIDTH / GRIDSIZE;  // int : Taille de chaque Cell
 const TILES = [                     // Array[string] : nom de chacune des Tiles possibles
   "TR",
