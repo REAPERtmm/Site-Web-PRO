@@ -1,0 +1,119 @@
+
+body{
+    background-color: rgb(245, 237, 237);
+}
+.div1{
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    margin: 2%;
+}
+.div2{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0 2%;
+    border: 3px solid;
+}
+
+.div4{
+    width: auto;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2%;
+}
+.dv2-1{
+    display: flex;
+    align-items: center;
+    flex-flow: row;
+    justify-content: space-between;
+}
+.dv2-2{
+    display: flex;
+    align-items:start;
+    flex-flow: row;
+}
+.sd4-2{
+    margin: 2%;
+    width: 25%;
+    display: flex;
+    justify-content: right;
+    padding: 0% , 5%;
+}
+.bouton_coeur{
+    width: 30px;
+    height: 30px;
+}
+.étape {
+    width: 5%;
+    background-color:lightgray ;
+    border:solid 2px ;
+    margin: 0% 0.1%;
+    width: 10%;
+    font-size: 100%;
+}
+.bouton_continuer {
+    background-color: lightgray;
+    border: solid 2px;
+    border-radius: 25%,5%;
+    width:fit-content;
+}
+
+
+.text_3{
+    font-size: 120%;
+    padding: 0 10%;
+}
+.produit{
+    padding: 0 390% 0 0;
+    font-size:100%;
+    margin: 0 20%;
+}
+.prix{
+    padding: 0 80% 0 0;
+    font-size:100%;
+}
+.quant{
+    padding: 0 50% 0 0;
+    font-size:100%;
+}
+
+
+.img_pr{
+    display: absolute;
+    margin: 0 2% 3% 3%;
+    width: 40%;
+}
+.nom_pr{
+    font-size: 100%;
+    margin: 0 10% 0 0;
+    padding: 5% 0;
+}
+.prix_pr{
+    font-size: 100%;
+    margin: 0 12% 0 0;
+    padding: 5% 0;
+}
+.quant_pr{
+    font-size: 100%;
+    margin: 0 6% 0 0;
+    padding: 5% 0;
+}
+.bouton_modifier{
+    margin: 4% 0;
+    width: 10%;
+}
+.modifier {
+    width: 30%;
+}
+.delet{
+    margin: 5% 0 0 2%;
+}
+.coeur{
+    align-items: flex-start;
+    width: 100%;
+}
