@@ -30,6 +30,7 @@ section form {
 .form-content {
     grid-column: 1;
     grid-row: 2;
+    max-width: 13em;
 }
 .form-content label{
     align-self: flex-start;
@@ -87,4 +88,8 @@ section input[type="submit"]:hover{
     width: 100%;
     background-color: #87D9FF;
     padding: 5px;
+}
+
+#error_msg {
+    color: red;
 }
