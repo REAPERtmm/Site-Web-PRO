@@ -80,9 +80,18 @@
         </div>
         <div class="other-choice">
             <div class="keycaps-line">
-                <p class="mid-keycaps-text"> Choix du Switch :</p>
+                <div class="dropdown">
+                <p class="mid-keycaps-text"> Choix du Switch : <span id="choice-keycaps-user" class="choiceuser"> choix de l'utilisateur </span></p>
                 <a class="help" href="https://www.cybertek.fr/blog/peripheriques/clavier-pc/quel-type-de-switch-choisir-pour-son-clavier" >Comment choisir son switch </a>
-                <div class="keycaps-choice-box"> Liste des switchs</div>
+                <div class="dropdown">
+                    <button class="keycaps-choice-box dropbtn" onclick="Dropdown()">Afficher les différents switch</button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <button id="Switch Bleu" onclick="SetKeycaps(this.id)" class="dropdown-button"> Switch Bleu </button>
+                        <button id="Switch Rouge" onclick="SetKeycaps(this.id)" class="dropdown-button"> Switch Rouge </button>
+                        <button id="Switch Marron" onclick="SetKeycaps(this.id)" class="dropdown-button"> Switch Marron </button>
+                    </div>
+                </div>
+                </div>
             </div>
 
             <div class="backplate-line">
@@ -178,5 +187,6 @@
             </div>
         </div>
     </footer>
-
+    
+    <script src="../script/custom.js"></script>
 </body>
