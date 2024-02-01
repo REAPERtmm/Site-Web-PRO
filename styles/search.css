@@ -8,7 +8,7 @@
 .catalogue{
     display: grid;
     grid-template-columns: repeat(4, 22%);
-    align-items: end;
+    align-items: start;
     background-color: rgb(142, 230, 200);
     padding: 10px 0px;
     gap: 5px;
@@ -18,8 +18,7 @@
 .product{
     display: flex;
     flex-direction: column;
-    width: 100%;
-    aspect-ratio: 1;
+    justify-content: center;
     background-color: rgba(0, 0, 0, .2);
     border-radius: 10px;
     padding: 10px;
@@ -27,7 +26,7 @@
 
 .title-product{
     color: black;
-    font-size: 30px;
+    font-size: 20px;
     font-style: italic;
 }
 

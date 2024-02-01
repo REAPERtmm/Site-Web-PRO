@@ -49,14 +49,9 @@
     <h1 class="Page-Count"> Page <?php if(!isset($_GET["page"])){ $_GET["page"] = 1;}; echo $_GET["page"]?> / 1</h1>
     <div class="catalogue" id="catalogue">
         <?php 
-            if(!isset($_POST["type"])){
-                $_POST["type"] = "Prix";
-            }
 
-            $q = $db->prepare("SELECT * FROM Produit ORDER BY :typ DESC LIMIT 10");
-            $q->execute([
-                'typ' => $_POST["type"]
-            ]);
+            $q = $db->query("SELECT ImgPath, Nom, Prix, Avis FROM Produit ORDER BY Prix DESC LIMIT 10");
+            $q->execute();
 
             foreach ($q as $key => $value) {
                 echo '<a href="#" class="product">';
@@ -64,7 +59,7 @@
                         echo '<img src="../Assets/' . $value["ImgPath"] . '" alt="image" width="100%" height="100%">';
                     echo '</div>';
                     echo '<h1 class="title-product">' . $value["Nom"] . '</h1>';
-                    echo '<i class="price-product">' . $value["Prix"] . '</i>';
+                    echo '<i class="price-product">' . $value["Prix"] . '€</i>';
                     echo '<p class="Avis">' . $value["Avis"] . '</p>';
                 echo "</a>";
             }
