@@ -34,7 +34,7 @@ body{
 }
 .dv2-1{
     display: flex;
-    align-items: center;
+    align-items: auto;
     flex-flow: row;
     justify-content: space-between;
 }
