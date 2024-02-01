@@ -2,8 +2,8 @@
 
     define('HOST', 'mysql-snowstorm.alwaysdata.net');
     define('DB_NAME', 'snowstorm_bdd');
-    define('USER', 'snowstorm_admin');
-    define('PASS', 'ftrdtructyctr56418974!');
+    define('USER', 'snowstorm');
+    define('PASS', 'Kaydi20');
 
     try{
         $db = new PDO("mysql:host=" . HOST . ";dbname=" . DB_NAME, USER, PASS);

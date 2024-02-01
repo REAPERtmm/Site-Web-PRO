@@ -20,6 +20,9 @@
 </head>
 <body>
     
+    <?php if (isset($_POST['FormsentLogin'])){include '../php/database.php'; global $db; $Mail = $_POST['login-email']; $Password = $_POST['login-password']; $Request = $db->query("SELECT Count(*) FROM Users WHERE Email='$Mail' AND Mdp='$Password'"); $Request = $Request->fetch(); if ($Request[0] == 1) {header("Location: ../index.html");}else {echo '<div style="color: red; margin-top: 2rem">Pseudo ou mot de passe invalide !</div>';}} 
+    if (isset($_POST['FormsentRegister'])){include '../php/database.php'; global $db; $Mail = $_POST['register-email']; $Password = $_POST['register-password']; $Password_verified = $_POST['register-password-verified']; $Nom = $_POST['register-nom']; $Prenom = $_POST['register-prenom']; $DateNaissance = $_POST['register-date']; $Check = $db->query("SELECT Count(*) FROM Users WHERE Email='$Mail'"); $Check = $Check->fetch(); if ($Check[0] == 1) {echo '<div style="color: red; margin-top: 2rem">Adresse email déjâ utilisé !</div>';}else {$Request = $db->query("INSERT INTO Users(IDUser, Email, Mdp, Nom, Prenom, DateNaissance) VALUE(0, '$Mail', '$Password', '$Nom', '$Prenom', '$DateNaissance')"); header("Location: ../index.php");}} ?>
+
     <header class="unselectable">
         <div class="header">
             <div class="header-grp">
@@ -30,7 +33,7 @@
                     </div>
                     <div class="logo">
                         <a href="../(page)/Search.html"><i class="fa-solid fa-cart-shopping fa-beat"></i></a>
-                        <a href="../(page)/login.html"><i class="fa-solid fa-user fa-beat"></i></a>
+                        <a href="../(page)/login.php"><i class="fa-solid fa-user fa-beat"></i></a>
                         <img src="../Assets/france-flag.webp" alt="France flag" height="40px" width="40px">
                     </div>
                 </div>
@@ -46,7 +49,7 @@
                     </div>
                     <div class="navbar_search">
                         <form action="" class="search">
-                            <input type="search" placeholder="Rechercher un produit">
+                            <input type="search" placeholder="Rechercher un produit" id="search">
                         </form>
                     </div>
                 </div>
@@ -58,16 +61,16 @@
     </header>
 
     <section>
-        <form action="" method="get">
+        <form action="" method="POST">
             <h3 class="form-title">Formulaire de connexion</h3>
             <div class="form-content">
                 <div>
-                    <label for="Email">Email</label>
-                    <input type="email" name="Email" placeholder="Email" id="Email" required>
+                    <label for="login-Email">Email</label>
+                    <input type="email" name="login-email" placeholder="Email" id="login-Email" required>
                 </div>
                 <div>
-                    <label for="password">Mot de passe</label>
-                    <input type="password" name="password" placeholder="Password" id="password" required>
+                    <label for="login-password">Mot de passe</label>
+                    <input type="password" name="login-password" placeholder="Password" id="login-password" required>
                 </div>
                 <div class="checkbox">
                     <input type="checkbox" id="toggle-register" name="toggle-register"/>
@@ -76,41 +79,42 @@
             </div>
             <div class="form-submit">
                 <a class="social-btn" href=""><i class="fab fa-google"></i> Google</a>
-                <input class="button" type="submit" value="Connexion"/>
+                <input name="FormsentLogin" class="button" type="submit" value="Connexion"/>
             </div>
         </form>
 
-        <form action="" method="get">
+        <form action="" method="POST">
             <h3 class="form-title">Formulaire d'inscription</h3>
             <div class="form-content">
                 <div>
-                    <label for="Email">Email</label>
-                    <input type="email" name="Email" placeholder="Email" id="Email" required>
+                    <label for="register-Email">Email</label>
+                    <input type="email" name="register-email" placeholder="Email" id="register-Email" required>
                 </div>
                 <div>
-                    <label for="password">Mot de passe</label>
-                    <input type="password" name="password" placeholder="Password" id="password" required>
+                    <label for="register-password">Mot de passe</label>
+                    <input type="password" name="register-password" placeholder="Password" id="register-password" required>
                 </div>
                 <div>
-                    <label for="password-verified">Confirmer le mot de passe</label>
-                    <input type="password" name="password-verified" placeholder="Password" id="password-verified" required>
+                    <label for="register-password-verified">Confirmer le mot de passe</label>
+                    <input type="password" name="register-password-verified" placeholder="Password" id="register-password-verified" required>
+                    <span id="error_msg"></span>
                 </div>
                 <div>
-                    <label for="nom">Nom</label>
-                    <input type="text" name="nom" placeholder="Nom" id="nom" required>
+                    <label for="register-nom">Nom</label>
+                    <input type="text" name="register-nom" placeholder="Nom" id="register-nom" required>
                 </div>
                 <div>
-                    <label for="prenom">Prénom</label>
-                    <input type="text" name="prenom" placeholder="Prenom" id="prenom" required>
+                    <label for="register-prenom">Prénom</label>
+                    <input type="text" name="register-prenom" placeholder="Prenom" id="register-prenom" required>
                 </div>
                 <div>
-                    <label for="date">Date de naissance</label>
-                    <input type="date" name="date" id="date" required>
+                    <label for="register-date">Date de naissance</label>
+                    <input type="date" name="register-date" id="register-date" required>
                 </div>
             </div>
             <div class="form-submit">
                 <a class="social-btn" href=""><i class="fab fa-google"></i> Google</a>
-                <input class="button" type="submit" value="Valider"/>
+                <input name="FormsentRegister" class="button" id="FormsentRegisterSubmit" type="submit" value="Valider"/>
             </div>
         </form>
     </section>
@@ -151,8 +155,9 @@
             </div>
         </div>
     </footer>
-    
+
     <script src="../script/app.js"></script>
+    <script src="../script/login.js"></script>
 
 </body>
 </html>
