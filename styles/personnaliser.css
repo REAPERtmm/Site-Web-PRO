@@ -1,0 +1,71 @@
+.best-offers {
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    justify-content: space-evenly;
+}
+
+.offers {
+    padding: 1%;
+}
+
+.offers-product:hover {
+    scale: 1.2;
+}
+
+
+.offers-compare {
+    color: white;
+    text-decoration: none;
+    float: right;
+    padding-right: 5%;
+    padding-bottom: 5%;
+    padding-top: 2%;
+}
+.offers-title {
+    font-size: 25px;
+    letter-spacing: -2px;
+    justify-content: left;
+    text-transform: uppercase;
+    height: 70px;
+}
+
+
+.offers-img {
+    width: 100%;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    aspect-ratio: 3;
+}
+
+.offers-model { 
+    color: black;
+    font-size: 20px;
+}
+
+@media (max-width: 800px) {
+    .best-offers {
+        display: grid;
+        grid-template-columns: 50% 50% ;
+        width: 100%;
+        padding-left: 5%;
+        padding-right: 5%;
+        justify-content: space-evenly;
+    }
+}
+
+@media (max-width: 650px) {
+    .best-offers {
+        display: grid;
+        grid-template-columns: 100% ;
+        width: 100%;
+        padding-left: 5%;
+        padding-right: 5%;
+        justify-content: space-evenly;
+    }
+}
+
