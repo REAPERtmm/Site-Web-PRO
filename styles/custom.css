@@ -2,6 +2,10 @@
     margin: 0;
 }
 
+body {
+    font-size: 22px;
+}
+
 
 .ligne1 {
     width: 100%;
@@ -121,4 +125,78 @@
 
 .backplate-text {
     padding-left: 2%;
+}
+
+.next-box {
+    max-width: fit-content;
+    max-height: fit-content;
+    background-color: lightgray;  
+    margin: auto;
+    padding-left: 7%;
+    padding-right: 7%;
+}
+
+.backplate-line {
+    display: flex;
+}
+
+.gauche {
+    width: 70%;
+}
+
+.droite {
+    display: flex;
+    width: 30%;
+}
+
+
+.black-line {
+    border: 1px black solid;
+    margin-bottom: 3%;
+}
+
+
+.custom-bot {
+    text-align: center;
+}
+
+.custom-title {
+    text-transform:uppercase;
+    font-weight: 600;
+    letter-spacing: -2px;
+    padding-bottom: 2%;
+}
+
+.product-presentation-line1 {
+    display: flex;
+}
+
+.product-presentation {
+    width: 100%;
+    background-color: lightgray;
+}
+
+.product-presentation-line1-left{
+    width: 50%;
+    overflow: hidden;
+    padding-top: 1%;
+    height: 50%;
+}
+
+.bot-img {
+    width: 80%;
+    border: 1px black solid;
+}
+
+.product-presentation-line1-right {
+    width: 50%;
+    max-height: 50%;
+    padding-top: 2%;
+    padding-right: 6%;
+
+}
+
+.product-presentation-text {
+    border: 1px black solid;
+
 }
