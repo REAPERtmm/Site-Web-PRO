@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles/base.css">
     <link rel="stylesheet" href="../styles/search.css">
+    <?php include '../php/database.php';?>
 </head>
 <body>
     <header class="unselectable">
@@ -44,8 +45,30 @@
         </div>
     </header>
 
+    
+    <h1 class="Page-Count"> Page <?php if(!isset($_GET["page"])){ $_GET["page"] = 1;}; echo $_GET["page"]?> / 1</h1>
     <div class="catalogue" id="catalogue">
-        
+        <?php 
+            if(!isset($_POST["type"])){
+                $_POST["type"] = "Prix";
+            }
+
+            $q = $db->prepare("SELECT * FROM Produit ORDER BY :typ DESC LIMIT 10");
+            $q->execute([
+                'typ' => $_POST["type"]
+            ]);
+
+            foreach ($q as $key => $value) {
+                echo '<a href="#" class="product">';
+                    echo '<div class="img-product">';
+                        echo '<img src="../Assets/' . $value["ImgPath"] . '" alt="image" width="100%" height="100%">';
+                    echo '</div>';
+                    echo '<h1 class="title-product">' . $value["Nom"] . '</h1>';
+                    echo '<i class="price-product">' . $value["Prix"] . '</i>';
+                    echo '<p class="Avis">' . $value["Avis"] . '</p>';
+                echo "</a>";
+            }
+        ?>
     </div>
 
     <footer class="footer">
@@ -84,7 +107,7 @@
             </div>
         </div>
     </footer>
-
-    <script src="../script/search.js"></script>
+    
+    
 </body>
 </html>

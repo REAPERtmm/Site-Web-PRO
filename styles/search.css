@@ -1,7 +1,14 @@
 
+.Page-Count{
+    background-color: rgb(142, 230, 200);
+    margin: 0;
+    padding: 20px 0;
+}
+
 .catalogue{
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, 22%);
+    align-items: end;
     background-color: rgb(142, 230, 200);
     padding: 10px 0px;
     gap: 5px;
@@ -11,7 +18,7 @@
 .product{
     display: flex;
     flex-direction: column;
-    width: 250px;
+    width: 100%;
     aspect-ratio: 1;
     background-color: rgba(0, 0, 0, .2);
     border-radius: 10px;
@@ -19,14 +26,9 @@
 }
 
 .title-product{
+    color: black;
     font-size: 30px;
     font-style: italic;
-}
-
-.bottom-div-product{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
 }
 
 .img-product{
@@ -38,14 +40,30 @@
 }
 
 .Avis{
+    color: black;
     border: 1px solid black;
     
 }
 
 .price-product{
+    color: black;
     font-size: large;
 }
 
-@media screen  {
-    
+@media (max-width: 1000px) {
+    .catalogue {
+        grid-template-columns: repeat(3, 30%);
+    }
+}
+
+@media (max-width: 750px) {
+    .catalogue {
+        grid-template-columns: repeat(2, 40%);
+    }
+}
+
+@media (max-width: 400px) {
+    .catalogue {
+        grid-template-columns: repeat(1, 90%);
+    }
 }
