@@ -3,24 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SNOWSTORM.GG</title>
-  
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  
-    <!-- Favicon -->
-    <script src="https://kit.fontawesome.com/d3255ff586.js" crossorigin="anonymous"></script>
-    <!-- Fonts API -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/penguin" rel="stylesheet">
-    <!-- CSS -->
-    <link rel="stylesheet" href="../styles/base.css">
-    <link rel="stylesheet" href="../styles/product1.css">
+    <title>E-commerce</title>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/d3255ff586.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/search.css">
+    <?php include '../php/database.php';?>
 </head>
 <body>
-    
     <header class="unselectable">
         <div class="header">
             <div class="header_top">
@@ -37,12 +29,12 @@
 
             <div class="header_bot">
                 <div class="navbar_link">
-                    <a href="../index.html">NOS PRODUITS</a>
-                    <a href="../index.html">PERSONNALISER</a>
+                    <a href="index.html">NOS PRODUITS</a>
+                    <a href="index.html">PERSONNALISER</a>
                     <a href="./(page)/Search.html">GALERIE</a>
-                    <a href="../index.html">SUPPORT/SAV</a>
-                    <a href="../index.html">FAQ</a>
-                    <a href="../index.html">CONTACT</a>
+                    <a href="index.html">SUPPORT/SAV</a>
+                    <a href="index.html">FAQ</a>
+                    <a href="index.html">CONTACT</a>
                 </div>
                 <div class="navbar_search">
                     <form action="" class="search">
@@ -52,20 +44,36 @@
             </div>
         </div>
     </header>
-    <div class="product">
-        <h3 class="title-product">PRODUIT-1</h3>
-        <div class="bottom-div-product">
-        <div class="img-product-1" id="img-product-1"></div>
-        <a href="panier.html"></a>
-        <button id="acheter">BUY NOW</button>
-            <i class="price-product"> 149.99€ </i>
-        </div>
+
+    
+    <h1 class="Page-Count"> Page <?php if(!isset($_GET["page"])){ $_GET["page"] = 1;}; echo $_GET["page"]?> / 1</h1>
+    <div class="catalogue" id="catalogue">
+        <?php 
+            if(!isset($_POST["type"])){
+                $_POST["type"] = "Prix";
+            }
+
+            $q = $db->prepare("SELECT * FROM Produit ORDER BY :typ DESC LIMIT 10");
+            $q->execute([
+                'typ' => $_POST["type"]
+            ]);
+
+            foreach ($q as $key => $value) {
+                echo '<a href="#" class="product">';
+                    echo '<div class="img-product">';
+                        echo '<img src="../Assets/' . $value["ImgPath"] . '" alt="image" width="100%" height="100%">';
+                    echo '</div>';
+                    echo '<h1 class="title-product">' . $value["Nom"] . '</h1>';
+                    echo '<i class="price-product">' . $value["Prix"] . '</i>';
+                    echo '<p class="Avis">' . $value["Avis"] . '</p>';
+                echo "</a>";
+            }
+        ?>
     </div>
-</body>
-</html>
 
     <footer class="footer">
         <div class="footer-container unselectable">
+            <img src="../Assets/logo-removebg-preview.png" alt="Logo de Snowstorm" id="footer-img">
             <p class="logo-name">Snowstorm.GG</p>
         </div>
         <div class="footer-container">
@@ -100,6 +108,6 @@
         </div>
     </footer>
     
-    <script src="./script/index.js"></script>
+    
 </body>
 </html>

@@ -15,8 +15,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/penguin" rel="stylesheet">
     <!-- CSS -->
-    <link rel="stylesheet" href="./styles/base.css">
-    <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/personnaliser.css">
 </head>
 <body>
     
@@ -25,12 +25,12 @@
             <div class="header-grp">
                 <div class="header_top">
                     <div class="logo">
-                        <img src="./Assets/logo-removebg-preview.png" alt="Logo" class="logo-img">
+                        <img src="../Assets/logo-removebg-preview.png" alt="Logo" class="logo-img">
                         <p class="logo-name">SNOWSTORM.GG</p>
                     </div>
                     <div class="logo">
                         <a href="./(page)/Search.html"><i class="fa-solid fa-cart-shopping fa-beat"></i></a>
-                        <a href="./(page)/login.php"><i class="fa-solid fa-user fa-beat"></i></a>
+                        <a href="./(page)/login.html"><i class="fa-solid fa-user fa-beat"></i></a>
                         <img src="./Assets/france-flag.webp" alt="France flag" height="40px" width="40px">
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                     <div class="navbar_link">
                         <a href="index.html">NOS PRODUITS</a>
                         <a href="index.html">PERSONNALISER</a>
-                        <a href="./(page)/Search.php">GALERIE</a>
+                        <a href="./(page)/Search.html">GALERIE</a>
                         <a href="index.html">SUPPORT/SAV</a>
                         <a href="index.html">FAQ</a>
                         <a href="index.html">CONTACT</a>
@@ -57,78 +57,98 @@
         </div>
     </header>
 
-    <div class="background-carrousel">
-        <div class="carrousel">
-            <div class="image-carrousel-on image-carrousel" id="Clavier1"></div>
-            <div class="image-carrousel-off image-carrousel" id="Clavier2"></div>
-            <div class="image-carrousel-off image-carrousel" id="Clavier3"></div>
-            <div class="image-carrousel-off image-carrousel" id="Clavier4"></div>
-            <div class="carrousel-btn-div">
-                <input type="button" class="carrousel-btn-off carrousel-btn" id="btn-1" onclick="forced_set(0)">
-                <input type="button" class="carrousel-btn-off carrousel-btn" id="btn-2" onclick="forced_set(1)">
-                <input type="button" class="carrousel-btn-off carrousel-btn" id="btn-3" onclick="forced_set(2)">
-                <input type="button" class="carrousel-btn-off carrousel-btn" id="btn-4" onclick="forced_set(3)">
-            </div>
-        </div>
-    </div>
-
 
     <div class="best-offers-bg">
         <div class="best-offers">
-            <div class="offers">
-                <p class="offers-title"> <b>Nos meilleures ventes</b></p>
-                <div class="offers-product">
-                    <a href="" class="offers-compare"> <span><i class="fa-solid fa-plus"></i></span> Comparer </a>
-                    <img class="offers-img" src="./Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller">
-                    <p class="offers-model"> Référence modèle </p>
-                </div>
-            </div>
 
             <div class="offers">
-                <p class="offers-title"> <b>Nos Nouveautés</b></p>
                 <div class="offers-product">
-                    <a href="" class="offers-compare"> <span><i class="fa-solid fa-plus"></i></span> Comparer </a>
-                    <img class="offers-img" src="./Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller">
+                    <a href="custom.html">
+                        <img class="offers-img" src="../Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller">
+                    </a>                    
                     <p class="offers-model"> Référence modèle </p>
+                    <p class="offers-model"> Prix </p>
+                </div>
+            </div>
+
+            <div class="offers">
+                <div class="offers-product">
+                    <a href="custom.html">
+                        <img class="offers-img" src="../Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller">
+                    </a>
+                    <p class="offers-model"> Référence modèle </p>
+                    <p class="offers-model"> Prix </p>
                 </div>
             </div>
 
             <div class="offers" id="best-selling">
-                <p class="offers-title"> <b>Nos classiques</b></p>
                 <div class="offers-product">
-                    <a href="" class="offers-compare"> <span><i class="fa-solid fa-plus"></i></span> Comparer </a>
-                    <img class="offers-img" src="./Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller">
+                    <a href="custom.html">
+                        <img class="offers-img" src="../Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller">
+                    </a>                    
                     <p class="offers-model"> Référence modèle </p>
-                </div>
-            </div>
-
-            
-            <div class="offers" id="best-selling">
-                <p class="offers-title"> <b>Nos kits préfaits</b></p>
-                <div class="offers-product">
-                    <a href="" class="offers-compare"> <span><i class="fa-solid fa-plus"></i></span> Comparer </a>
-                    <img class="offers-img" src="./Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller">
-                    <p class="offers-model"> Référence modèle </p>
-                </div>
-            </div>
-
-            
-            <div class="offers" id="best-selling">
-                <p class="offers-title"> <b>Nos kits préfaits</b></p>
-                <div class="offers-product">
-                    <a href="" class="offers-compare"> <span><i class="fa-solid fa-plus"></i></span> Comparer </a>
-                    <img class="offers-img" src="./Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller">
-                    <p class="offers-model"> Référence modèle </p>
+                    <p class="offers-model"> Prix </p>
                 </div>
             </div>
 
             
-            <div class="offers" id="best-selling">
-                <p class="offers-title"> <b>Nos kits préfaits</b></p>
+            <div class="offers">
                 <div class="offers-product">
-                    <a href="" class="offers-compare"> <span><i class="fa-solid fa-plus"></i></span> Comparer </a>
-                    <img class="offers-img" src="./Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller">
+                    <a href="custom.html">
+                        <img class="offers-img" src="../Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller">
+                    </a>                    
                     <p class="offers-model"> Référence modèle </p>
+                    <p class="offers-model"> Prix </p>
+                </div>
+            </div>
+
+            <div class="offers">
+                <div class="offers-product">
+                    <a href="custom.html">
+                        <img class="offers-img" src="../Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller">
+                    </a>
+                    <p class="offers-model"> Référence modèle </p>
+                    <p class="offers-model"> Prix </p>
+                </div>
+            </div>
+
+            <div class="offers" id="best-selling">
+                <div class="offers-product">
+                    <a href="custom.html">
+                        <img class="offers-img" src="../Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller">
+                    </a>                    
+                    <p class="offers-model"> Référence modèle </p>
+                    <p class="offers-model"> Prix </p>
+                </div>
+            </div>
+
+            <div class="offers">
+                <div class="offers-product">
+                    <a href="custom.html">
+                        <img class="offers-img" src="../Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller">
+                    </a>                    
+                    <p class="offers-model"> Référence modèle </p>
+                    <p class="offers-model"> Prix </p>
+                </div>
+            </div>
+
+            <div class="offers">
+                <div class="offers-product">
+                    <a href="custom.html">
+                        <img class="offers-img" src="../Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller">
+                    </a>
+                    <p class="offers-model"> Référence modèle </p>
+                    <p class="offers-model"> Prix </p>
+                </div>
+            </div>
+
+            <div class="offers" id="best-selling">
+                <div class="offers-product">
+                    <a href="custom.html">
+                        <img class="offers-img" src="../Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller">
+                    </a>                    
+                    <p class="offers-model"> Référence modèle </p>
+                    <p class="offers-model"> Prix </p>
                 </div>
             </div>
 
@@ -137,7 +157,7 @@
 
     <footer class="footer">
         <div class="footer-container unselectable">
-            <img src="./Assets/logo-removebg-preview.png" alt="Logo de Snowstorm" id="footer-img">
+            <img src="../Assets/logo-removebg-preview.png" alt="Logo de Snowstorm" id="footer-img">
             <p class="logo-name">Snowstorm.GG</p>
         </div>
         <div class="footer-container">
@@ -171,8 +191,5 @@
             </div>
         </div>
     </footer>
-    
-    <script src="./script/app.js"></script>
-    <script src="./script/index.js"></script>
+
 </body>
-</html>

@@ -1,0 +1,246 @@
+*{
+    margin: 0;
+}
+
+body {
+    font-size: 22px;
+}
+
+
+.ligne1 {
+    width: 100%;
+    text-align: start;
+    text-indent: 7.8%;
+    padding-top: 3%;
+}
+
+.right {
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10%;
+    padding-top: 3%;
+}
+
+.ligne2 {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-bottom: 2%;
+}
+
+.choice-text {
+    padding-right: 5%;
+    padding-left: 5%;
+}
+
+.left {
+    display: flex;
+    width: 70%;
+    align-items: center;
+    padding-top: 3%;
+}
+
+.box-choice {
+    background-color: lightgray;
+    padding-left: 7%;
+    padding-right: 7%;
+    border: 1px black solid;
+}
+
+
+.save-box {
+    background-color: lightgray;
+    border: 1px black solid;
+    max-width: 70%;
+}
+
+
+.custom-mid {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.img-line {
+    width: 60%;
+    margin: auto;
+    padding-bottom: 2%;
+    padding-top: 2%;
+}
+
+.other-choice {
+    text-align: start;
+    padding-left: 5%;
+}
+
+.mid-keycaps-text {
+    margin: 0;
+}
+
+.help {
+    color: red;
+    font-size: 14px;
+}
+
+.keycaps-choice-box {
+    max-width: fit-content;
+    background-color: lightgray;
+    padding-left: 5%;
+    padding-right: 5%;
+
+}
+
+.dot {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 1px black solid;
+}
+
+.grey {
+    background-color: #bbb;
+}
+
+.black {
+    background-color: rgb(48, 47, 47);
+}
+
+.peru {
+    background-color:peru;
+}
+
+.backplate {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-bottom: 1%;
+}
+
+.backplate-color-text{
+    padding-top: 3%;
+    padding-bottom: 1%;
+}
+
+.backplate-text {
+    padding-left: 2%;
+}
+
+.next-box {
+    max-width: fit-content;
+    max-height: fit-content;
+    background-color: lightgray;  
+    margin: auto;
+    padding-left: 7%;
+    padding-right: 7%;
+}
+
+.backplate-line {
+    display: flex;
+}
+
+.gauche {
+    width: 70%;
+}
+
+.droite {
+    display: flex;
+    width: 30%;
+}
+
+
+.black-line {
+    border: 1px black solid;
+    margin-bottom: 3%;
+}
+
+
+.custom-bot {
+    text-align: center;
+}
+
+.custom-title {
+    text-transform:uppercase;
+    font-weight: 600;
+    letter-spacing: -2px;
+    padding-bottom: 2%;
+}
+
+.product-presentation-line1 {
+    display: flex;
+}
+
+.product-presentation {
+    width: 100%;
+    background-color: lightgray;
+}
+
+.product-presentation-line1-left{
+    width: 50%;
+    overflow: hidden;
+    padding-top: 1%;
+    height: 50%;
+}
+
+.bot-img {
+    width: 80%;
+    border: 1px black solid;
+}
+
+.product-presentation-line1-right {
+    width: 50%;
+    max-height: 50%;
+    padding-top: 2%;
+    padding-right: 6%;
+
+}
+
+.product-presentation-text {
+    border: 1px black solid;
+
+}
+
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content p {
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+
+.show {
+    display:block;
+}
+
+.dropbtn {
+    border: none;
+    cursor: pointer;
+    padding-top: 1%; 
+    padding-bottom: 1%; 
+    font-size: 22px;
+}
+
+.choiceuser {
+    display: none;
+}
+
+
+.dropdown-button {
+    cursor: pointer;
+    max-width: fit-content;
+    background-color: lightgray;
+    padding-left: 5%;
+    padding-right: 5%;
+    border: 1px black solid;
+    font-size: 22px;
+}

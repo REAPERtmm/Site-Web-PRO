@@ -30,14 +30,12 @@ function createProduct(name, price, path, avis){
 
     return createhtml(
         "div", "product", 
-        createhtml("div", "bottom-div-product", 
             createhtml("div", "img-product", 
-                createImage(path, alt)
+                createImage("../Assets/" + path, alt)
             ) + 
             createhtml("h1", "title-product", name) +
             createhtml("i", "price-product", "" + price + "€") +
             createhtml("p", "Avis", avis)
-        )
     )
 }
 
