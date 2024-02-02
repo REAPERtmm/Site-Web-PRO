@@ -1,0 +1,81 @@
+
+body{
+    background-color: rgb(245, 237, 237);
+}
+.div1{
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    margin: 2%;
+}
+.div2{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0 2%;
+    border: 3px solid;
+}
+
+.div4{
+    width: auto;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2%;
+}
+.dv2-1{
+    display: flex;
+    align-items: center;
+    flex-flow: row;
+    justify-content: space-between;
+}
+.dv2-2{
+    display: flex;
+    align-items:start;
+    flex-flow: row;
+}
+.sd4-2{
+    margin: 2%;
+    width: 25%;
+    display: flex;
+    justify-content: right;
+    padding: 0% , 5%;
+}
+
+.étape {
+    width: 5%;
+    background-color:lightgray ;
+    border:solid 2px ;
+    margin: 0% 0.1%;
+    width: 10%;
+    font-size: 100%;
+}
+.bouton_continuer {
+    background-color: lightgray;
+    border: solid 2px;
+    border-radius: 25%,5%;
+    width:fit-content;
+}
+.img_pr{
+    display: flex;
+    margin: 25px;
+    width: 90px;
+    justify-content: space-between;
+}
+.nom_pr{
+    font-size: 100%;
+    align-items: center;
+    margin: 0 10% 0 0;
+    padding: 5% 0;
+}
+
+.bouton_modifier{
+    margin: 35px 0;
+    width: 10%;
+}
+.modifier {
+    width: 30%;
+}
