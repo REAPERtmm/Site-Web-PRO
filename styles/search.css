@@ -1,9 +1,26 @@
 
-.Page-Count{
+.form-galerie{
     background-color: rgb(142, 230, 200);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.Page-Count{
     margin: 0;
     padding: 20px 0;
 }
+
+.IsAsc{
+    gap: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .catalogue{
     display: grid;
