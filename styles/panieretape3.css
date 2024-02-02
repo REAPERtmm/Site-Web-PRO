@@ -63,7 +63,6 @@ body{
     display: flex;
     margin: 25px;
     width: 90px;
-    justify-content: space-between;
 }
 .nom_pr{
     font-size: 100%;
