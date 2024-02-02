@@ -1,5 +1,5 @@
 body, html{
-    background-color: #5684C1;
+    background-color: grey;
 }
 
 section {
@@ -31,6 +31,7 @@ section form {
     grid-column: 1;
     grid-row: 2;
     max-width: 13em;
+    text-overflow: ellipsis;
 }
 .form-content label{
     align-self: flex-start;

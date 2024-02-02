@@ -12,7 +12,7 @@
     <!-- Fonts API -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans=>ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/penguin" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/base.css">
@@ -63,7 +63,7 @@
         </div>
         <div class="ligne2">
             <div class="left">
-                <p class="choice-text"> Etape 1: choix du clavier</p>
+                <p class="choice-text"> Etape 1=> choix du clavier</p>
                 <div class="box-choice"> 2 </div>
                 <div class="box-choice"> 3 </div>
                 <div class="box-choice"> 4 </div>
@@ -81,7 +81,7 @@
         <div class="other-choice">
             <div class="keycaps-line">
                 <div class="dropdown">
-                <p class="mid-keycaps-text"> Choix du Switch : <span id="choice-keycaps-user" class="choiceuser"> choix de l'utilisateur </span></p>
+                <p class="mid-keycaps-text"> Choix du Switch => <span id="choice-keycaps-user" class="choiceuser"> choix de l'utilisateur </span></p>
                 <a class="help" href="https://www.cybertek.fr/blog/peripheriques/clavier-pc/quel-type-de-switch-choisir-pour-son-clavier" >Comment choisir son switch </a>
                 <div class="dropdown">
                     <button class="keycaps-choice-box dropbtn" onclick="Dropdown()">Afficher les différents switch</button>
@@ -129,7 +129,7 @@
             <div class="product-presentation">
                 <div class="product-presentation-line1">
                     <div class="product-presentation-line1-left">
-                        <img class="bot-img" src="../Assets/keyboard-test.png" alt="">
+                        <img class="bot-img" src="../Assets/keyboard-test.png" alt="Image de votre clavier">
                     </div>
                     <div class="product-presentation-line1-right">
                         <p class="product-presentation-text"> Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. </p>
@@ -137,18 +137,114 @@
                 </div>
                 <div class="product-presentation-line2">
                     <div class="product-presentation-line2-left">
-
+                        <p class="product-presentation-text"> Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. </p>
                     </div>
                     <div class="product-presentation-line2-right">
-                    
+                        <img class="bot-img" src="../Assets/keyboard-test.png" alt="Image de votre clavier">
                     </div>
                 </div>
             </div>
-            <p class="custom-title"> Fiche   produit</p>
+            <p class="custom-title"> Fiche produit</p>
 
 
         </div>
     </div>
+
+    <?php 
+
+    include("../php/database.php");
+
+
+    $q = $db->prepare("SELECT * FROM Attribut WHERE IDProduit = :IDProduit");
+    $q->execute([
+        'IDProduit' => 1,
+    ]
+    );
+    $q = $q->fetch();
+
+
+    $dic = [
+        "Informations générales"=> [
+            "Désignation"=> $q["Designation"],
+            "Marque"=> $q["Marque"],
+            "Modèle"=> $q["Modele"],
+        ],
+        "Format du clavier"=> [
+            "Format"=> $q["Format"],
+            "Compact"=> $q["Compact"],
+            "TKL"=> $q["TKL"],
+            "Norme du clavier"=> $q["Norme"],
+            "Localisation"=> $q["Localisation"],
+        ],
+        "Interface"=> [
+            "Sans-fil"=> $q["SansFil"],
+            "Interface avec l'ordinateur"=> $q["InterfaceAvecOrdinateur"],
+            "Technologie de connexion du clavier"=> $q["TechnologieDeConnexionDuClavier"],
+        ],
+        "Ergonomie"=> [
+            "Type de touches"=> $q["TypeDeTouches"],
+            "Type de switch"=> $q["TypeDeSwitch"],
+            "Clavier Rétroéclairé"=> $q["ClavierRetroeclaire"],
+            "Rétroéclairage RGB"=> $q["RetroeclairageRGB"],
+            "Touches macro"=> $q["TouchesMacro"],
+            "Touches Multimédia"=> $q["TouchesMultimedia"],
+            "Pavé numérique"=> $q["PaveNumerique"],
+        ],
+        "Caractéristiques Physiques"=> [
+            "Couleur"=> $q["Couleur"],
+            "Largeur"=> $q["Largeur"],
+            "Hauteur"=> $q["Hauteur"],
+            "Profondeur"=> $q["Profondeur"],
+            "Poids"=> $q["Poids"],
+        ],
+        "Alimentation"=> [
+            "Type d'alimentation"=> $q["TypeAlimentation"],
+        ],
+        "Compatibilité"=> [
+            "OS supportés"=> $q["OSSupportes"],
+            "Utilisation"=> $q["Utilisation"],
+        ],
+        "Garanties"=>  [
+            "Garantie commerciale"=> $q["GarantieCommerciale"],
+            "Garantie légale"=> $q["GarantieLegale"],
+        ],
+
+    ];
+
+
+    echo '<div class="product-sheet">';
+    foreach( $dic as $title => $v ) {
+        echo                
+        '<div class="row"> 
+        <div class="blue-tilte"> 
+            '. $title .'
+        </div>
+        <div class="info">';
+        foreach( $v as $smalltitle => $content ) {
+            echo '<p class="left-info">'.$smalltitle.'</p>';
+            if( $smalltitle == "OS supportés" || $smalltitle == "Utilisation") {
+                $contentspecial = explode(";", $content);
+                echo '<div class="right-info">';
+
+                foreach( $contentspecial as $k3 => $v3 ) {
+                    echo '<p class="right-info">'.$v3.'</p>' ;
+                }
+                echo '</div>';
+
+            }
+            else{
+                echo 
+                '<p class="right-info">'.$content.'</p>';
+            }
+        };
+        echo 
+        '</div>
+        </div>';
+    };
+
+    echo '</div>';
+
+    ?>
 
 
     <footer class="footer">

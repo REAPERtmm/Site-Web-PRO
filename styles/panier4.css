@@ -1,0 +1,106 @@
+body{
+    background-color: rgb(245, 237, 237);
+}
+.div1{
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    margin: 2%;
+}
+.étape {
+    width: 5%;
+    background-color:lightgray ;
+    border:solid 2px ;
+    margin: 0% 0.1%;
+    width: 10%;
+    font-size: 100%;
+}
+.text_1{
+    font-size:100%;
+    margin: 0;
+}
+.text_2{
+    font-size: 100%;
+    padding: 0 5% 0 5%;
+}
+.text_3{
+    font-size: 120%;
+    padding: 0 5% 0 5%;
+}
+.validation{
+    background-color: rgb(245, 237, 237);
+    margin: 3% 0 0 0;
+    border: 1px solid black;
+    width: auto;
+}
+.div2{
+    background-color: lightgray;
+    width: 60%;
+    margin: 1% 20%;
+    display: flex;
+    justify-content: center;
+    
+}
+.sd2-1{
+    display: flex;
+    flex-flow: column;
+    flex-wrap: wrap;
+    border: 1px solid black;
+    margin:2%;
+    width:30%;
+    justify-content: space-between;
+    padding: 2%;
+}
+.sd2-1-1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sd2-1-2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sd2-2{
+
+    margin: 1% 1%;
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    width: 30%;
+}
+.sd2-2-1{
+    display: flex;
+}
+.sd2-2-2{
+    display: flex;
+}
+.small{
+    width: 20%;
+    margin: 0 5% 0 0;
+}
+.text_4{
+    font-size:100%;
+    margin: 0 60% 0 0;
+}
+.sd2-2-3{
+    display: flex;
+}
+.sd2-3{
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: column;
+    justify-content: space-around;
+    margin: 1%;
+    width: 30%;
+}
+.logo-panier{
+    width: 30%;
+    margin: 0 0  0 40%;
+    
+}
+.imge{
+    width: 100%;
+}

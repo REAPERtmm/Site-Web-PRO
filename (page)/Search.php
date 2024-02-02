@@ -10,7 +10,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles/base.css">
     <link rel="stylesheet" href="../styles/search.css">
-    <?php include '../php/database.php';?>
+    <?php 
+        include '../php/database.php';
+        if(!isset($_GET["page"])){ $_GET["page"] = 1;}; 
+        if(!isset($_GET["Asc"])){ $_GET["Asc"] = true;};
+        if(!isset($_GET["research"])){ $_GET["research"] = "";};
+    ?>
 </head>
 <body>
     <header class="unselectable">
@@ -45,17 +50,22 @@
         </div>
     </header>
 
-    
-    <h1 class="Page-Count"> Page <?php if(!isset($_GET["page"])){ $_GET["page"] = 1;}; echo $_GET["page"]?> / 1</h1>
+    <form action="" method="get" class="form-galerie">
+        <h1 class="Page-Count"> Page <?php echo $_GET["page"]; ?> / 1</h1>
+        <div class="IsAsc">
+            <input type="checkbox" name="ASC" id="Checkbox-Asc">
+            <div class="Title-Checkbox">Sort</div>
+            <input type="submit" value="">
+        </div>
+    </form>
     <div class="catalogue" id="catalogue">
         <?php 
-            if(!isset($_POST["type"])){
-                $_POST["type"] = "Prix";
-            }
 
-            $q = $db->prepare("SELECT * FROM Produit ORDER BY :typ DESC LIMIT 10");
+            $_SQL_Search = "%" . $_GET["research"] . "%";
+
+            $q = $db->prepare("SELECT ImgPath, Nom, Prix, Avis FROM Produit WHERE Nom like :search ORDER BY Prix DESC LIMIT 10 ");
             $q->execute([
-                'typ' => $_POST["type"]
+                "search" => $_SQL_Search,
             ]);
 
             foreach ($q as $key => $value) {
@@ -64,7 +74,7 @@
                         echo '<img src="../Assets/' . $value["ImgPath"] . '" alt="image" width="100%" height="100%">';
                     echo '</div>';
                     echo '<h1 class="title-product">' . $value["Nom"] . '</h1>';
-                    echo '<i class="price-product">' . $value["Prix"] . '</i>';
+                    echo '<i class="price-product">' . $value["Prix"] . '€</i>';
                     echo '<p class="Avis">' . $value["Avis"] . '</p>';
                 echo "</a>";
             }
