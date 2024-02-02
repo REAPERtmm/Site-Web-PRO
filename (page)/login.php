@@ -6,6 +6,7 @@
     <title>SNOWSTORM.GG</title>
   
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
   
     <!-- Favicon -->
     <script src="https://kit.fontawesome.com/d3255ff586.js" crossorigin="anonymous"></script>
@@ -19,9 +20,6 @@
     <link rel="stylesheet" href="../styles/login.css">
 </head>
 <body>
-    
-    <?php if (isset($_POST['FormsentLogin'])){include '../php/database.php'; global $db; $Mail = $_POST['login-email']; $Password = $_POST['login-password']; $Request = $db->query("SELECT Count(*) FROM Users WHERE Email='$Mail' AND Mdp='$Password'"); $Request = $Request->fetch(); if ($Request[0] == 1) {header("Location: ../index.html");}else {echo '<div style="color: red; margin-top: 2rem">Pseudo ou mot de passe invalide !</div>';}} 
-    if (isset($_POST['FormsentRegister'])){include '../php/database.php'; global $db; $Mail = $_POST['register-email']; $Password = $_POST['register-password']; $Password_verified = $_POST['register-password-verified']; $Nom = $_POST['register-nom']; $Prenom = $_POST['register-prenom']; $DateNaissance = $_POST['register-date']; $Check = $db->query("SELECT Count(*) FROM Users WHERE Email='$Mail'"); $Check = $Check->fetch(); if ($Check[0] == 1) {echo '<div style="color: red; margin-top: 2rem">Adresse email déjâ utilisé !</div>';}else {$Request = $db->query("INSERT INTO Users(IDUser, Email, Mdp, Nom, Prenom, DateNaissance) VALUE(0, '$Mail', '$Password', '$Nom', '$Prenom', '$DateNaissance')"); header("Location: ../index.html");}} ?>
 
     <header class="unselectable">
         <div class="header">
@@ -32,7 +30,7 @@
                         <p class="logo-name">SNOWSTORM.GG</p>
                     </div>
                     <div class="logo">
-                        <a href="../(page)/Search.html"><i class="fa-solid fa-cart-shopping fa-beat"></i></a>
+                        <a href="../(page)/Search.php"><i class="fa-solid fa-cart-shopping fa-beat"></i></a>
                         <a href="../(page)/login.php"><i class="fa-solid fa-user fa-beat"></i></a>
                         <img src="../Assets/france-flag.webp" alt="France flag" height="40px" width="40px">
                     </div>
@@ -42,14 +40,14 @@
                     <div class="navbar_link">
                         <a href="../index.html">NOS PRODUITS</a>
                         <a href="../index.html">PERSONNALISER</a>
-                        <a href="./Search.html">GALERIE</a>
+                        <a href="./Search.php">GALERIE</a>
                         <a href="../index.html">SUPPORT/SAV</a>
                         <a href="../index.html">FAQ</a>
                         <a href="../index.html">CONTACT</a>
                     </div>
                     <div class="navbar_search">
-                        <form action="" class="search">
-                            <input type="search" placeholder="Rechercher un produit" id="search">
+                        <form action="" method="GET" class="search">
+                            <input type="search" placeholder="Rechercher un produit" id="search" name="search">
                         </form>
                     </div>
                 </div>
@@ -59,6 +57,9 @@
             </div>
         </div>
     </header>
+
+    <?php if (isset($_POST['FormsentLogin'])){include '../php/database.php'; global $db; $Mail = $_POST['login-email']; $Password = $_POST['login-password']; $Request = $db->query("SELECT Count(*) FROM Users WHERE Email='$Mail' AND Mdp='$Password'"); $Request = $Request->fetch(); if ($Request[0] == 1) {header("Location: ../index.html"); echo session_status;}else {echo '<div style="color: red; margin-top: 2rem">Adresse mail ou mot de passe invalide !</div>';}} 
+    if (isset($_POST['FormsentRegister'])){include '../php/database.php'; global $db; $Mail = $_POST['register-email']; $Password = $_POST['register-password']; $Password_verified = $_POST['register-password-verified']; $Nom = $_POST['register-nom']; $Prenom = $_POST['register-prenom']; $DateNaissance = $_POST['register-date']; $Check = $db->query("SELECT Count(*) FROM Users WHERE Email='$Mail'"); $Check = $Check->fetch(); if ($Check[0] == 1) {echo '<div style="color: red; margin-top: 2rem">Adresse mail déjâ utilisé !</div>';}else {$Request = $db->query("INSERT INTO Users(IDUser, Email, Mdp, Nom, Prenom, DateNaissance) VALUE(0, '$Mail', '$Password', '$Nom', '$Prenom', '$DateNaissance')"); header("Location: ../index.html");}} ?>
 
     <section>
         <form action="" method="POST">
