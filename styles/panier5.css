@@ -1,0 +1,49 @@
+body{
+    background-color: rgb(245, 237, 237);
+}
+.div1{
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    margin: 2%;
+}
+.étape {
+    width: 5%;
+    background-color:lightgray ;
+    border:solid 2px ;
+    margin: 0% 0.1%;
+    width: 10%;
+    font-size: 100%;
+}
+.text_1{
+    font-size:100%;
+    margin: 0;
+}
+.text_2{
+    font-size: 100%;
+    padding: 0 5% 0 5%;
+}
+.text_3{
+    font-size: 120%;
+    padding: 0 5% 0 5%;
+}
+.validation{
+    background-color: rgb(245, 237, 237);
+    margin: 3% 0 0 0;
+    border: 1px solid black;
+    width: auto;
+}
+.div2{
+    display: flex;
+    flex-flow: column ;
+    background-color: lightgray;
+    width: 60%;
+    margin: 1% 20%;
+    justify-content: center;
+    padding: 2% 5%;
+    align-items: center;    
+}
+.validation{
+    width: 30%;
+}
