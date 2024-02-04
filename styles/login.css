@@ -74,12 +74,12 @@ section input[type="submit"]{
     border-style: solid;
     border-radius: 3px;
     padding: 10px 20px;
-    background-color: #2181ff;
+    background-color: #094FAC;
     cursor: pointer;
     width: 100%;
 }
 section input[type="submit"]:hover{
-    background-color: #094FAC;
+    background-color: #2181ff;
 }
 
 .social-btn {
