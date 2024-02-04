@@ -1,6 +1,7 @@
 <?php 
 require '../php/config.php';
 
+print_r($_COOKIE);
 print_r($_POST);
 
 ?>
