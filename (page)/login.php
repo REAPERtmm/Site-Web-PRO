@@ -1,3 +1,11 @@
+<?php 
+require '../php/config.php';
+
+print_r($_COOKIE);
+print_r($_POST);
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,7 +14,6 @@
     <title>SNOWSTORM.GG</title>
   
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
   
     <!-- Favicon -->
     <script src="https://kit.fontawesome.com/d3255ff586.js" crossorigin="anonymous"></script>
@@ -79,7 +86,22 @@
                 </div>
             </div>
             <div class="form-submit">
-                <a class="social-btn" href=""><i class="fab fa-google"></i> Google</a>
+                <div id="g_id_onload"
+                    data-client_id="463202083643-85r6bih9kcvt7en94rnmbdh52s4jagnb.apps.googleusercontent.com"
+                    data-context="signin"
+                    data-ux_mode="popup"
+                    data-login_uri="http://localhost:80/(page)/login.php"
+                    data-auto_prompt="false">
+                </div>
+                <div class="g_id_signin"
+                    data-type="standard"
+                    data-shape="rectangular"
+                    data-theme="filled_blue"
+                    data-text="signin"
+                    data-size="large"
+                    data-logo_alignment="left">
+                </div>
+
                 <input name="FormsentLogin" class="button" type="submit" value="Connexion"/>
             </div>
         </form>
@@ -114,7 +136,22 @@
                 </div>
             </div>
             <div class="form-submit">
-                <a class="social-btn" href=""><i class="fab fa-google"></i> Google</a>
+                <div id="g_id_onload"
+                    data-client_id="463202083643-85r6bih9kcvt7en94rnmbdh52s4jagnb.apps.googleusercontent.com"
+                    data-context="signup"
+                    data-ux_mode="popup"
+                    data-login_uri="http://localhost:80/(page)/login.php"
+                    data-auto_prompt="false">
+                </div>
+                <div class="g_id_signin"
+                    data-type="standard"
+                    data-shape="rectangular"
+                    data-theme="filled_blue"
+                    data-text="signup_with"
+                    data-size="large"
+                    data-logo_alignment="left">
+                </div>
+
                 <input name="FormsentRegister" class="button" id="FormsentRegisterSubmit" type="submit" value="Valider"/>
             </div>
         </form>
@@ -159,6 +196,7 @@
 
     <script src="../script/app.js"></script>
     <script src="../script/login.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async></script>
 
 </body>
 </html>
