@@ -12,7 +12,6 @@
     <!-- Fonts API -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans=>ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/penguin" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/base.css">
@@ -117,7 +116,7 @@
                 <div class="box-choice"> 4 </div>
             </div>
             <div class="right"> 
-                <div class="save-box"> Sauvegarder ma configuration</div>
+                    <div class="save-box" id="save-config-btn" onclick="SaveConfig()"> Sauvegarder ma configuration</div>
             </div>
         </div>
     </div>
@@ -134,9 +133,9 @@
                 <div class="dropdown">
                     <button class="keycaps-choice-box dropbtn" onclick="Dropdown()">Afficher les différents switch</button>
                     <div id="myDropdown" class="dropdown-content">
-                        <button id="Switch Bleu" onclick="SetKeycaps(this.id)" class="dropdown-button"> Switch Bleu </button>
-                        <button id="Switch Rouge" onclick="SetKeycaps(this.id)" class="dropdown-button"> Switch Rouge </button>
-                        <button id="Switch Marron" onclick="SetKeycaps(this.id)" class="dropdown-button"> Switch Marron </button>
+                        <button id="#0000FF"  onclick="SetKeycaps(this.id, 'Switch Bleu')" class="dropdown-button"> Switch Bleu </button>
+                        <button id="#FF0000" onclick="SetKeycaps(this.id, 'Switch Rouge')" class="dropdown-button"> Switch Rouge </button>
+                        <button id="#582900" onclick="SetKeycaps(this.id, 'Switch Marron')" class="dropdown-button"> Switch Marron </button>
                     </div>
                 </div>
                 </div>
@@ -146,25 +145,33 @@
                 <div class="gauche">
                     <p class="backplate-color-text">Couleur de la backplate</p>
                     <div class="backplate">
-                        <div class="dot grey" ></div>
-                        <p class="backplate-text"> Gris</p>
+                        <button id="#bbbbbb" class="backplate-btn" onclick="SetBackplate(this.id)">
+                            <div class="dot grey" ></div>
+                            <p class="backplate-text"> Gris </p>
+                        </button>
                     </div>
                     <div class="backplate">
-                        <div class="dot black" ></div>
-                        <p class="backplate-text"> Noir </p>
+                        <button id="#000000" class="backplate-btn" onclick="SetBackplate(this.id)">
+                            <div class="dot black" ></div>
+                            <p class="backplate-text"> Noir </p>
+                        </button>
                     </div>
                     <div class="backplate">
-                        <div class="dot white" ></div>
-                        <p class="backplate-text"> Blanc</p>
+                        <button id="#FFFFFF" class="backplate-btn" onclick="SetBackplate(this.id)">
+                            <div class="dot white" ></div>
+                            <p class="backplate-text"> Blanc + 5$ </p>
+                        </button>
                     </div>
                     <div class="backplate">
-                        <div class="dot peru" ></div>
-                        <p class="backplate-text"> Peru </p>
+                        <button id="#cd853f" class="backplate-btn" onclick="SetBackplate(this.id)">
+                            <div class="dot peru" ></div>
+                            <p class="backplate-text"> Peru + 5$ </p>
+                        </button>
                     </div>
                 </div>
 
                 <div class="droite">
-                    <div class="next-box"> Suivant </div>
+                    <div class="next-box" id="next-btn" onclick="NextPage()"> Suivant </div>
                 </div>
             </div>
         </div>
@@ -333,6 +340,21 @@
   
 
     </div>
+
+    <form action="" id="form-action" method="POST">
+        <input type="hidden" id="backplate-color" name="backplate-color" value="">
+        <input type="hidden" id="keycaps-color" name="keycaps-color" value="">
+    </form>
+
+    <?php
+    
+    $BackplateColor = $_POST["backplate-color"];
+    $KeycapsColor = $_POST["keycaps-color"];
+
+    //$q = $db->prepare("I") 
+    
+    ?>
+
         
 
 

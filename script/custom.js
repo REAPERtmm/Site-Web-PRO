@@ -1,4 +1,9 @@
 const choiceuser = document.getElementById("choice-keycaps-user");
+const BackplateColor = document.getElementById("backplate-color");
+const KeycapsColor = document.getElementById("keycaps-color");
+const FormAction = document.getElementById("form-action");
+let BtnList;
+
 
 
 function Dropdown() {
@@ -6,9 +11,36 @@ function Dropdown() {
 }
 
 
-function SetKeycaps(clicked_id) {
-    choiceuser.innerHTML = clicked_id;
-    choiceuser.classList.remove("choiceuser");
+
+function SetKeycaps(clicked_id, texte) {
+  choiceuser.innerHTML = texte;
+  choiceuser.classList.remove("choiceuser");
+  KeycapsColor.value = clicked_id;
+  //console.log(KeycapsColor.value);
+}
+
+function SetBackplate(clicked_id_backplate) {
+  BackplateColor.value = clicked_id_backplate;
+  //console.log(BackplateColor.value);
+
+  if (BtnList && clicked_id_backplate != BtnList) {
+    document.getElementById(BtnList).classList.remove("clicked-btn");
+    document.getElementById(clicked_id_backplate).classList.add("clicked-btn");
+  }else {
+    document.getElementById(clicked_id_backplate).classList.add("clicked-btn");
+  }
+  BtnList = clicked_id_backplate;
+}
+
+
+function SaveConfig() {
+  FormAction.action = "custom.php";
+  FormAction.submit();
+}
+
+function NextPage() {
+  FormAction.action = "builder2.html";
+  FormAction.submit();
 }
 
 
