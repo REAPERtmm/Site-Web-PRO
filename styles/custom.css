@@ -399,3 +399,32 @@ body {
 }
 
 
+.rate-box {
+    width: 100%;
+    display: flex;
+    background-color: rgb(172, 168, 168);
+    align-items: center;
+    margin-bottom: 10%;
+}
+
+.rate-title {
+    background-color: rgb(172, 168, 168);
+}
+
+.rate {
+    padding: 0 2%;
+    width: 25%;
+}
+
+.filled {
+    filter: drop-shadow(0px 0px 12px rgb(34, 215, 221)) brightness(2);
+    width: 10%;
+}
+
+.unfilled {
+    width: 10%;
+}
+
+.text {
+    word-break: break-all;
+}

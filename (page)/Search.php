@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="../styles/search.css">
     <?php 
         include '../php/database.php';
-        if(!isset($_GET["page"])){ $_GET["page"] = 1;}; 
-        if(!isset($_GET["Asc"])){ $_GET["Asc"] = true;};
+        if(!isset($_GET["ASC"])){ $_GET["ASC"] = "off";};
         if(!isset($_GET["research"])){ $_GET["research"] = "";};
+        if(!isset($_GET["loadedAmount"])){ $_GET["loadedAmount"] = "2";};
     ?>
 </head>
 <body>
@@ -50,23 +50,27 @@
         </div>
     </header>
 
-    <form action="" method="get" class="form-galerie">
-        <h1 class="Page-Count"> Page <?php echo $_GET["page"]; ?> / 1</h1>
+    <form action="Search.php" method="get" class="form-galerie" id="form-reload">
         <div class="IsAsc">
-            <input type="checkbox" name="ASC" id="Checkbox-Asc">
-            <div class="Title-Checkbox">Sort</div>
-            <input type="submit" value="">
+            <input type="checkbox" name="ASC" id="Checkbox-Asc" <?php if($_GET["ASC"]=="on"){echo "checked";}?>>
+            <div class="Title-Checkbox">Prix croissant</div>
+            <input type="hidden" name="loadedAmount" value="<?php echo $_GET["loadedAmount"]; ?>" id="loadedAmount">
+            <input type="submit" value="Submit">
         </div>
     </form>
     <div class="catalogue" id="catalogue">
         <?php 
-
             $_SQL_Search = "%" . $_GET["research"] . "%";
 
-            $q = $db->prepare("SELECT ImgPath, Nom, Prix, Avis FROM Produit WHERE Nom like :search ORDER BY Prix DESC LIMIT 10 ");
+            if($_GET["ASC"] == "on"){
+                $q = $db->prepare("SELECT * FROM Produit WHERE Nom like :search ORDER BY Prix ASC LIMIT " . $_GET["loadedAmount"]);
+            }else{
+                $q = $db->prepare("SELECT * FROM Produit WHERE Nom like :search ORDER BY Prix DESC LIMIT " . $_GET["loadedAmount"]);      
+            }
             $q->execute([
                 "search" => $_SQL_Search,
             ]);
+            $q = $q->fetchAll();
 
             foreach ($q as $key => $value) {
                 echo '<a href="#" class="product">';
@@ -75,12 +79,23 @@
                     echo '</div>';
                     echo '<h1 class="title-product">' . $value["Nom"] . '</h1>';
                     echo '<i class="price-product">' . $value["Prix"] . '€</i>';
-                    echo '<p class="Avis">' . $value["Avis"] . '</p>';
+
+                    $qAvis = $db->prepare("SELECT (TexteAvis) FROM Avis INNER JOIN Users ON Users.IDUser = Avis.IDUser WHERE Avis.IDProduit = :ID ORDER BY RAND () LIMIT 1");
+                    $qAvis->execute([
+                        "ID" => $value["IDProduit"]
+                    ]);
+                    $qAvis = $qAvis->fetch();
+
+                    echo '<p class="Avis">' . $qAvis["TexteAvis"] . '</p>';
                 echo "</a>";
             }
         ?>
     </div>
 
+    <input type="button" value="Charger Plus ..." id="btn-load-more" onclick="load_12new()">
+    
+    <script src="../script/ScrollHereOnLoad.js"></script>
+    
     <footer class="footer">
         <div class="footer-container unselectable">
             <img src="../Assets/logo-removebg-preview.png" alt="Logo de Snowstorm" id="footer-img">
@@ -118,6 +133,6 @@
         </div>
     </footer>
     
-    
+    <script src="../script/search.js"></script>
 </body>
 </html>
