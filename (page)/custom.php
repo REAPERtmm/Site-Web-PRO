@@ -19,7 +19,55 @@
     <link rel="stylesheet" href="../styles/custom.css">
 </head>
 <body>
+    <?php  
+    include("../php/database.php");
+    header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+    header("Cache-Control: post-check=0, pre-check=0", false);
+    header("Pragma: no-cache");
     
+    
+    if (isset($_POST['IDProduct']))
+        {
+            $IDProduit = $_POST['IDProduct'];
+        }
+    else
+        {
+            echo "Aucune donnée";
+        }
+
+
+    $q = $db->prepare("SELECT * FROM Attribut WHERE IDProduit = :IDProduit");
+    $q->execute([
+        'IDProduit' => $IDProduit,
+    ]
+    );
+    $q = $q->fetch();
+
+    $Reference = $q["Modele"];
+
+    $qp = $db->prepare("SELECT * FROM Produit WHERE IDProduit = :IDProduit");
+    $qp->execute([
+        'IDProduit' => $IDProduit,
+    ]
+    );
+
+    $qp = $qp->fetch();
+
+    $keyboard_name = $qp["Nom"];
+    $path1 = $qp["Path1"];
+    $path2 = $qp["Path2"];
+    $desc1 = $qp["Description1"];
+    $desc2 = $qp["Description2"];
+    $ImgPath = $qp["ImgPath"];
+
+    $q_avis = $db->prepare("SELECT * FROM Avis INNER JOIN Users ON Avis.IDUser = Users.IDUser WHERE IDProduit = :IDProduit ORDER BY RAND () LIMIT 4;");
+    $q_avis->execute([
+        'IDProduit' => $IDProduit,
+    ]
+    );
+    $q_avis = $q_avis->fetchAll();
+
+    ?>
     <header class="unselectable">
         <div class="header">
             <div class="header-grp">
@@ -31,7 +79,7 @@
                     <div class="logo">
                         <a href="./(page)/Search.html"><i class="fa-solid fa-cart-shopping fa-beat"></i></a>
                         <a href="./(page)/login.html"><i class="fa-solid fa-user fa-beat"></i></a>
-                        <img src="./Assets/france-flag.webp" alt="France flag" height="40px" width="40px">
+                        <img src="../Assets/france-flag.webp" alt="France flag" height="40px" width="40px">
                     </div>
                 </div>
 
@@ -59,11 +107,11 @@
 
     <div class="custom-top">
         <div class="ligne1">
-            <p class="reference"> Référence modèle </p>
+            <p class="reference"> <?php echo $Reference ?> </p>
         </div>
         <div class="ligne2">
             <div class="left">
-                <p class="choice-text"> Etape 1=> choix du clavier</p>
+                <p class="choice-text"> Etape 1: choix du clavier</p>
                 <div class="box-choice"> 2 </div>
                 <div class="box-choice"> 3 </div>
                 <div class="box-choice"> 4 </div>
@@ -76,12 +124,12 @@
 
     <div class="custom-mid">
         <div class="img-line">
-            <img src="../Assets/keyboard-test.png" alt="image du clavier" width="100%">
+            <?php echo '<img src="../Assets/'.$ImgPath.'" alt="image du clavier" width="100%">' ?>
         </div>
         <div class="other-choice">
             <div class="keycaps-line">
                 <div class="dropdown">
-                <p class="mid-keycaps-text"> Choix du Switch => <span id="choice-keycaps-user" class="choiceuser"> choix de l'utilisateur </span></p>
+                <p class="mid-keycaps-text"> Choix du Switch : <span id="choice-keycaps-user" class="choiceuser"> choix de l'utilisateur </span></p>
                 <a class="help" href="https://www.cybertek.fr/blog/peripheriques/clavier-pc/quel-type-de-switch-choisir-pour-son-clavier" >Comment choisir son switch </a>
                 <div class="dropdown">
                     <button class="keycaps-choice-box dropbtn" onclick="Dropdown()">Afficher les différents switch</button>
@@ -126,21 +174,25 @@
         <hr class="black-line">
         <div class="product-info">
             <p class="custom-title"> Présentation du produit</p>
-            <div class="product-presentation">
+
+
+    <?php 
+
+      echo      '<div class="product-presentation">
                 <div class="product-presentation-line1">
                     <div class="product-presentation-line1-left">
-                        <img class="bot-img" src="../Assets/keyboard-test.png" alt="Image de votre clavier">
+                        <img class="bot-img" src="../Assets/'.$path1.'" alt="Image du clavier : '.$keyboard_name.'">
                     </div>
                     <div class="product-presentation-line1-right">
-                        <p class="product-presentation-text"> Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. </p>
+                        <p class="product-presentation-text">'.$desc1.'  </p>
                     </div>
                 </div>
                 <div class="product-presentation-line2">
                     <div class="product-presentation-line2-left">
-                        <p class="product-presentation-text"> Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. </p>
+                        <p class="product-presentation-text"> '.$desc2.' </p>
                     </div>
                     <div class="product-presentation-line2-right">
-                        <img class="bot-img" src="../Assets/keyboard-test.png" alt="Image de votre clavier">
+                        <img class="bot-img" src="../Assets/'.$path2.'" alt="Image du clavier : '.$keyboard_name.'">
                     </div>
                 </div>
             </div>
@@ -148,19 +200,12 @@
 
 
         </div>
-    </div>
+    </div>'
+
+    ?>
+    
 
     <?php 
-
-    include("../php/database.php");
-
-
-    $q = $db->prepare("SELECT * FROM Attribut WHERE IDProduit = :IDProduit");
-    $q->execute([
-        'IDProduit' => 1,
-    ]
-    );
-    $q = $q->fetch();
 
 
     $dic = [
@@ -245,6 +290,50 @@
     echo '</div>';
 
     ?>
+
+    <p class="rate-title"> Avis</p>
+    <div class="rate-box">
+
+        <?php
+
+            foreach ($q_avis as $key => $value) {
+
+
+                $Note = $value["NoteAvis"];
+                $Texte = $value["TexteAvis"];
+                $Nom = $value["Nom"];
+                $Prenom = $value["Prenom"];
+
+                echo '
+                    <div class="rate">
+                        <div class="rate-pseudo">
+                            <p class="pseudo"> <i class="fa-solid fa-user"></i> '.$Prenom.' '.$Nom.' </p>
+                        </div>
+                        <div class="rate-text">
+                            <p class="text">'.$Texte.'</p>
+                        </div>
+                        <div class="star-box">';
+
+                        for ( $i = 0; $i < 5; $i++){
+                            if ($i < $Note) {
+                                echo '<i class="fa-solid fa-star filled"></i>';
+                            } else {
+                                echo '<i class="fa-regular fa-star unfilled"></i>';
+                            }
+                        };
+
+
+                echo '
+                        </div>
+                    </div>';
+
+            };
+        ?>
+
+  
+
+    </div>
+        
 
 
     <footer class="footer">
