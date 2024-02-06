@@ -10,12 +10,13 @@ body{
     margin: 2%;
 }
 .div2{
-    display: flex;
-    flex-flow: column;
+    display: grid;
+    grid-template-columns: repeat(4, 15%) 20%;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     margin: 0 2%;
     border: 3px solid ;
+    width: 96%;
 }
 .div3{
     width: 98%;
@@ -101,49 +102,49 @@ body{
     padding: 0 10%;
 }
 .produit{
-    padding: 0 390% 0 0;
     font-size:100%;
-    margin: 0 20%;
 }
 .prix{
-    padding: 0 80% 0 0;
-    font-size:100%;
+    font-size: 30px;
 }
 .quant{
-    padding: 0 50% 0 0;
-    font-size:100%;
+    font-size:30px;
 }
 
 
 .img_pr{
-    margin: 0 2% 3% 3%;
-    width: 40%;
+    width: 100%;
+    padding: 5%;
 }
 .nom_pr{
     font-size: 100%;
-    margin: 0 10% 0 0;
-    padding: 5% 0;
 }
 .prix_pr{
-    font-size: 100%;
-    margin: 0 12% 0 0;
-    padding: 5% 0;
+    text-align: center;
 }
+
 .quant_pr{
-    font-size: 100%;
-    margin: 0 6% 0 0;
-    padding: 5% 0;
+    text-align: center;
 }
 .bouton_modifier{
-    margin: 4% 0;
-    width: 10%;
-}
-.modifier {
     width: 30%;
+    height: 25px;
 }
+
 .delet{
-    margin: 5% 0 0 2%;
+    width: 30%;
+    height: 25px;
+    font-size: 1vw;
+    text-align: center;
 }
+
+.btn-div{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
 .coeur{
     align-items: flex-start;
     width: 100%;
