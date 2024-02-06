@@ -73,7 +73,7 @@
             $q = $q->fetchAll();
 
             foreach ($q as $key => $value) {
-                echo '<a href="#" class="product">';
+                echo '<a href="panier.php" class="product">';
                     echo '<div class="img-product">';
                         echo '<img src="../Assets/' . $value["ImgPath"] . '" alt="image" width="100%" height="100%">';
                     echo '</div>';

@@ -4,6 +4,40 @@ require '../php/config.php';
 print_r($_COOKIE);
 print_r($_POST);
 
+if (!empty($_POST['credential'])) {
+
+    if (
+        empty($_COOKIE['g_csrf_token']) || empty($_POST['g_csrf_token']) || $_COOKIE['g_csrf_token'] != $_POST['g_csrf_token']
+    ) {
+        echo 'Invalid CSRF token';
+        exit();
+    }
+
+    $clientId = "463202083643-85r6bih9kcvt7en94rnmbdh52s4jagnb.apps.googleusercontent.com";
+    $client = new Google_Client(['client_id' => $clientId]);  // Specify the CLIENT_ID of the app that accesses the backend
+    
+    $idToken = $_POST['credential'];
+    $user = $client->verifyIdToken($idToken);
+
+    if ($user) {
+        $_SESSION['user'] = $user;
+        
+        $Mail = $user['email'];
+        $Check = $db->query("SELECT Count(*) FROM Users WHERE Email='$Mail'"); $Check = $Check->fetch(); 
+        if ($Check[0] == 0) {
+            header("Location: ./googlelogin.php");
+            exit();
+        }
+        header("Location: ./profil.php");
+        exit();
+
+    } else {
+        // Invalid ID token
+        echo "Erreur lors de l'authentification";
+    }
+
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +76,7 @@ print_r($_POST);
                         <img src="../Assets/france-flag.webp" alt="France flag" height="40px" width="40px">
                     </div>
                 </div>
-
+                
                 <div class="header_bot">
                     <div class="navbar_link">
                         <a href="../index.html">NOS PRODUITS</a>
@@ -65,8 +99,8 @@ print_r($_POST);
         </div>
     </header>
 
-    <?php if (isset($_POST['FormsentLogin'])){include '../php/database.php'; global $db; $Mail = $_POST['login-email']; $Password = $_POST['login-password']; $Request = $db->query("SELECT Count(*) FROM Users WHERE Email='$Mail' AND Mdp='$Password'"); $Request = $Request->fetch(); if ($Request[0] == 1) {header("Location: ../index.html"); echo session_status;}else {echo '<div style="color: red; margin-top: 2rem">Adresse mail ou mot de passe invalide !</div>';}} 
-    if (isset($_POST['FormsentRegister'])){include '../php/database.php'; global $db; $Mail = $_POST['register-email']; $Password = $_POST['register-password']; $Password_verified = $_POST['register-password-verified']; $Nom = $_POST['register-nom']; $Prenom = $_POST['register-prenom']; $DateNaissance = $_POST['register-date']; $Check = $db->query("SELECT Count(*) FROM Users WHERE Email='$Mail'"); $Check = $Check->fetch(); if ($Check[0] == 1) {echo '<div style="color: red; margin-top: 2rem">Adresse mail déjâ utilisé !</div>';}else {$Request = $db->query("INSERT INTO Users(IDUser, Email, Mdp, Nom, Prenom, DateNaissance) VALUE(0, '$Mail', '$Password', '$Nom', '$Prenom', '$DateNaissance')"); header("Location: ../index.html");}} ?>
+    <?php if (isset($_POST['FormsentLogin'])){include '../php/database.php'; global $db; $Mail = $_POST['login-email']; $Password = $_POST['login-password']; $Request = $db->query("SELECT Count(*) FROM Users WHERE Email='$Mail' AND Mdp='$Password'"); $Request = $Request->fetch(); if ($Request[0] == 1) {header("Location: ./profil.php"); exit();}else {echo '<div style="color: red; margin-top: 2rem">Adresse mail ou mot de passe invalide !</div>';}} 
+    if (isset($_POST['FormsentRegister'])){include '../php/database.php'; global $db; $Mail = $_POST['register-email']; $Password = $_POST['register-password']; $Password_verified = $_POST['register-password-verified']; $Nom = $_POST['register-nom']; $Prenom = $_POST['register-prenom']; $DateNaissance = $_POST['register-date']; $Check = $db->query("SELECT Count(*) FROM Users WHERE Email='$Mail'"); $Check = $Check->fetch(); if ($Check[0] == 1) {echo '<div style="color: red; margin-top: 2rem">Adresse mail déjâ utilisé !</div>';}else {$Request = $db->query("INSERT INTO Users(IDUser, Email, Mdp, Nom, Prenom, DateNaissance) VALUE(0, '$Mail', '$Password', '$Nom', '$Prenom', '$DateNaissance')"); header("Location: ./profil.php");}} ?>
 
     <section>
         <form action="" method="POST">
@@ -83,6 +117,9 @@ print_r($_POST);
                 <div class="checkbox">
                     <input type="checkbox" id="toggle-register" name="toggle-register"/>
                     <label for="toggle-register">Se souvenir de moi</label>
+                </div>
+                <div>
+                    <a class="forgot-mdp" href="">Mot de passe oublié</a>
                 </div>
             </div>
             <div class="form-submit">
@@ -138,7 +175,7 @@ print_r($_POST);
             <div class="form-submit">
                 <div id="g_id_onload"
                     data-client_id="463202083643-85r6bih9kcvt7en94rnmbdh52s4jagnb.apps.googleusercontent.com"
-                    data-context="signup"
+                    data-context="signin"
                     data-ux_mode="popup"
                     data-login_uri="http://localhost:80/(page)/login.php"
                     data-auto_prompt="false">
@@ -147,7 +184,7 @@ print_r($_POST);
                     data-type="standard"
                     data-shape="rectangular"
                     data-theme="filled_blue"
-                    data-text="signup_with"
+                    data-text="signin"
                     data-size="large"
                     data-logo_alignment="left">
                 </div>

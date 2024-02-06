@@ -74,12 +74,12 @@ section input[type="submit"]{
     border-style: solid;
     border-radius: 3px;
     padding: 10px 20px;
-    background-color: #094FAC;
+    background-color: #2181ff;
     cursor: pointer;
     width: 100%;
 }
 section input[type="submit"]:hover{
-    background-color: #2181ff;
+    background-color: #87D9FF;
 }
 
 .social-btn {
@@ -93,4 +93,9 @@ section input[type="submit"]:hover{
 
 #error_msg {
     color: red;
+}
+
+.forgot-mdp {
+    text-decoration: underline;
+    color: #094FAC;
 }
