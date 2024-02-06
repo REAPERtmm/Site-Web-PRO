@@ -2,7 +2,6 @@
 require '../php/config.php';
 
 $user = $_SESSION['user'];
-print_r($user);
 ?>
 
 <!DOCTYPE html>
@@ -27,13 +26,15 @@ print_r($user);
 </head>
 <body>
 
+    <?php if (isset($_POST['FormsentRegister'])){include '../php/database.php'; global $db; $Mail = $user['email']; $Password = $_POST['register-password']; $Nom = $_POST['register-nom']; $Prenom = $_POST['register-prenom']; $DateNaissance = $_POST['register-date']; $Check = $db->query("SELECT Count(*) FROM Users WHERE Email='$Mail'"); $Check = $Check->fetch(); if ($Check[0] == 1) {echo '<div style="color: red; margin-top: 2rem">Adresse mail déjâ utilisé !</div>';}else {$Request = $db->query("INSERT INTO Users(IDUser, Email, Mdp, Nom, Prenom, DateNaissance) VALUE(0, '$Mail', '$Password', '$Nom', '$Prenom', '$DateNaissance')"); header("Location: ./profil.php"); exit();}} ?>
+
     <section>
         <form action="" method="POST">
             <h3 class="form-title">Formulaire d'inscription</h3>
             <div class="form-content">
                 <div>
                     <label for="register-Email">Email</label>
-                    <input type="email" name="register-email" value="<?php print_r($user['email'])?>" id="register-Email" required disabled>
+                    <input type="email" name="register-email" value="<?php echo $user['email'] ?>" id="register-Email" disabled>
                 </div>
                 <div>
                     <label for="register-password">Mot de passe</label>
