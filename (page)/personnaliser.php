@@ -64,10 +64,10 @@
             <div class="offers">
                 <div class="offers-product">
                     <form action="custom.php" method="POST">
-                        <a href="custom.php">
+                        <div>
                             <button type="submit"> <img class="offers-img" src="../Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller"></button>
                             <input type="hidden" name="IDProduct" value="1">
-                        </a>        
+                        </div>        
                     </form>           
                     <p class="offers-model"> Référence modèle </p>
                     <p class="offers-model"> Prix </p>
@@ -77,10 +77,10 @@
             <div class="offers">
                 <div class="offers-product">
                     <form action="custom.php" method="POST">
-                        <a href="custom.php">
+                        <div href="custom.php">
                             <button type="submit"> <img class="offers-img" src="../Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller"></button>
                             <input type="hidden" name="IDProduct" value="2">
-                        </a>        
+                        </div>        
                     </form> 
                     <p class="offers-model"> Référence modèle </p>
                     <p class="offers-model"> Prix </p>
@@ -90,10 +90,10 @@
             <div class="offers" id="best-selling">
                 <div class="offers-product">
                     <form action="custom.php" method="POST">
-                        <a href="custom.php">
+                        <div href="custom.php">
                             <button type="submit"> <img class="offers-img" src="../Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller"></button>
                             <input type="hidden" name="IDProduct" value="2">
-                        </a>        
+                        </div>        
                     </form>                   
                     <p class="offers-model"> Référence modèle </p>
                     <p class="offers-model"> Prix </p>
@@ -104,10 +104,10 @@
             <div class="offers">
                 <div class="offers-product">
                     <form action="custom.php" method="POST">
-                        <a href="custom.php">
+                        <div href="custom.php">
                             <button type="submit"> <img class="offers-img" src="../Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller"></button>
                             <input type="hidden" name="IDProduct" value="2">
-                        </a>        
+                        </div>        
                     </form>              
                     <p class="offers-model"> Référence modèle </p>
                     <p class="offers-model"> Prix </p>
@@ -117,10 +117,10 @@
             <div class="offers">
                 <div class="offers-product">
                     <form action="custom.php" method="POST">
-                        <a href="custom.php">
+                        <div href="custom.php">
                             <button type="submit"> <img class="offers-img" src="../Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller"></button>
                             <input type="hidden" name="IDProduct" value="2">
-                        </a>        
+                        </div>        
                     </form> 
                     <p class="offers-model"> Référence modèle </p>
                     <p class="offers-model"> Prix </p>
@@ -130,10 +130,10 @@
             <div class="offers" id="best-selling">
                 <div class="offers-product">
                     <form action="custom.php" method="POST">
-                        <a href="custom.php">
+                        <div href="custom.php">
                             <button type="submit"> <img class="offers-img" src="../Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller"></button>
                             <input type="hidden" name="IDProduct" value="2">
-                        </a>        
+                        </div>        
                     </form>              
                     <p class="offers-model"> Référence modèle </p>
                     <p class="offers-model"> Prix </p>
@@ -143,10 +143,10 @@
             <div class="offers">
                 <div class="offers-product">
                     <form action="custom.php" method="POST">
-                        <a href="custom.php">
+                        <div href="custom.php">
                             <button type="submit"> <img class="offers-img" src="../Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller"></button>
                             <input type="hidden" name="IDProduct" value="2">
-                        </a>        
+                        </div>        
                     </form>            
                     <p class="offers-model"> Référence modèle </p>
                     <p class="offers-model"> Prix </p>
@@ -156,10 +156,10 @@
             <div class="offers">
                 <div class="offers-product">
                     <form action="custom.php" method="POST">
-                        <a href="custom.php">
+                        <div href="custom.php">
                             <button type="submit"> <img class="offers-img" src="../Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller"></button>
                             <input type="hidden" name="IDProduct" value="2">
-                        </a>        
+                        </div>        
                     </form> 
                     <p class="offers-model"> Référence modèle </p>
                     <p class="offers-model"> Prix </p>
@@ -169,10 +169,10 @@
             <div class="offers" id="best-selling">
                 <div class="offers-product">
                     <form action="custom.php" method="POST">
-                        <a href="custom.php">
+                        <div href="custom.php">
                             <button type="submit"> <img class="offers-img" src="../Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller"></button>
                             <input type="hidden" name="IDProduct" value="2">
-                        </a>        
+                        </div>        
                     </form>           
                     <p class="offers-model"> Référence modèle </p>
                     <p class="offers-model"> Prix </p>
