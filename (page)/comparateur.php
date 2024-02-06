@@ -15,7 +15,56 @@
     <link rel="stylesheet" href="../styles/comparateur.css">
 </head>
 <body>
+<?php  
+    include("../php/database.php");
+    header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+    header("Cache-Control: post-check=0, pre-check=0", false);
+    header("Pragma: no-cache");
     
+    
+    if (isset($_POST['IDProduct']))
+        {
+            $IDProduit = $_POST['IDProduct'];
+        }
+    else
+        {
+            echo "Aucune donnée";
+        }
+
+
+    $q = $db->prepare("SELECT * FROM Attribut WHERE IDProduit = :IDProduit");
+    $q->execute([
+        'IDProduit' => $IDProduit,
+    ]
+    );
+    $q = $q->fetch();
+
+    $Reference = $q["Modele"];
+
+    $qp = $db->prepare("SELECT * FROM Produit WHERE IDProduit = :IDProduit");
+    $qp->execute([
+        'IDProduit' => $IDProduit,
+    ]
+    );
+
+    $qp = $qp->fetch();
+
+    $keyboard_name = $qp["Nom"];
+    $path1 = $qp["Path1"];
+    $path2 = $qp["Path2"];
+    $desc1 = $qp["Description1"];
+    $desc2 = $qp["Description2"];
+    $ImgPath = $qp["ImgPath"];
+
+    $q_avis = $db->prepare("SELECT * FROM Avis INNER JOIN Users ON Avis.IDUser = Users.IDUser WHERE IDProduit = :IDProduit ORDER BY RAND () LIMIT 4;");
+    $q_avis->execute([
+        'IDProduit' => $IDProduit,
+    ]
+    );
+    $q_avis = $q_avis->fetchAll();
+
+    ?>
+     
     <header class="unselectable">
         <div class="header">
             <div class="header_top">
@@ -47,12 +96,17 @@
             </div>
         </div>
     </header>
+    
+    
 <h1>comparateur</h1>
 
 <div>
     <img class="img_pr" src="../Assets/Clavier1.webp" alt=""  /> 
     <img class="img_pr"src="../Assets/Clavier2.webp" alt=""  />
     <img class="img_pr"src="../Assets/Clavier3.jpg" alt="" />
+   </div>
+   <div>
+
    </div>
 
     <footer class="footer">
