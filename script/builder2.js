@@ -1,4 +1,4 @@
-let anc_couleur = "C-"+0
+let anc_couleur = "C-"+-1
 let cible = 0
 let touche_choisi = -1
 
@@ -14,7 +14,6 @@ for(let i = 0 ; i < 20 ; i++){
     document.getElementById("C-"+i).addEventListener("click", function(){
         $("#"+anc_couleur).toggle("couleur2")
         anc_couleur = this.id;
-
         $("#"+this.id).toggle("couleur2");
         
     });

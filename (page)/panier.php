@@ -112,14 +112,14 @@
         <h1></h1>
         
         <?php 
-            foreach($output as $key => $row){
+            foreach($output as $row){
                 echo '<img class="img_pr" src="../Assets/'. $row["ImgPath"] .'" alt="image du produit">';
                 echo '<h1 class="nom_pr">' . $row["Nom"] . ($row["IsCustom"] == 1 ? "(Custom)" : "") . '</h1>';
                 echo '<p class="prix_pr">' . $row["Prix"] . '$</p>';
                 echo '<p class="quant_pr">' . $row["Amount"] . '</p>';
                 echo '  <div class="btn-div">
-                            <button class="bouton_modifier" id="m'.$key.'"><img class="modifier" src="https://icones.pro/wp-content/uploads/2022/07/icone-crayon-bleu.png" height="100%"></button>
-                            <button class="delet" id="d'.$key.'>suprimer</button>
+                            <button class="bouton_modifier"><img class="modifier" src="https://icones.pro/wp-content/uploads/2022/07/icone-crayon-bleu.png" height="100%"></button>
+                            <button class="delet">suprimer</button>
                         </div>';
             }
         ?>
