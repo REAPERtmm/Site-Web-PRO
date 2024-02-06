@@ -112,16 +112,19 @@
         <h1></h1>
         
         <?php 
+            $i = 0;
             foreach($output as $row){
-                echo '<img class="img_pr" src="../Assets/'. $row["ImgPath"] .'" alt="image du produit">';
-                echo '<h1 class="nom_pr">' . $row["Nom"] . ($row["IsCustom"] == 1 ? "(Custom)" : "") . '</h1>';
-                echo '<p class="prix_pr">' . $row["Prix"] . '$</p>';
-                echo '<p class="quant_pr">' . $row["Amount"] . '</p>';
-                echo '  <div class="btn-div">
-                            <button class="bouton_modifier"><img class="modifier" src="https://icones.pro/wp-content/uploads/2022/07/icone-crayon-bleu.png" height="100%"></button>
-                            <button class="delet">suprimer</button>
+                echo '<img class="img_pr" src="../Assets/'. $row["ImgPath"] .'" alt="image du produit"  id="i-'.$i.'">';
+                echo '<h1 class="nom_pr" id="n-'.$i.'">' . $row["Nom"] . ($row["IsCustom"] == 1 ? "(Custom)" : "") . '</h1>';
+                echo '<p class="prix_pr" id="p-'.$i.'">' . $row["Prix"] . '€</p>';
+                echo '<input type="number" class="quant_pr" id="q-'.$i.'" value="'.$row["Amount"].'" readonly>';
+                echo '  <div class="btn-div"  id="d-'.$i.'">
+                            <button class="bouton_modifier" onclick="ModifyRow('.$i.')"><img class="modifier" src="https://icones.pro/wp-content/uploads/2022/07/icone-crayon-bleu.png" height="100%"></button>
+                            <button class="delet" onclick="DeleteRow('.$i.')">suprimer</button>
                         </div>';
-            }
+                    $i++;
+                    }
+        
         ?>
     </div>
     <div class="div3" id="">
@@ -131,7 +134,7 @@
         </div>
         <div class="sd3-2" id="">
             <h1 class="text_2" id="">Sous-total :</h1>
-            <h1 class="" id=""><?php $total = 0; foreach($output as $row){$total += floatval($row["Prix"]) * intval($row["Amount"]);} echo $total; echo '$'; ?></h1>
+            <h1 class="" id="Total"><?php $total = 0; foreach($output as $row){$total += floatval($row["Prix"]) * intval($row["Amount"]);} echo $total; echo '€'; ?></h1>
         </div>
     </div>
     <div class="div4" id="">
@@ -142,7 +145,8 @@
 
         <form action="panier2.php" method="post" class="sd4-2" id="form-next">
             <input class="bouton_continuer" type="submit" value="Confirmer le panier et poursuivre" onclick="BeforeNextPage()">
-            <input type="hidden" name="Data" value="" id="">
+            <input type="hidden" name="Data" value="" id="Data">
+            <input type="hidden" id="Panier" value="<?php echo count($output); ?>">
         </form>
     </div>
     
