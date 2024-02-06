@@ -2,6 +2,7 @@ const choiceuser = document.getElementById("choice-keycaps-user");
 const BackplateColor = document.getElementById("backplate-color");
 const KeycapsColor = document.getElementById("keycaps-color");
 const FormAction = document.getElementById("form-action");
+const DataForm = document.getElementById("data");
 let BtnList;
 
 
@@ -39,6 +40,11 @@ function SaveConfig() {
 }
 
 function NextPage() {
+  var data = {
+    "Backplate": BackplateColor.value,
+    "Keycaps": KeycapsColor.value
+  }
+  DataForm.value = btoa(btoa(JSON.stringify(data)));
   FormAction.action = "builder2.html";
   FormAction.submit();
 }
