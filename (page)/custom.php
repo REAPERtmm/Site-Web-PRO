@@ -31,8 +31,14 @@
         }
     else
         {
-            echo "Aucune donnée";
+            $IDProduit = 1;
         }
+
+    if (!isset($_POST["IDCustom"])){
+        $IDCustom = -1;
+    } else {
+        $IDCustom = $_POST["IDCustom"];
+    }
 
 
     $q = $db->prepare("SELECT * FROM Attribut WHERE IDProduit = :IDProduit");
@@ -133,9 +139,9 @@
                 <div class="dropdown">
                     <button class="keycaps-choice-box dropbtn" onclick="Dropdown()">Afficher les différents switch</button>
                     <div id="myDropdown" class="dropdown-content">
-                        <button id="#0000FF"  onclick="SetKeycaps(this.id, 'Switch Bleu')" class="dropdown-button"> Switch Bleu </button>
-                        <button id="#FF0000" onclick="SetKeycaps(this.id, 'Switch Rouge')" class="dropdown-button"> Switch Rouge </button>
-                        <button id="#582900" onclick="SetKeycaps(this.id, 'Switch Marron')" class="dropdown-button"> Switch Marron </button>
+                        <button id="#0000FF"  onclick="SetKeycaps(this.id, 'Switch Bleu')" class="dropdown-button"> Switch Bleu (total: 91$)</button>
+                        <button id="#FF0000" onclick="SetKeycaps(this.id, 'Switch Rouge')" class="dropdown-button"> Switch Rouge (total: 31$) </button>
+                        <button id="#582900" onclick="SetKeycaps(this.id, 'Switch Marron')" class="dropdown-button"> Switch Marron (total: 122$) </button>
                     </div>
                 </div>
                 </div>
@@ -344,29 +350,40 @@
     <form action="" id="form-action" method="POST">
         <input type="hidden" id="backplate-color" name="backplate-color" value="">
         <input type="hidden" id="keycaps-color" name="keycaps-color" value="">
+        <input type="hidden" id="data" value="">
     </form>
 
     <?php
     
-    $BackplateColor = $_POST["backplate-color"];
-    $KeycapsColor = $_POST["keycaps-color"];
+    if (isset($_POST['backplate-color']) && isset($_POST['keycaps-color'])) {
+        $BackplateColor = $_POST["backplate-color"];
+        $KeycapsColor = $_POST["keycaps-color"];
+    
 
-
-    if(!isset($_POST["IDCustom"])){
-        $qc = $db->prepare("UPDATE Customs SET BackplateColor=:BackplateColor, KeycapColor=:KeycapColor WHERE IDCustom=:IDCustom");
-        $qc ->execute([
+        $q_check = $db->prepare("SELECT COUNT(*) FROM Customs WHERE IDCustom=:IDCustom");
+        $q_check->execute([
             "IDCustom"=> $IDCustom,
-            "BackplateColor"=> $BackplateColor,
-            "KeycapColor"=> $KeycapsColor
         ]);
-    } else {
-        $qc = $db->prepare("INSERT INTO Customs VALUES (NULL, :IDUser, :IDProduit, :BackplateColor, :KeycapColor)");
-        $qc ->execute([
-            "IDUser"=> 1,
-            "IDProduit"=> $IDProduit,
-            "BackplateColor"=> $BackplateColor,
-            "KeycapColor"=> $KeycapsColor
-        ]);
+        $check = $q_check->fetch();
+
+        if($check[0] > 0){
+            $qc = $db->prepare("UPDATE Customs SET BackplateColor=:BackplateColor, KeycapColor=:KeycapColor WHERE IDCustom=:IDCustom");
+            $qc ->execute([
+                "IDCustom"=> $IDCustom,
+                "BackplateColor"=> $BackplateColor,
+                "KeycapColor"=> $KeycapsColor
+            ]);
+            echo 'update pls';
+        } else {
+            $qc = $db->prepare("INSERT INTO Customs(IDCustom,IDUser,IDProduit,BackplateColor,KeycapColor) VALUES (NULL, :IDUser, :IDProduit, :BackplateColor,:KeycapColor)");
+            $qc ->execute([
+                "IDUser" => "1",
+                "IDProduit"=> $IDProduit,
+                "BackplateColor"=> $BackplateColor,
+                "KeycapColor"=> $KeycapsColor
+            ]);
+            echo 'insert pls';
+        }
     }
 
 
