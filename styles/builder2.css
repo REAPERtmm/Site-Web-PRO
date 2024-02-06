@@ -28,10 +28,15 @@ body{
     font-size: 120%;
     padding: 0 3% 0 3%;
 }
-.text_3{
-    font-size: 120%;
-    padding: 0 3% 0 3%;
+
+.text_4{
+    width: 20px;
+    height: 20px;
+    border: 1px solid;
+    margin: 0 0.5% 0 0;
 }
+
+
 .save-conf{
     width: 15%;
     margin: 0 10%;
@@ -145,24 +150,23 @@ body{
 .cible{
     margin: 0 3%;
 }
-
-.div3{
-    
+.div4{
+    background-color: lightgray;
+    padding: 1%;
 }
-.groups-key{
-
+.sd4-1{
+    display: flex;
+    justify-content: center;
 }
-.img1{
-
+.img{
+    width: 100px;
 }
-.img2{
-    
-}
-.img3{
-    
-}
-.next1{
-
+.masse{
+    width: 90%;
+    margin: 1% 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 .t000 {width: 30px; height: 30px; padding: 0;}
 .t001 {width: 30px; height: 30px;}
