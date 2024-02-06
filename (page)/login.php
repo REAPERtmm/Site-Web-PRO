@@ -30,12 +30,13 @@ if (!empty($_POST['credential'])) {
         if ($Check[0] == 0) {
             header("Location: ./googlelogin.php");
             exit();
+        }else {
+            $IDCLIENT =  $db->query("SELECT IDUser FROM Users WHERE Email='$Mail'"); 
+            $IDCLIENT = $IDCLIENT->fetch(); 
+            $_SESSION['user'] = array('email' => $Mail, 'IDUser' => $IDCLIENT[0]);
+            header("Location: ./profil.php");
+            exit();
         }
-        $IDCLIENT =  $db->query("SELECT IDUser FROM Users WHERE Email='$EEMail'"); 
-        $IDCLIENT = $IDCLIENT->fetch(); 
-        $_SESSION['user'] = array('email' => $EEMail, 'IDUser' => $IDCLIENT[0]);
-        header("Location: ./profil.php");
-        exit();
 
     } else {
         // Invalid ID token
