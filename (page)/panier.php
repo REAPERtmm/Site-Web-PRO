@@ -13,6 +13,56 @@
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/base.css">
     <link rel="stylesheet" href="../styles/panier.css">
+    <?php 
+        include '../php/database.php'; 
+        if(!isset($_SESSION['IDUser'])){$_SESSION['IDUser'] = 1;}
+
+        $q_panier = $db->prepare('SELECT * FROM Paniers WHERE IDUser=:ID');
+        $q_panier->bindParam(':ID', $_SESSION['IDUser']);
+        $q_panier->execute();
+        $result = $q_panier->fetchAll(PDO::FETCH_ASSOC);
+
+
+        $output = array();
+        $i = 0;
+        foreach($result as $row){
+            if($row["IsCustom"] == 1){
+                $q_Custom = $db->prepare("
+                SELECT Produit.ImgPath, Produit.Nom, Produit.Prix
+                FROM Customs 
+                JOIN Produit 
+                ON Produit.IDProduit = Customs.IDProduit 
+                WHERE Customs.IDCustom = :ID;
+                ");
+                $q_Custom->execute(
+                    ["ID" => $row["IDCustom"]]
+                );
+                $data = $q_Custom->fetch(PDO::FETCH_ASSOC);
+                $data["Amount"] = $row["Amount"];
+                $data["IsCustom"] = $row["IsCustom"];
+                
+                // AJOUTER LE PRIX DES SWITCH, BACKPLATE etc...
+
+                $output[$i] = $data;
+                $i++;
+            } else{
+                $q_Produit = $db->prepare("
+                SELECT ImgPath, Nom, Prix
+                FROM Produit 
+                WHERE IDProduit = :ID;
+                ");
+                $q_Produit->execute(
+                    ["ID" => $row["IDProduit"]]
+                );
+                $data = $q_Produit->fetch(PDO::FETCH_ASSOC);
+                $data["Amount"] = $row["Amount"];
+                $data["IsCustom"] = $row["IsCustom"];
+
+                $output[$i] = $data;
+                $i++;
+            }
+        }
+    ?>
 </head>
 <body>
     
@@ -55,20 +105,24 @@
         <h1 class="étape" id="">5</h1>
     </div>
     <div class="div2" id="">
-        <div class="dv2-1" id="">
-            <h1 class="produit" id="">produit</h1>
-            <h1 class="prix" id="">prix</h1>
-            <h1 class="quant" id="">Quantiter</h1>
-        </div>
-        <div class="dv2-2" id="">
-            <img class="img_pr" src="../Assets/Clavier2.webp" title="image du produit">
-            <h1 class="nom_pr" id="" title="nom du produit">nom</h1>
-            <h1 class="prix_pr" id="" title="prix du produit">///</h1>
-            <h1 class="quant_pr" id="" title="quantiter de produit">///</h1>
-            <button class="bouton_modifier" id=""><img class="modifier" src="https://icones.pro/wp-content/uploads/2022/07/icone-crayon-bleu.png"></button>
-            <button class="delet" id="">suprimer</button>
-        </div>
+        <h1 class="produit" id="">produit</h1>
+        <h1></h1>
+        <h1 class="prix" id="">prix</h1>
+        <h1 class="quant" id="">Quantiter</h1>
+        <h1></h1>
         
+        <?php 
+            foreach($output as $key => $row){
+                echo '<img class="img_pr" src="../Assets/'. $row["ImgPath"] .'" alt="image du produit">';
+                echo '<h1 class="nom_pr">' . $row["Nom"] . ($row["IsCustom"] == 1 ? "(Custom)" : "") . '</h1>';
+                echo '<p class="prix_pr">' . $row["Prix"] . '$</p>';
+                echo '<p class="quant_pr">' . $row["Amount"] . '</p>';
+                echo '  <div class="btn-div">
+                            <button class="bouton_modifier" id="m'.$key.'"><img class="modifier" src="https://icones.pro/wp-content/uploads/2022/07/icone-crayon-bleu.png" height="100%"></button>
+                            <button class="delet" id="d'.$key.'>suprimer</button>
+                        </div>';
+            }
+        ?>
     </div>
     <div class="div3" id="">
         <div class="sd3-1" id="">
@@ -77,17 +131,19 @@
         </div>
         <div class="sd3-2" id="">
             <h1 class="text_2" id="">Sous-total :</h1>
-            <h1 class="" id="">????</h1>
+            <h1 class="" id=""><?php $total = 0; foreach($output as $row){$total += floatval($row["Prix"]) * intval($row["Amount"]);} echo $total; echo '$'; ?></h1>
         </div>
     </div>
     <div class="div4" id="">
         <div class="sd4-1" id="">
             <h1 class="text_1" id="">Utiliser un code de réduction :</h1>
-            <input class="" id="">
+            <input type="text" name="" id="" placeholder="XXXX-XXXX-XXXX">
         </div>
-        <div class="sd4-2" id="">
-            <button class="bouton_continuer" id="">Confirmer le panier et poursuivre</button>
-        </div>
+
+        <form action="panier2.php" method="post" class="sd4-2" id="form-next">
+            <input class="bouton_continuer" type="submit" value="Confirmer le panier et poursuivre" onclick="BeforeNextPage()">
+            <input type="hidden" name="Data" value="" id="">
+        </form>
     </div>
     
     <footer class="footer">
@@ -127,6 +183,7 @@
         </div>
     </footer>
     
-    <script src="./script/index.js"></script>
+    <script src="../script/panier.js"></script>
+    <script src="../script/index.js"></script>
 </body>
 </html>
