@@ -1,8 +1,11 @@
 <?php 
 require '../php/config.php';
+include '../php/database.php'; 
+global $db;
 
-print_r($_COOKIE);
-print_r($_POST);
+header("Cache-Control: sno-cache");
+
+print_r($_SESSION);
 
 if (!empty($_POST['credential'])) {
 
@@ -28,6 +31,9 @@ if (!empty($_POST['credential'])) {
             header("Location: ./googlelogin.php");
             exit();
         }
+        $IDCLIENT =  $db->query("SELECT IDUser FROM Users WHERE Email='$EEMail'"); 
+        $IDCLIENT = $IDCLIENT->fetch(); 
+        $_SESSION['user'] = array('email' => $EEMail, 'IDUser' => $IDCLIENT[0]);
         header("Location: ./profil.php");
         exit();
 
@@ -99,8 +105,8 @@ if (!empty($_POST['credential'])) {
         </div>
     </header>
 
-    <?php if (isset($_POST['FormsentLogin'])){include '../php/database.php'; global $db; $Mail = $_POST['login-email']; $Password = $_POST['login-password']; $Request = $db->query("SELECT Count(*) FROM Users WHERE Email='$Mail' AND Mdp='$Password'"); $Request = $Request->fetch(); if ($Request[0] == 1) {header("Location: ./profil.php"); exit();}else {echo '<div style="color: red; margin-top: 2rem">Adresse mail ou mot de passe invalide !</div>';}} 
-    if (isset($_POST['FormsentRegister'])){include '../php/database.php'; global $db; $Mail = $_POST['register-email']; $Password = $_POST['register-password']; $Password_verified = $_POST['register-password-verified']; $Nom = $_POST['register-nom']; $Prenom = $_POST['register-prenom']; $DateNaissance = $_POST['register-date']; $Check = $db->query("SELECT Count(*) FROM Users WHERE Email='$Mail'"); $Check = $Check->fetch(); if ($Check[0] == 1) {echo '<div style="color: red; margin-top: 2rem">Adresse mail déjâ utilisé !</div>';}else {$Request = $db->query("INSERT INTO Users(IDUser, Email, Mdp, Nom, Prenom, DateNaissance) VALUE(0, '$Mail', '$Password', '$Nom', '$Prenom', '$DateNaissance')"); header("Location: ./profil.php");}} ?>
+    <?php if (isset($_POST['FormsentLogin'])){$Mail = $_POST['login-email']; $Password = $_POST['login-password']; $Request = $db->query("SELECT Count(*) FROM Users WHERE Email='$Mail' AND Mdp='$Password'"); $Request = $Request->fetch(); if ($Request[0] == 1) {$IDCLIENT =  $db->query("SELECT IDUser FROM Users WHERE Email='$Mail'"); $IDCLIENT = $IDCLIENT->fetch(); $_SESSION['user'] = array('email' => $Mail, 'IDUser' => $IDCLIENT[0]); header("Location: ./profil.php"); exit();}else {echo '<div style="color: red; margin-top: 2rem">Adresse mail ou mot de passe invalide !</div>';}} 
+    if (isset($_POST['FormsentRegister'])){$Mail = $_POST['register-email']; $Password = $_POST['register-password']; $Password_verified = $_POST['register-password-verified']; $Nom = $_POST['register-nom']; $Prenom = $_POST['register-prenom']; $DateNaissance = $_POST['register-date']; $Check = $db->query("SELECT Count(*) FROM Users WHERE Email='$Mail'"); $Check = $Check->fetch(); if ($Check[0] == 1) {echo '<div style="color: red; margin-top: 2rem">Adresse mail déjâ utilisé !</div>';}else {$Request = $db->query("INSERT INTO Users(IDUser, Email, Mdp, Nom, Prenom, DateNaissance) VALUE(0, '$Mail', '$Password', '$Nom', '$Prenom', '$DateNaissance')"); $IDCLIENT =  $db->query("SELECT IDUser FROM Users WHERE Email='$Mail'"); $IDCLIENT = $IDCLIENT->fetch(); $_SESSION['user'] = array('email' => $Mail, 'IDUser' => $IDCLIENT[0]); header("Location: ./profil.php");}} ?>
 
     <section>
         <form action="" method="POST">
