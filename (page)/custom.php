@@ -21,10 +21,11 @@
     <?php  
     require("../php/database.php");
     require("../php/config.php");
-    print_r($_SESSION);
     header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
     header("Cache-Control: post-check=0, pre-check=0", false);
     header("Pragma: no-cache");
+
+    $IDUser = $_SESSION["user"]["IDUser"];
     
     
     if (isset($_POST['IDProduct']))
@@ -141,8 +142,8 @@
                 <div class="dropdown">
                     <button class="keycaps-choice-box dropbtn" onclick="Dropdown()">Afficher les différents switch</button>
                     <div id="myDropdown" class="dropdown-content">
-                        <button id="#0000FF"  onclick="SetKeycaps(this.id, 'Switch Bleu')" class="dropdown-button"> Switch Bleu (total: 91$)</button>
-                        <button id="#FF0000" onclick="SetKeycaps(this.id, 'Switch Rouge')" class="dropdown-button"> Switch Rouge (total: 31$) </button>
+                        <button id="#0000ff"  onclick="SetKeycaps(this.id, 'Switch Bleu')" class="dropdown-button"> Switch Bleu (total: 91$)</button>
+                        <button id="#ff0000" onclick="SetKeycaps(this.id, 'Switch Rouge')" class="dropdown-button"> Switch Rouge (total: 31$) </button>
                         <button id="#582900" onclick="SetKeycaps(this.id, 'Switch Marron')" class="dropdown-button"> Switch Marron (total: 122$) </button>
                     </div>
                 </div>
@@ -165,7 +166,7 @@
                         </button>
                     </div>
                     <div class="backplate">
-                        <button id="#FFFFFF" class="backplate-btn" onclick="SetBackplate(this.id)">
+                        <button id="#ffffff" class="backplate-btn" onclick="SetBackplate(this.id)">
                             <div class="dot white" ></div>
                             <p class="backplate-text"> Blanc + 5$ </p>
                         </button>
@@ -350,8 +351,8 @@
     </div>
 
     <form action="" id="form-action" method="POST">
-        <input type="hidden" id="backplate-color" name="backplate-color" value="">
-        <input type="hidden" id="keycaps-color" name="keycaps-color" value="">
+        <input type="hidden" id="backplate-color" name="backplate-color" value="bbbbbb">
+        <input type="hidden" id="keycaps-color" name="keycaps-color" value="#0000ff">
         <input type="hidden" id="data" value="">
     </form>
 
@@ -375,16 +376,14 @@
                 "BackplateColor"=> $BackplateColor,
                 "KeycapColor"=> $KeycapsColor
             ]);
-            echo 'update pls';
         } else {
             $qc = $db->prepare("INSERT INTO Customs(IDCustom,IDUser,IDProduit,BackplateColor,KeycapColor) VALUES (NULL, :IDUser, :IDProduit, :BackplateColor,:KeycapColor)");
             $qc ->execute([
-                "IDUser" => "1",
+                "IDUser" => $IDUser,
                 "IDProduit"=> $IDProduit,
                 "BackplateColor"=> $BackplateColor,
                 "KeycapColor"=> $KeycapsColor
             ]);
-            echo 'insert pls';
         }
     }
 
