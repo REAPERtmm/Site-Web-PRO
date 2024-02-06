@@ -160,6 +160,7 @@ body{
 }
 .img{
     width: 100px;
+    margin: 0 1%;
 }
 .masse{
     width: 90%;
@@ -250,4 +251,65 @@ body{
     display: flex;
     flex-flow: column;
     justify-content: space-between;
+}
+.separ{
+    width: 100%;
+    height: 0;
+    border: 1px solid black;
+}
+.second1{
+    display: flex;
+    flex-flow: column;
+    width: 98%;
+    margin: 1%;
+    align-items: center;
+    justify-content: center;
+}
+.contour{
+    border: 1px solid black;
+    width: 30%;
+    margin: 0 3%;
+    font-size: 100%;
+}
+.sous1{
+    padding: 1%;
+    display: flex;
+    flex-flow: column;
+    background-color: lightgray;
+    align-items: center;
+    justify-content: center;
+}
+.sous1-1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.avie{
+    display: flex;
+    width: 100%;
+    padding: 1% 0;
+    background-color: lightgray;
+    margin: 1% 0;
+    justify-content: space-between;
+}
+.av-no{
+    display: flex;
+    flex-flow: column;
+    width: 20%;
+    margin: 2%;
+    justify-content: center;
+    align-items: center;
+
+}
+.second2{
+    display: flex;
+    flex-flow: column;
+    width: 98%;
+    margin: 1%;
+    align-items: center;
+    justify-content: center;
+    margin: 2%;
+}
+.note{
+    width: 50%;
 }

@@ -1,21 +1,21 @@
-
-#footer-img {
-    width: 50%;
+.la-big-div-sa-mere{
+    display: flex;
+    width: 96%;
+    margin: 0 2%;
+    align-items: center;
+    justify-content: space-between;
 }
-
-.img-product-1{
-    background-image: url("../Assets/product-1.jpg");
-    margin: auto;
-    background-position: center;
-    background-size: cover;
-    width: 70%;
-    height: 250px;
+.cest-drole-si-tu-lis-sa{
+    display: flex;
+    flex-flow: column;
+    width: 49%;
 }
+.img-de-clavier-la-classe-est-pas-trop-longue{
 
-#acheter  {  
-margin: 20px;
-background-image: linear-gradient(to right, white, grey);
-width: 20%;
-height: 50px;
+}
+.qwsxdcfvgbhnjkl{
 
+}
+.c-la-classe-des-canards-qui-en-sortant-de-la-ram-ce-secou-le-cyclotan{
+    
 }

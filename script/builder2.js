@@ -1,5 +1,5 @@
 let anc_couleur = "C-"+-1
-let cible = 0
+let cible = 1
 let touche_choisi = -1
 
 let coulor_table = {"C-0":"black","C-1":"red","C-2":"brown","C-3":"green","C-4":"cyan","C-5":"cornflowerblue","C-6":"royalblue","C-7":"yellow","C-8":"burlywood","C-9":"white","C-10":"purple","C-11":"chartreuse","C-12":"coral","C-13":"crimson","C-14":"fuchia","C-15":"greenyellow","C-16":"hotpink","C-17":"orangered","C-18":"gray","C-19":"lightgray"};
