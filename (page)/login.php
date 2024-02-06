@@ -106,8 +106,46 @@ if (!empty($_POST['credential'])) {
         </div>
     </header>
 
-    <?php if (isset($_POST['FormsentLogin'])){$Mail = $_POST['login-email']; $Password = $_POST['login-password']; $Request = $db->query("SELECT Count(*) FROM Users WHERE Email='$Mail' AND Mdp='$Password'"); $Request = $Request->fetch(); if ($Request[0] == 1) {$IDCLIENT =  $db->query("SELECT IDUser FROM Users WHERE Email='$Mail'"); $IDCLIENT = $IDCLIENT->fetch(); $_SESSION['user'] = array('email' => $Mail, 'IDUser' => $IDCLIENT[0]); header("Location: ./profil.php"); exit();}else {echo '<div style="color: red; margin-top: 2rem">Adresse mail ou mot de passe invalide !</div>';}} 
-    if (isset($_POST['FormsentRegister'])){$Mail = $_POST['register-email']; $Password = $_POST['register-password']; $Password_verified = $_POST['register-password-verified']; $Nom = $_POST['register-nom']; $Prenom = $_POST['register-prenom']; $DateNaissance = $_POST['register-date']; $Check = $db->query("SELECT Count(*) FROM Users WHERE Email='$Mail'"); $Check = $Check->fetch(); if ($Check[0] == 1) {echo '<div style="color: red; margin-top: 2rem">Adresse mail déjâ utilisé !</div>';}else {$Request = $db->query("INSERT INTO Users(IDUser, Email, Mdp, Nom, Prenom, DateNaissance) VALUE(0, '$Mail', '$Password', '$Nom', '$Prenom', '$DateNaissance')"); $IDCLIENT =  $db->query("SELECT IDUser FROM Users WHERE Email='$Mail'"); $IDCLIENT = $IDCLIENT->fetch(); $_SESSION['user'] = array('email' => $Mail, 'IDUser' => $IDCLIENT[0]); header("Location: ./profil.php");}} ?>
+    <?php 
+    if (isset($_POST['FormsentLogin'])){
+        $Mail = $_POST['login-email']; 
+        $Password = $_POST['login-password']; 
+        $mdp = $db->query("SELECT Mdp FROM Users WHERE Email='$Mail'");
+        $mdp = $mdp->fetch();
+        $PasswordVerify = password_verify($Password, $mdp[0]);
+        $Request = $db->query("SELECT Count(*) FROM Users WHERE Email='$Mail' AND Mdp='$Password'"); 
+        $Request = $Request->fetch(); 
+        if ($Request[0] == 1) {
+            $IDCLIENT =  $db->query("SELECT IDUser FROM Users WHERE Email='$Mail'"); 
+            $IDCLIENT = $IDCLIENT->fetch(); 
+            $_SESSION['user'] = array('email' => $Mail, 'IDUser' => $IDCLIENT[0]); 
+            header("Location: ./profil.php"); 
+            exit();
+        }else {
+            echo '<div style="color: red; margin-top: 2rem">Adresse mail ou mot de passe invalide !</div>';
+        }
+    }
+    
+    if (isset($_POST['FormsentRegister'])){
+        $Mail = $_POST['register-email']; 
+        $Password = $_POST['register-password']; 
+        $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
+        $Nom = $_POST['register-nom']; 
+        $Prenom = $_POST['register-prenom']; 
+        $DateNaissance = $_POST['register-date']; 
+        $Check = $db->query("SELECT Count(*) FROM Users WHERE Email='$Mail'"); 
+        $Check = $Check->fetch(); 
+        if ($Check[0] == 1) {
+            echo '<div style="color: red; margin-top: 2rem">Adresse mail déjâ utilisé !</div>';
+        }else {
+            $Request = $db->query("INSERT INTO Users(IDUser, Email, Mdp, Nom, Prenom, DateNaissance) VALUE(0, '$Mail', '$hashedPassword', '$Nom', '$Prenom', '$DateNaissance')"); 
+            $IDCLIENT =  $db->query("SELECT IDUser FROM Users WHERE Email='$Mail'"); 
+            $IDCLIENT = $IDCLIENT->fetch(); 
+            $_SESSION['user'] = array('email' => $Mail, 'IDUser' => $IDCLIENT[0]); 
+            header("Location: ./profil.php");
+        }
+    } 
+    ?>
 
     <section>
         <form action="" method="POST">
@@ -134,7 +172,7 @@ if (!empty($_POST['credential'])) {
                     data-client_id="463202083643-85r6bih9kcvt7en94rnmbdh52s4jagnb.apps.googleusercontent.com"
                     data-context="signin"
                     data-ux_mode="popup"
-                    data-login_uri="http://localhost:80/(page)/login.php"
+                    data-login_uri="https://snowstorm.alwaysdata.net/(page)/login.php"
                     data-auto_prompt="false">
                 </div>
                 <div class="g_id_signin"
@@ -184,7 +222,7 @@ if (!empty($_POST['credential'])) {
                     data-client_id="463202083643-85r6bih9kcvt7en94rnmbdh52s4jagnb.apps.googleusercontent.com"
                     data-context="signin"
                     data-ux_mode="popup"
-                    data-login_uri="http://localhost:80/(page)/login.php"
+                    data-login_uri="https://snowstorm.alwaysdata.net/(page)/login.php"
                     data-auto_prompt="false">
                 </div>
                 <div class="g_id_signin"
