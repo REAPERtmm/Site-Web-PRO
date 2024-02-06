@@ -351,8 +351,26 @@
     $BackplateColor = $_POST["backplate-color"];
     $KeycapsColor = $_POST["keycaps-color"];
 
-    //$q = $db->prepare("I") 
-    
+
+    if(!isset($_POST["IDCustom"])){
+        $qc = $db->prepare("UPDATE Customs SET BackplateColor=:BackplateColor, KeycapColor=:KeycapColor WHERE IDCustom=:IDCustom");
+        $qc ->execute([
+            "IDCustom"=> $IDCustom,
+            "BackplateColor"=> $BackplateColor,
+            "KeycapColor"=> $KeycapsColor
+        ]);
+    } else {
+        $qc = $db->prepare("INSERT INTO Customs VALUES (NULL, :IDUser, :IDProduit, :BackplateColor, :KeycapColor)");
+        $qc ->execute([
+            "IDUser"=> 1,
+            "IDProduit"=> $IDProduit,
+            "BackplateColor"=> $BackplateColor,
+            "KeycapColor"=> $KeycapsColor
+        ]);
+    }
+
+
+
     ?>
 
         
