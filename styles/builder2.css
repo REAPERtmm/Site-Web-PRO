@@ -38,75 +38,86 @@ body{
     border-radius: 0;
     border: 1px solid black;
 }
-.couleur1{
+#C-1{
     background-color: red;
+}
+#C-2{
+    background-color: brown ;
+}
+#C-3{
+    background-color: green;
+}
+#C-4{
+    background-color: cyan;
+}
+#C-5{
+    background-color: cornflowerblue;
+}
+#C-6{
+    background-color: royalblue;
+}
+#C-7{
+    background-color: yellow;
+}
+#C-8{
+    background-color: burlywood;
+}
+#C-9{
+    background-color: white;
+}
+#C-0{
+    background-color: black;
+}
+#C-10{
+    background-color: purple;
+}
+#C-11{
+    background-color: chartreuse;
+}
+#C-12{
+    background-color: coral;
+}
+#C-13{
+    background-color: crimson;
+}
+#C-14{
+    background-color: fuchsia;
+}
+#C-15{
+    background-color: greenyellow;
+}
+#C-16{
+    background-color: hotpink;
+}
+#C-17{
+    background-color: orangered;
+}
+#C-18{
+    background-color: gray;
+}
+#C-19{
+    background-color: lightgray;
+}
+.couleur{
     width: 20px;
     height: 20px;
     border: 1px solid;
     margin: 0 0.5% 0 0;
+}
+.couleur:hover{
+    width: 20px;
+    height: 20px;
+    border: 2px solid;
+    border-radius: 0 10px 10px 10px;
+    transform: rotateZ(45deg);
+
 }
 .couleur2{
-    background-color: brown ;
     width: 20px;
     height: 20px;
-    border: 1px solid;
-    margin: 0 0.5% 0 0;
-}
-.couleur3{
-    background-color: green;
-    width: 20px;
-    height: 20px;
-    border: 1px solid;
-    margin: 0 0.5% 0 0;
-}
-.couleur4{
-    background-color: cyan;
-    width: 20px;
-    height: 20px;
-    border: 1px solid;
-    margin: 0 0.5% 0 0;
-}
-.couleur5{
-    background-color: cornflowerblue;
-    width: 20px;
-    height: 20px;
-    border: 1px solid;
-    margin: 0 0.5% 0 0;
-}
-.couleur6{
-    background-color: royalblue;
-    width: 20px;
-    height: 20px;
-    border: 1px solid;
-    margin: 0 0.5% 0 0;
-}
-.couleur7{
-    background-color: yellow;
-    width: 20px;
-    height: 20px;
-    border: 1px solid;
-    margin: 0 0.5% 0 0;
-}
-.couleur8{
-    background-color: burlywood;
-    width: 20px;
-    height: 20px;
-    border: 1px solid;
-    margin: 0 0.5% 0 0;
-}
-.couleur9{
-    background-color: white;
-    width: 20px;
-    height: 20px;
-    border: 1px solid;
-    margin: 0 0.5% 0 0;
-}
-.couleur0{
-    background-color: black;
-    width: 20px;
-    height: 20px;
-    border: 1px solid;
-    margin: 0 0.5% 0 0;
+    border:2px solid;
+    border-radius: 0 10px 10px 10px;
+    transform: rotateZ(45deg);
 }
 
 
@@ -153,7 +164,7 @@ body{
 .next1{
 
 }
-.t000 {width: 30px; height: 30px;}
+.t000 {width: 30px; height: 30px; padding: 0;}
 .t001 {width: 30px; height: 30px;}
 .t002 {width: 30px; height: 30px;}
 .t003 {width: 30px; height: 30px;}
@@ -227,10 +238,11 @@ body{
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    padding: 2px;
 }
 .clavier{
-    width: 40%;
-    margin: 0 30%;
+    width: 28%;
+    margin: 0 36%;
     display: flex;
     flex-flow: column;
     justify-content: space-between;
