@@ -128,12 +128,6 @@
 
     </div> 
 
-
-
-
-
-    
-
     <footer class="footer">
         <div class="footer-container unselectable">
             <p class="logo-name">Snowstorm.GG</p>
@@ -172,5 +166,6 @@
     
     <script src="../script/index.js"></script>
     <script src="../script/panier3.js"></script>
+
 </body>
 </html>
