@@ -45,7 +45,7 @@ function NextPage() {
     "Keycaps": KeycapsColor.value
   }
   DataForm.value = btoa(btoa(JSON.stringify(data)));
-  FormAction.action = "builder2.html";
+  FormAction.action = "builder2.php";
   FormAction.submit();
 }
 
