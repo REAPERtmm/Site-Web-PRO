@@ -1,0 +1,11 @@
+.save-box {
+    background-color: lightgray;
+    border: 1px black solid;
+    max-width: 70%;
+    cursor: pointer;
+    margin-bottom: 1000px;
+}
+
+.footer {
+    margin-top: 411.156000000009px; 
+}

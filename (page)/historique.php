@@ -16,30 +16,10 @@
     <link href="https://fonts.cdnfonts.com/css/penguin" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/base.css">
-    <link rel="stylesheet" href="../styles/profil.css">
+    <link rel="stylesheet" href="../styles/historique.css">
 </head>
 <body>
 
-<?php 
-    require("../php/database.php");
-    //require("../php/config.php");
-    header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-    header("Cache-Control: post-check=0, pre-check=0", false);
-    header("Pragma: no-cache");
-
-    $IDUser = $_SESSION["user"]["IDUser"];
-
-    $q = $db->prepare("SELECT Nom, Prenom FROM Users WHERE IDUser =:IDUser");
-    $q->execute([
-        "IDUser" => $IDUser
-    ]);
-    $qf = $q->fetch();
-
-    $Nom = $qf["Nom"];
-    $Prenom = $qf["Prenom"];
-
-?>
-    
     <header class="unselectable">
         <div class="header">
             <div class="header-grp">
@@ -58,7 +38,7 @@
                 <div class="header_bot">
                     <div class="navbar_link">
                         <a href="../index.html">ACCUEIL </a>
-                        <a href="/(page)/historique.php">HISTORIQUE</a>
+                        <a href="/(page)/personnaliser.php">HISTORIQUE</a>
                         <a href="./(page)/Search.php">FAVORIS</a>
                         <a href="index.html">SAUVEGARDES</a>
                         <a href="index.html">COMPTE</a>
@@ -76,10 +56,102 @@
         </div>
     </header>
 
-    <div class="titre">
-        <p class="text"> Bonjour <?php echo $Prenom.' '.$Nom ?> ! Vous êtes désormais connecté </p>
-        <a href="../index.html" class="save-box"> Retour à l'acceuil </a>
-    </div>
+
+    <?php 
+    require("../php/database.php");
+    //require("../php/config.php");
+    header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+    header("Cache-Control: post-check=0, pre-check=0", false);
+    header("Pragma: no-cache");
+
+    $IDUser = $_SESSION["user"]["IDUser"];
+
+    $q = $db->prepare("SELECT * FROM Paniers WHERE IDUser =:IDUser AND IsBought=:IsBought");
+    $q->execute([
+        "IDUser"=> $IDUser,
+        "IsBought"=> 1,
+    ]);
+
+    $qf = $q->fetchAll();
+
+    $equivalent = array(
+        "#bbbbbb" => 0,
+        "#ffffff" => 5,
+        "#000000" => 0,
+        "#cd856f" => 5,
+        "#0000ff" => 91,
+        "#ff0000" => 31,
+        "#582900" => 122,
+    );
+
+
+
+
+
+
+
+    echo ' <div class="titre"> Historique des achats </div>
+    <div class="grid-his">
+            <p class="subtitlehis">Nom du produit</p>       
+            <p class="subtitlehis">Prix Unitaire</p>
+            <p class="subtitlehis"> Quantité</p>
+            <p class="subtitlehis"> Prix totale</p>';
+            foreach ($qf as $row) {
+                $price = 0;
+                if ($row["IsCustom"] == 1) {
+                    $qcustom = $db->prepare("SELECT * FROM Customs WHERE IDCustom =:IDCustom");
+                    $qcustom->execute([
+                        "IDCustom" => $row["IDCustom"],
+                    ]);
+                    $qcustomf = $qcustom->fetch();
+
+
+                    if($qcustomf["KeycapColor"] == "#0000ff") {
+                        $price += 91;
+                    } elseif($qcustomf["KeycapColor"] == "#ff0000") {
+                        $price += 31;
+                    } elseif ($qcustomf["KeycapColor"] == "#582900") {
+                        $price += 122;
+                    }
+
+
+                    if($qcustomf["BackplateColor"] == "#ffffff") {
+                        $price += 5;
+                    } elseif ($qcustomf["BackplateColor"] == "#cd853f") {
+                        $price += 5;
+                    }
+
+
+                    $IDProduit = $qcustomf["IDProduit"];
+                } else {
+                    $IDProduit = $row["IDProduit"];
+                }
+                $qprice = $db->prepare("SELECT Prix, Nom FROM Produit WHERE IDProduit =:IDProduit");
+                $qprice->execute([
+                    "IDProduit" => $IDProduit,
+                ]);
+                $qpricef = $qprice->fetch();
+                $price += $qpricef["Prix"];
+                $Nom = $qpricef["Nom"];
+
+                $Quantity = $row["Amount"];
+
+                $PrixTotale = $Quantity * $price;
+
+                echo '<p> '.$Nom.' </p>';
+                echo '<p> '.$price.' </p>';
+                echo '<p> '.$Quantity.' </p>';
+                echo '<p> '.$PrixTotale.' </p>';
+            }
+
+
+        echo '</div>';
+
+
+?> 
+
+
+
 
 
     <footer class="footer">
@@ -123,13 +195,3 @@
     <script src="../script/index.js"></script>
 </body>
 </html>
-
-
-
-
-
-<?php 
-require '../php/config.php';
-
-print_r($_SESSION); 
-?>
