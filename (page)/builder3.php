@@ -72,7 +72,6 @@
         </form>
     </div>
 
-    <script src="../script/fillKey.js"></script>
 
     <div class="clavier" id="">
         <div class="ligne" id="">
@@ -147,17 +146,21 @@
             <button class="t40" id="60">ctr</button>
         </div>
     </div>
+    <script src="../script/fillKey.js"></script>
     <div class="line">
         <div class="container-option">
             <div class="option">
+                <p>Alphanumérique</p>
                 <img src="" alt="img Key" class="img">
                 <p class="txt">AZERTY</p>
             </div>
             <div class="option">
+                <p>Modifier</p>
                 <img src="" alt="img Mod" class="img">
                 <p class="txt">ctrl</p>
             </div>
             <div class="option">
+                <p>OS</p>
                 <img src="" alt="img OS" class="img">
                 <p class="txt">Windows</p>
             </div>

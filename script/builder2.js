@@ -50,8 +50,8 @@ let groups = {
 keys = {}
 for(var i = 0 ; i < 61 ; i++){
     keys[i.toString()] = {
-        bg:"#000000",
-        fg:"#ffffff"
+        bg:"#ffffff",
+        fg:"#000000"
     }
 }
 
