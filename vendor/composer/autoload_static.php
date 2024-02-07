@@ -20,6 +20,10 @@ class ComposerStaticInitebda91f5643b684e5f1d84addd6b9e69
         array (
             'phpseclib3\\' => 11,
         ),
+        'S' => 
+        array (
+            'Stripe\\' => 7,
+        ),
         'P' => 
         array (
             'Psr\\Log\\' => 8,
@@ -52,14 +56,18 @@ class ComposerStaticInitebda91f5643b684e5f1d84addd6b9e69
         array (
             0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
         ),
+        'Stripe\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
+        ),
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
