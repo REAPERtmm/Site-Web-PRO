@@ -12,6 +12,7 @@ $stripe_secret_key = "sk_test_51Oh0CYAM1e9hGOmlQ5Dn28i31c2ZynxclLV63T4ONYU9Kj1a8
 $checkout_session = \Stripe\Checkout\Session::create([
     "mode" => "payment",
     "success_url" => "http://localhost:80/(page)/success.html",
+    "cancel_url" => "http://localhost:80/(page)/panier4.php",
     'line_items' => [
         [
             "quantity" => 1,
