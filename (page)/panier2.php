@@ -22,8 +22,7 @@
 
     $IDUser = $_SESSION["user"]["IDUser"];
 
-
-    ?>
+?>
     
     <header class="unselectable">
         <div class="header">
@@ -90,9 +89,8 @@
                 <input type="text" name="telephone" id="telephone" required>
             </div>
 
-            <div class="save-box" id="save-config-btn">
-                <input type="submit" id="valid-btn" value="Valider">
-            </div> 
+            <input class="bouton_continuer" type="submit" value="Valider" onclick="BeforeNextPage()">
+            <input type="hidden" name="Data" value="<?php print_r($_POST["Data"]);?>" id="Data">
         </form>
     </div>
 

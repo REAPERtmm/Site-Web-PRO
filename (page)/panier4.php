@@ -1,5 +1,6 @@
 <?php
 require '../php/config.php';
+$prix = $_POST['Data'];
 ?>
 
 <!DOCTYPE html>
@@ -62,13 +63,6 @@ require '../php/config.php';
     </header>
 <!-- _____________________________________________________________________________________________ -->
 
-    <?php 
-    
-    // $prix = $_POST['Data'];
-    $prix = 29.99;
-
-    ?>
-
     <div class="div1" id="">
         <h1 class="étape" id="">1</h1>
         <h1 class="étape" id="">2</h1>
@@ -81,7 +75,8 @@ require '../php/config.php';
             <form action="../php/checkout.php" method="post">
                 <p>Produits</p>
                 <h1 class="text_3" id="">total : <?php print_r($prix)?> €</h1>
-                <button>Pay</button>
+                <input class="bouton_continuer" type="submit" value="Payer" onclick="BeforeNextPage()">
+                <input type="hidden" name="Data" value="<?php print_r($_POST["Data"]);?>" id="Data">
             </form>
         </div>
         <div class="sd2-3">

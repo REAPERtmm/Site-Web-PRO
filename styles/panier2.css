@@ -77,3 +77,7 @@ body {
     all:unset;
 }
 
+.bouton_modifier{
+    width: 30%;
+    height: 25px;
+}

@@ -18,7 +18,7 @@
     <?php 
         require("../php/database.php");
         require("../php/config.php");
-    
+
         $IDUser = $_SESSION["user"]["IDUser"];
 
         $Prenom = $_POST["prenom"];
@@ -122,7 +122,8 @@
         <form action="panier4.php" id="form-livraison" method="POST">
             <input type="hidden" id="data2" value="">
             <div class="save-box" id="save-config-btn">
-                <input type="submit" id="Valid-btn-PR" value="Valider">
+                <input class="bouton_continuer" type="submit" value="Valider" onclick="BeforeNextPage()">
+                <input type="hidden" name="Data" value="<?php print_r($_POST["Data"]);?>" id="Data">
             </div>
         </form>
 
@@ -130,6 +131,7 @@
 
     <footer class="footer">
         <div class="footer-container unselectable">
+            <img src="../Assets/logo-removebg-preview.png" alt="Logo de Snowstorm" id="footer-img">
             <p class="logo-name">Snowstorm.GG</p>
         </div>
         <div class="footer-container">
