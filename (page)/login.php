@@ -112,17 +112,19 @@ if (!empty($_POST['credential'])) {
         $Password = $_POST['login-password']; 
         $mdp = $db->query("SELECT Mdp FROM Users WHERE Email='$Mail'");
         $mdp = $mdp->fetch();
-        $PasswordVerify = password_verify($Password, $mdp[0]);
-        $Request = $db->query("SELECT Count(*) FROM Users WHERE Email='$Mail' AND Mdp='$Password'"); 
-        $Request = $Request->fetch(); 
-        if ($Request[0] == 1) {
-            $IDCLIENT =  $db->query("SELECT IDUser FROM Users WHERE Email='$Mail'"); 
-            $IDCLIENT = $IDCLIENT->fetch(); 
-            $_SESSION['user'] = array('email' => $Mail, 'IDUser' => $IDCLIENT[0]); 
-            header("Location: ./profil.php"); 
-            exit();
-        }else {
+        if (empty($mdp)) {
             echo '<div style="color: red; margin-top: 2rem">Adresse mail ou mot de passe invalide !</div>';
+        } else {
+            $PasswordVerify = password_verify($Password, $mdp[0]);
+            if ($PasswordVerify) {
+                $IDCLIENT =  $db->query("SELECT IDUser FROM Users WHERE Email='$Mail'"); 
+                $IDCLIENT = $IDCLIENT->fetch(); 
+                $_SESSION['user'] = array('email' => $Mail, 'IDUser' => $IDCLIENT[0]); 
+                header("Location: ./profil.php"); 
+                exit();
+            }else {
+                echo '<div style="color: red; margin-top: 2rem">Adresse mail ou mot de passe invalide !</div>';
+            }
         }
     }
     
