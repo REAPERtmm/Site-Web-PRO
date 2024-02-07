@@ -67,6 +67,7 @@
                         <div>
                             <button type="submit"> <img class="offers-img" src="../Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller"></button>
                             <input type="hidden" name="IDProduct" value="1">
+                            <input type="hidden" name="IDCustom" value="1">
                         </div>        
                     </form>           
                     <p class="offers-model"> Référence modèle </p>
@@ -80,6 +81,7 @@
                         <div href="custom.php">
                             <button type="submit"> <img class="offers-img" src="../Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller"></button>
                             <input type="hidden" name="IDProduct" value="2">
+                            <input type="hidden" name="IDCustom" value="2">
                         </div>        
                     </form> 
                     <p class="offers-model"> Référence modèle </p>
@@ -93,6 +95,7 @@
                         <div href="custom.php">
                             <button type="submit"> <img class="offers-img" src="../Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller"></button>
                             <input type="hidden" name="IDProduct" value="2">
+                            <input type="hidden" name="IDCustom" value="3">
                         </div>        
                     </form>                   
                     <p class="offers-model"> Référence modèle </p>
@@ -107,6 +110,7 @@
                         <div href="custom.php">
                             <button type="submit"> <img class="offers-img" src="../Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller"></button>
                             <input type="hidden" name="IDProduct" value="2">
+                            <input type="hidden" name="IDCustom" value="4">
                         </div>        
                     </form>              
                     <p class="offers-model"> Référence modèle </p>
@@ -120,6 +124,7 @@
                         <div href="custom.php">
                             <button type="submit"> <img class="offers-img" src="../Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller"></button>
                             <input type="hidden" name="IDProduct" value="2">
+                            <input type="hidden" name="IDCustom" value="5">
                         </div>        
                     </form> 
                     <p class="offers-model"> Référence modèle </p>
@@ -133,6 +138,7 @@
                         <div href="custom.php">
                             <button type="submit"> <img class="offers-img" src="../Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller"></button>
                             <input type="hidden" name="IDProduct" value="2">
+                            <input type="hidden" name="IDCustom" value="6">
                         </div>        
                     </form>              
                     <p class="offers-model"> Référence modèle </p>
@@ -146,6 +152,7 @@
                         <div href="custom.php">
                             <button type="submit"> <img class="offers-img" src="../Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller"></button>
                             <input type="hidden" name="IDProduct" value="2">
+                            <input type="hidden" name="IDCustom" value="7">
                         </div>        
                     </form>            
                     <p class="offers-model"> Référence modèle </p>
@@ -159,6 +166,7 @@
                         <div href="custom.php">
                             <button type="submit"> <img class="offers-img" src="../Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller"></button>
                             <input type="hidden" name="IDProduct" value="2">
+                            <input type="hidden" name="IDCustom" value="8">
                         </div>        
                     </form> 
                     <p class="offers-model"> Référence modèle </p>
@@ -172,6 +180,7 @@
                         <div href="custom.php">
                             <button type="submit"> <img class="offers-img" src="../Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller"></button>
                             <input type="hidden" name="IDProduct" value="2">
+                            <input type="hidden" name="IDCustom" value="9">
                         </div>        
                     </form>           
                     <p class="offers-model"> Référence modèle </p>

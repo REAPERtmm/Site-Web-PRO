@@ -17,6 +17,8 @@
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/base.css">
     <link rel="stylesheet" href="../styles/builder2.css">
+    <link rel="stylesheet" href="../styles/builder3.css">
+    <?php include '../php/database.php'; ?>
 </head>
 <body>
     
@@ -60,131 +62,114 @@
 
     <div class="div1" id="">
         <h1 class="étape" id="">1</h1>
-        <h1 class="text_3" id="">Étape 2 : choix de la couleur</h1>
-        <h1 class="étape" id="">3</h1>
+        <h1 class="étape" id="">2</h1>
+        <h1 class="text_3" id="">Etape 3 : choix de la langue et design</h1>
         <h1 class="étape" id="">4</h1>
-        <button class="save-conf" id="">sauvgarder la confihuration</button>
+        <form action="../php/load_key_in_page.php" target="_blank" class="save-conf" id="form">
+            <input type="submit" class="Sumbit" value="sauvgarder la configuration" onclick="extract()">
+            <input type="hidden" name="data" id="data" value=<?php echo $_POST["data"]; ?>>
+            <input type="hidden" name="IDCustom" value=<?php echo $_POST["IDCustom"]; ?>>
+        </form>
     </div>
 
-    <div class="div2" id="">
-        <dis class="sd2-1" id="">
-            <h1 class="text_3">cible:</h1>
-            <h1 class="text_3">couleur:</h1>
-        </dis>
-        <div class="sd2-2" id="">
-            <div class="cible" id="">
-                <button class="" id="cible_1">touche</button>
-                <button class="" id="cible_2">Aa</button>
-            </div>
-            <button class="couleur" id="C-0"   title="couleur rouge">        </button>
-            <button class="couleur" id="C-9"   title="couleur maron">        </button>
-            <button class="couleur" id="C-1"   title="couleur vert">         </button>
-            <button class="couleur" id="C-3"   title="couleur cyan">         </button>
-            <button class="couleur" id="C-4"   title="couleur azur">         </button>
-            <button class="couleur" id="C-5"   title="couleur bleu">         </button>
-            <button class="couleur" id="C-6"   title="couleur jaune">        </button>
-            <button class="couleur" id="C-7"   title="couleur beige">        </button>
-            <button class="couleur" id="C-8"   title="couleur violet">       </button>
-            <button class="couleur" id="C-2"   title="couleur chartreuse">   </button>
-            <button class="couleur" id="C-10"  title="couleur coral">        </button>
-            <button class="couleur" id="C-11"  title="couleur crimson">      </button>
-            <button class="couleur" id="C-12"  title="couleur fushia">       </button>
-            <button class="couleur" id="C-13"  title="couleur greenyellow">  </button>
-            <button class="couleur" id="C-14"  title="couleur hotpink">      </button>
-            <button class="couleur" id="C-15"  title="couleur orangered">    </button>
-            <button class="couleur" id="C-16"  title="couleur gray">         </button>
-            <button class="couleur" id="C-17"  title="couleur lightgray">    </button>
-            <button class="couleur" id="C-18"  title="couleur blanc">        </button>
-            <button class="couleur" id="C-19"  title="couleur noir">         </button>
-            <h1 class="text_4" id="gab" > </h1>
-        </div>
-    </div>
-    
+    <script src="../script/fillKey.js"></script>
 
     <div class="clavier" id="">
         <div class="ligne" id="">
-            <button class="t000" id="0">esc</button>
-            <button class="t001" id="1">1</button>
-            <button class="t002" id="2">2</button>
-            <button class="t003" id="3">3</button>
-            <button class="t004" id="4">4</button>
-            <button class="t005" id="5">5</button>
-            <button class="t006" id="6">6</button>
-            <button class="t007" id="7">7</button>
-            <button class="t008" id="8">8</button>
-            <button class="t009" id="9">9</button>
-            <button class="t010" id="10">0</button>
-            <button class="t011" id="11">-</button>
-            <button class="t012" id="12">+</button>
-            <button class="t013" id="13">←</button>
+            <button class="t30" id="0">esc</button>
+            <button class="t30" id="1">1</button>
+            <button class="t30" id="2">2</button>
+            <button class="t30" id="3">3</button>
+            <button class="t30" id="4">4</button>
+            <button class="t30" id="5">5</button>
+            <button class="t30" id="6">6</button>
+            <button class="t30" id="7">7</button>
+            <button class="t30" id="8">8</button>
+            <button class="t30" id="9">9</button>
+            <button class="t30" id="10">0</button>
+            <button class="t30" id="11">-</button>
+            <button class="t30" id="12">+</button>
+            <button class="t30" id="13">←</button>
         </div>
         <div class="ligne" id="">
-            <button class="t100" id="14">↔</button>
-            <button class="t101" id="15">Q</button>
-            <button class="t102" id="16">W</button>
-            <button class="t103" id="17">E</button>
-            <button class="t104" id="18">R</button>
-            <button class="t105" id="19">T</button>
-            <button class="t106" id="20">Y</button>
-            <button class="t107" id="21">U</button>
-            <button class="t108" id="22">I</button>
-            <button class="t109" id="23">O</button>
-            <button class="t110" id="24">P</button>
-            <button class="t111" id="25">[</button>
-            <button class="t112" id="26">]</button>
-            <button class="t113" id="27">\</button>
+            <button class="t40" id="14">↔</button>
+            <button class="t30" id="15">Q</button>
+            <button class="t30" id="16">W</button>
+            <button class="t30" id="17">E</button>
+            <button class="t30" id="18">R</button>
+            <button class="t30" id="19">T</button>
+            <button class="t30" id="20">Y</button>
+            <button class="t30" id="21">U</button>
+            <button class="t30" id="22">I</button>
+            <button class="t30" id="23">O</button>
+            <button class="t30" id="24">P</button>
+            <button class="t30" id="25">[</button>
+            <button class="t30" id="26">]</button>
+            <button class="t40" id="27">\</button>
         </div>
         <div class="ligne" id="">
-            <button class="t200" id="28">▼</button>
-            <button class="t201" id="29">A</button>
-            <button class="t202" id="30">S</button>
-            <button class="t203" id="31">D</button>
-            <button class="t204" id="32">F</button>
-            <button class="t205" id="33">G</button>
-            <button class="t206" id="34">H</button>
-            <button class="t207" id="35">J</button>
-            <button class="t208" id="36">K</button>
-            <button class="t209" id="37">L</button>
-            <button class="t210" id="38">;</button>
-            <button class="t211" id="39">"</button>
-            <button class="t212" id="40">◄</button>
+            <button class="t50" id="28">▼</button>
+            <button class="t30" id="29">A</button>
+            <button class="t30" id="30">S</button>
+            <button class="t30" id="31">D</button>
+            <button class="t30" id="32">F</button>
+            <button class="t30" id="33">G</button>
+            <button class="t30" id="34">H</button>
+            <button class="t30" id="35">J</button>
+            <button class="t30" id="36">K</button>
+            <button class="t30" id="37">L</button>
+            <button class="t30" id="38">;</button>
+            <button class="t30" id="39">"</button>
+            <button class="t60" id="40">◄</button>
         </div>
         <div class="ligne" id="">
-            <button class="t300" id="41">▲</button>
-            <button class="t301" id="42">Z</button>
-            <button class="t302" id="43">X</button>
-            <button class="t303" id="44">C</button>
-            <button class="t304" id="45">V</button>
-            <button class="t305" id="46">B</button>
-            <button class="t306" id="47">N</button>
-            <button class="t307" id="48">M</button>
-            <button class="t308" id="49">&lt;</button>
-            <button class="t309" id="50">&gt;</button>
-            <button class="t310" id="51">/</button>
-            <button class="t311" id="52">▲</button>
+            <button class="t60" id="41">▲</button>
+            <button class="t30" id="42">Z</button>
+            <button class="t30" id="43">X</button>
+            <button class="t30" id="44">C</button>
+            <button class="t30" id="45">V</button>
+            <button class="t30" id="46">B</button>
+            <button class="t30" id="47">N</button>
+            <button class="t30" id="48">M</button>
+            <button class="t30" id="49">&lt;</button>
+            <button class="t30" id="50">&gt;</button>
+            <button class="t30" id="51">/</button>
+            <button class="t80" id="52">▲</button>
         </div>
         <div class="ligne" id="">
-            <button class="t400" id="53">ctr</button>
-            <button class="t401" id="54">⊞</button>
-            <button class="t402" id="55">alt</button>
-            <button class="t403" id="56"></button>
-            <button class="t404" id="57">alt</button>
-            <button class="t405" id="58">⊞</button>
-            <button class="t406" id="59">fn</button>
-            <button class="t407" id="60">ctr</button>
+            <button class="t40" id="53">ctr</button>
+            <button class="t40" id="54">⊞</button>
+            <button class="t40" id="55">alt</button>
+            <button class="t180" id="56"></button>
+            <button class="t40" id="57">alt</button>
+            <button class="t40" id="58">⊞</button>
+            <button class="t40" id="59">fn</button>
+            <button class="t40" id="60">ctr</button>
         </div>
     </div>
-    <div class="masse">
-        <div class="div4" id="" >
-            <h1 class="text_3" id="">key groups</h1>
-            <div class="sd4-1" id="">
-                <button class="img" id=""><img src="" class="img1" id="" title="image groups de touche 1"></button>
-                <button class="img" id=""><img src="" class="img2" id="" title="image groups de touche 2"></button>
-                <button class="img" id=""><img src="" class="img3" id="" title="image groups de touche 3"></button>
+    <div class="line">
+        <div class="container-option">
+            <div class="option">
+                <img src="" alt="img Key" class="img">
+                <p class="txt">AZERTY</p>
+            </div>
+            <div class="option">
+                <img src="" alt="img Mod" class="img">
+                <p class="txt">ctrl</p>
+            </div>
+            <div class="option">
+                <img src="" alt="img OS" class="img">
+                <p class="txt">Windows</p>
             </div>
         </div>
-        <button class="next1" id="">suivant</button>
+        <div class="dl">
+            <input type="button" value="télécharger votre propre design"> 
+        </div>
     </div>
+    <div class="suivant">
+        <input type="button" value="Suivant" class="btn-suivant">
+    </div>
+    
     <div class="separ"></div>
     <div class="second1">
         <h1 class="texte_3">présentation produit</h1>
@@ -249,7 +234,7 @@
 </footer>
 
 <script src="../script/app.js"></script>
-<script src="../script/builder2.js"></script>
+<script src="../script/builder3.js"></script>
 
 </body>
 </html>
