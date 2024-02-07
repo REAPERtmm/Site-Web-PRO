@@ -12,9 +12,46 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/base.css">
-    <link rel="stylesheet" href="../styles/panier2.css">
+    <link rel="stylesheet" href="../styles/panier3.css">
 </head>
 <body>
+    <?php 
+        require("../php/database.php");
+        require("../php/config.php");
+    
+        $IDUser = $_SESSION["user"]["IDUser"];
+
+        $Prenom = $_POST["prenom"];
+        $Nom = $_POST["nom"];
+        $Adresse = $_POST["adresse"];
+        $Adresse2 = $_POST["adresse2"];
+        $CodePostal = $_POST["CP"];
+        $Ville = $_POST["ville"];
+        $Pays = $_POST["pays"];
+        $Info = $_POST["info"];
+        $Telephone = $_POST["telephone"];
+    
+
+        $q = $db ->prepare("INSERT INTO Livraison VALUES (NULL, :IDUser, :Prenom, :Nom, :Adresse, :Adresse2, :CodePostal, :Ville, :Pays, :InfoSupplementaires, :Telephone, :PointRelais)");
+        $q -> execute([
+            "IDUser"=> $IDUser,
+            "Prenom"=> $Prenom,
+            "Nom"=> $Nom,
+            "Adresse"=> $Adresse,
+            "Adresse2"=> $Adresse2,
+            "CodePostal"=> $CodePostal,
+            "Ville"=> $Ville,
+            "Pays"=> $Pays,
+            "InfoSupplementaires"=> $Info,
+            "Telephone"=> $Telephone,
+            "PointRelais"=> 0
+        ]);
+
+        $IDLivraison = $db->lastInsertId();
+        
+
+
+    ?>
     
     <header class="unselectable">
         <div class="header">
@@ -47,82 +84,58 @@
             </div>
         </div>
     </header>
-<!-- ________________________________________________________________________________________________________ -->
-    <div class="div1" id="">
-        <h1 class="étape" id="">1</h1>
-        <h1 class="text_2" id="">Étape 2 : panier</h1>
-        <h1 class="étape" id="">3</h1>
-        <h1 class="étape" id="">4</h1>
-        <h1 class="étape" id="">5</h1>
-    </div>   
-    <div class="div2" id="">
-        <div class="sd2-1">
-            <div class="sd2-1-1" id="">
-                <h1 class="text_3">formulaire de connection </h1>
-                <h1 class="text_1" id="">email</h1>
-                <div class="connection" id="">
-                    <button class="in" id="">api de conection google</button>
-                </div>
-                <h1 class="text_1" id="">mot de passe </h1>
-                <div class="co" id="">
-                    <input class="in" id="">
-                    <button class="in" id="">connection</button>
-                </div>
-                <div class="so" id="">
-                    <input type="checkbox" class="" id="">
-                    <h1 class="text_1" id="">se souvenir de moi</h1>
-                </div>
+
+    <div class="panier3-top">
+        <div class="ligne2">
+            <div class="left">
+                <p class="box-choice"> 1 </p>
+                <div class="box-choice"> 2 </div>
+                <div class="choice-text"> Etape 3: Livraison </div>
+                <div class="box-choice"> 4 </div>
             </div>
-            <div class="white"><br></div>
-            <div class="sd2-1-2" id="">
-                <h1 class="text_3" id="" > formulaire d'inscription</h1>
-                <h1 class="text_1" id="">email *</h1>
-                <input class="in" id="">
-                <h1 class="text_1" id="">Mot de Passe *</h1>
-                <input class="in" id="">
-                <h1 class="text_1" id="">confirmer Mot de passe *</h1>
-                <input class="in" id="">
-                <h1 class="text_1" id="">Nom *</h1>
-                <input class="in" id="">
-                <h1 class="text_1" id="">prenom *</h1>
-                <input class="in" id="">
-                <h1 class="text_1" id="">date de naissance</h1>
-                <div class="date" id="">
-                    <input class="datein" id="">
-                    <input class="datein" id="">
-                    <input class="datein" id="">
-                </div>
-                <button class="validation" id="">valider</button>
+        </div>
+    </div>
+
+    <div class="panier3-mid">
+
+        <div class="line">
+            <div class="line-left">
+                <img src="../Assets/Apps-Colissimo.jpg" alt="Logo de colissimo" width="15%">
+                <p class="mid-text"> Retrait en point relais</p>
+            </div>
+            <div class="line-right">
+                <div class="save-box1" id="check-box1" onclick="SetClickedBox(this.id, 1)"> </div>
+            </div>
+        </div>
+
+
+        <div class="line">
+            <div class="line-left">
+                <img src="../Assets/Apps-Colissimo.jpg" alt="Logo de colissimo" width="15%">
+                <p class="mid-text"> Livraison à domicile + frais supplémentaires </p>
+            </div>
+            <div class="line-right">
+                <div class="save-box2" id="check-box2" onclick="SetClickedBox(this.id, 0)"> </div>
             </div>
         </div>
         
-        <div class="sd2-2">
-            <h1 class="text_3" id="">adresse de livraison</h1>
-            <h1 class="text_1" id="">prenom *</h1>
-            <input class="in" id="">
-            <h1 class="text_1" id="">nom *</h1>
-            <input class="in" id="">
-            <h1 class="text_1" id="">adresse *</h1>
-            <input class="in" id="">
-            <h1 class="text_1" id="">adresse 2</h1>
-            <input class="in" id="">
-            <h1 class="text_1" id="">code postal *</h1>
-            <input class="in" id="">
-            <h1 class="text_1" id="">ville *</h1>
-            <input class="in" id="">
-            <h1 class="text_1" id="">pays *</h1>
-            <input class="in" id="">
-            <h1 class="text_1" id="">infomation suplemantaires</h1>
-            <input class="in" id="">
-            <h1 class="text_1" id="">telephone *</h1>
-            <input class="in" id="">
-            <button class="validation" id="">valider</button>
-        </div>
-    </div>
-<!-- ________________________________________________________________________________________________________ -->
+        <form action="panier4.php" id="form-livraison" method="POST">
+            <input type="hidden" id="data2" value="">
+            <div class="save-box" id="save-config-btn">
+                <input type="submit" id="Valid-btn-PR" value="Valider">
+            </div>
+        </form>
+
+    </div> 
+
+
+
+
+
+    
+
     <footer class="footer">
         <div class="footer-container unselectable">
-            <img src="../Assets/logo-removebg-preview.png" alt="Logo de Snowstorm" id="footer-img">
             <p class="logo-name">Snowstorm.GG</p>
         </div>
         <div class="footer-container">
@@ -157,6 +170,7 @@
         </div>
     </footer>
     
-    <script src="./script/index.js"></script>
+    <script src="../script/index.js"></script>
+    <script src="../script/panier3.js"></script>
 </body>
 </html>

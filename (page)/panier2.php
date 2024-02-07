@@ -12,9 +12,18 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/base.css">
-    <link rel="stylesheet" href="../styles/panier3.css">
+    <link rel="stylesheet" href="../styles/panier2.css">
 </head>
 <body>
+
+<?php  
+    require("../php/database.php");
+    require("../php/config.php");
+
+    $IDUser = $_SESSION["user"]["IDUser"];
+
+
+    ?>
     
     <header class="unselectable">
         <div class="header">
@@ -47,42 +56,52 @@
             </div>
         </div>
     </header>
-    <div class="div1" id="">
-        <h1 class="étape" id="">1</h1>
-        <h1 class="étape" id="">2</button>
-        <h1 class="text_3" id="">Étape 3 : Livraison</button>
-        <h1 class="étape" id="">4</button>
-        <h1 class="étape" id="">5</h1>
+<!-- ________________________________________________________________________________________________________ -->
+    <div class="panier-top">
+        <div class="ligne1">
+            <div class="left">
+                <p class="box-choice"> 1 </p>
+                <div class="choice-text"> Etape 2 : Adresse </div>
+                <div class="box-choice"> 3 </div>
+                <div class="box-choice"> 4 </div>
+            </div>
+        </div>
     </div>
-    <div class="div2" id="">
-        <div class="dv2-1" id="">
-            <h1 class="Livraison" id="">Livraison</h1>
-        </div>
-        <div class="dv2-2" id="">   
-                <div>
-                    <img class="img_pr" src="../Assets/Livraison-Premiers-Moments.jpg" title="image du produit">
-                    <h1 class="nom_pr" id="" title="type de Livraison">Livraison a domicile</h1>
-                    <input type ="radio" id="choix1" name="Livraison" value="domicile">
-                    <label for="domicile"></label>    
-                </div>
-                
-        </div>
-        <div>
-            <img class="img_pr" src="../Assets/Livraison-Premiers-Moments.jpg" title="image du produit">
-            <h1 class="nom_pr" id="" title="type de Livraison">Retrait en point-relais</h1>
-            <input type ="radio" id="choix2" name="Livraison" value="point-relais">
-            <label for="point-relais"></label>
-        </div> 
-        
-    </div>
-        </div>
-        <div class="sd4-2" id="">
-            <button class="bouton_continuer" id="">Confirmer la livraison et poursuivre</button>
-        </div>
-    
+    <div class="panier-mid">
+        <form action="./panier3.php" method="POST" class="forml">
+            <div class="form-info">
+                <p class="form-text">Prénom*</p>
+                <input type="text" name="prenom" id="prenom" required>
+                <p class="form-text">Nom*</p>
+                <input type="text" name="nom" id="nom" required>
+                <p class="form-text">Adresse*</p>
+                <input type="text" name="adresse" id="adresse" required>
+                <p class="form-text">adresse 2</p>
+                <input type="text" name="adresse2" id="adresse2">
+                <p class="form-text">Code postal*</p>
+                <input type="number" name="CP" id="CP" required>
+                <p class="form-text">Ville*</p>
+                <input type="text" name="ville" id="ville" required>
+                <p class="form-text">Pays*</p>
+                <input type="text" name="pays" id="pays" required>
+                <p class="form-text">Informations supplémentaires</p>
+                <input type="text" name="info" id="info">
+                <p class="form-text">Téléphone*</p>
+                <input type="text" name="telephone" id="telephone" required>
+            </div>
 
+            <div class="save-box" id="save-config-btn">
+                <input type="submit" id="valid-btn" value="Valider">
+            </div> 
+        </form>
+    </div>
+
+
+
+<!-- ________________________________________________________________________________________________________ -->
     <footer class="footer">
         <div class="footer-container unselectable">
+            <img src="../Assets/logo-removebg-preview.png" alt="Logo de Snowstorm" id="footer-img">
             <p class="logo-name">Snowstorm.GG</p>
         </div>
         <div class="footer-container">

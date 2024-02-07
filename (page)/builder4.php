@@ -15,7 +15,7 @@
     <link href="https://fonts.cdnfonts.com/css/penguin" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/base.css">
-    <link rel="stylesheet" href="../styles/custom.css">
+    <link rel="stylesheet" href="../styles/builder4.css">
 </head>
 <body>
     <?php  
@@ -119,10 +119,10 @@
         </div>
         <div class="ligne2">
             <div class="left">
-                <p class="choice-text"> Etape 1: choix du clavier</p>
+                <p class="box-choice"> 1 </p>
                 <div class="box-choice"> 2 </div>
                 <div class="box-choice"> 3 </div>
-                <div class="box-choice"> 4 </div>
+                <div class="choice-text"> Etape 4: options </div>
             </div>
             <div class="right"> 
                     <div class="save-box" id="save-config-btn" onclick="SaveConfig()"> Sauvegarder ma configuration</div>
@@ -134,12 +134,10 @@
         <div class="img-line">
             <?php echo '<img src="../Assets/'.$ImgPath.'" alt="image du clavier" width="100%">' ?>
         </div>
-        <div class="other-choice">
-            <div class="keycaps-line">
-                <p class="mid-keycaps-text"> Choix du Switch : <span id="choice-keycaps-user" class="choiceuser"> choix de l'utilisateur </span></p>
-                <a class="help" href="https://www.cybertek.fr/blog/peripheriques/clavier-pc/quel-type-de-switch-choisir-pour-son-clavier" >Comment choisir son switch </a>
+        <div class="line2">
+            <div class="line2-left">
                 <div class="dropdown">
-                    <button class="keycaps-choice-box dropbtn" onclick="Dropdown()">Afficher les différents switch</button>
+                    <button class="keycaps-choice-box dropbtn" onclick="Dropdown()"> Bandeau déroulant pour les options <i class="fa-solid fa-caret-down"></i> </button>
                     <div id="myDropdown" class="dropdown-content">
                         <button id="#0000ff"  onclick="SetKeycaps(this.id, 'Switch Bleu')" class="dropdown-button"> Switch Bleu (total: 91$)</button>
                         <button id="#ff0000" onclick="SetKeycaps(this.id, 'Switch Rouge')" class="dropdown-button"> Switch Rouge (total: 31$) </button>
@@ -147,42 +145,15 @@
                     </div>
                 </div>
             </div>
+            <div class="line2-right">
 
-            <div class="backplate-line">
-                <div class="gauche">
-                    <p class="backplate-color-text">Couleur de la backplate</p>
-                    <div class="backplate">
-                        <button id="#bbbbbb" class="backplate-btn" onclick="SetBackplate(this.id)">
-                            <div class="dot grey" ></div>
-                            <p class="backplate-text"> Gris </p>
-                        </button>
-                    </div>
-                    <div class="backplate">
-                        <button id="#000000" class="backplate-btn" onclick="SetBackplate(this.id)">
-                            <div class="dot black" ></div>
-                            <p class="backplate-text"> Noir </p>
-                        </button>
-                    </div>
-                    <div class="backplate">
-                        <button id="#ffffff" class="backplate-btn" onclick="SetBackplate(this.id)">
-                            <div class="dot white" ></div>
-                            <p class="backplate-text"> Blanc + 5$ </p>
-                        </button>
-                    </div>
-                    <div class="backplate">
-                        <button id="#cd853f" class="backplate-btn" onclick="SetBackplate(this.id)">
-                            <div class="dot peru" ></div>
-                            <p class="backplate-text"> Peru + 5$ </p>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="droite">
-                    <div class="next-box" id="next-btn" onclick="NextPage()"> Suivant </div>
-                </div>
             </div>
         </div>
     </div>
+
+
+
+
 
     <div class="custom-bot">
         <hr class="black-line">

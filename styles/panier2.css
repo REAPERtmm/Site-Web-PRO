@@ -1,108 +1,79 @@
-body{
-    background-color: rgb(245, 237, 237);
-    margin: 0;
+body {
+    font-size: 22px;
+    background-color: rgb(240, 226, 224);
 }
-.div1{
+
+
+.ligne1 {
+    width: 100%;
     display: flex;
-    flex-flow: row;
+    align-items: center;
+    padding-bottom: 2%;
+}
+
+.choice-text {
+    padding-right: 5%;
+    padding-left: 5%;
+}
+
+.left {
+    display: flex;
+    width: 70%;
+    align-items: center;
+    padding-top: 3%;
+    padding-left: 10%;
+}
+
+.box-choice {
+    background-color: lightgray;
+    padding-left: 7%;
+    padding-right: 7%;
+    border: 1px black solid;
+}
+
+.panier-mid {
+    width: 90%;
+    background-color: rgb(161, 156, 156);
+    margin: auto;
+    margin-bottom: 10%;
+    padding-bottom: 5%;
+    padding-top: 2%;
     justify-content: center;
     align-items: center;
-    margin: 2%;
 }
-.text_1{
-    font-size:100%;
-    margin: 0;
-}
-.text_2{
-    font-size: 100%;
-    padding: 0 5% 0 1%;
-}
-.text_3{
-    font-size: 120%;
-    padding: 0 5% 0 5%;
-}
-.étape {
-    width: 5%;
-    background-color:lightgray ;
-    border:solid 2px ;
-    margin: 0% 0.1%;
-    width: 10%;
-    font-size: 100%;
-}
-.div2{
-    width: 96%;
-    margin: 2%;
-    display: flex;
-    
-}
-.sd2-1{
-    display: flex;
-    flex-flow: column;
-    width: 46%;
-    margin: 1% 2% 1% 5%;
-    background-color: lightgray;
 
+.form-info {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+    padding-bottom: 2%;
 }
-.sd2-1-1{
-    display: flex;
-    flex-flow: column;
-    align-items: flex-start;
-    width: 100%;
-    margin: 1%;
-    padding: 0 0 2% 3%;
 
+.form-info input{
+    height: 30%;
+    width: 80%;
+    justify-content: center;
+    background-color: rgb(161, 156, 156);
+    border: 1px black solid;
 }
-.sd2-1-2{
-    display: flex;
-    flex-flow: column;
-    align-items: flex-start;
-    width: 100%;
-    margin: 1%;
-    padding: 0 0 2% 2%;
+
+#info {
+    height: 60%;
 }
-.sd2-2{
-    display: flex;
-    flex-flow: column;
-    align-items: flex-start;
-    width: 46%;
-    margin: 1%;
-    background-color: lightgray;
-    padding: 0 0 2% 2%;
+
+.save-box {
+    width: fit-content;
+    height: 80%;
+    background-color: rgb(161, 156, 156);
+    border: 1px black solid;
+    max-width: 70%;
+    cursor: pointer;
+    margin: auto;
+    padding: 1%;
 }
-.validation{
-    background-color: rgb(245, 237, 237);
-    margin: 3% 0 0 0;
-    border: 1px solid black;
-    width: 30%;
+
+
+.save-box input {
+    all:unset;
 }
-.co{
-    width: 95%;
-    display: flex;
-    flex-flow: row;
-    justify-content: space-between;
-}
-.so{
-    display: flex;
-}
-.connection{
-    width: 95%;
-    display: flex;
-    justify-content: right;
-}
-.date{
-    display: flex;
-}
-.datein{
-    width: 10%;
-    margin: 0 2px 0 0;
-    border: solid black 1px;
-    border-radius: 0;
-}
-.in{
-    border:solid black 1px;
-    border-radius: 0;
-}
-.white {
-    background-color: rgb(245, 237, 237);
-    padding:0 10%;
-}
+
