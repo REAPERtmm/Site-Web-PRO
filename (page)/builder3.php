@@ -60,16 +60,18 @@
     </header>
 <!-- _____________________________________________________________________________________________ -->
 
-    <div class="div1" id="">
-        <h1 class="étape" id="">1</h1>
-        <h1 class="étape" id="">2</h1>
-        <h1 class="text_3" id="">Etape 3 : choix de la langue et design</h1>
-        <h1 class="étape" id="">4</h1>
-        <form action="../php/load_key_in_page.php" target="_blank" class="save-conf" id="form">
-            <input type="submit" class="Sumbit" value="sauvgarder la configuration" onclick="extract()">
-            <input type="hidden" name="data" id="data" value=<?php echo $_POST["data"]; ?>>
-            <input type="hidden" name="IDCustom" value=<?php echo $_POST["IDCustom"]; ?>>
-        </form>
+<div class="custom-top">
+        <div class="ligne2">
+            <div class="left">
+                <div class="box-choice"> 1 </div>
+                <div class="box-choice"> 2 </div>
+                <p class="choice-text"> Etape 3: choix de la langue et design</p>
+                <div class="box-choice"> 4 </div>
+            </div>
+            <div class="right"> 
+                    <div class="save-box" id="save-config-btn" onclick="SaveConfig()"> Sauvegarder ma configuration</div>
+            </div>
+        </div>
     </div>
 
 
@@ -147,31 +149,40 @@
         </div>
     </div>
     <script src="../script/fillKey.js"></script>
-    <div class="line">
+    <form action="builder4.php" method="post" class="line">
+        <input type="hidden" name="IDCustom" value="<?php echo $_POST["IDCustom"]; ?>">
         <div class="container-option">
             <div class="option">
                 <p>Alphanumérique</p>
-                <img src="" alt="img Key" class="img">
-                <p class="txt">AZERTY</p>
+                <img src="../Assets/AZERTY.jpg" alt="img Key" class="img" width="100%">
+                <fieldset class="filedset-builder">
+                    <input type="radio" name="Alphanumerique" value="azerty" id="A-choice1" class="A-choice" checked>
+                    <label for="A-choice1" class="L-choice">AZERTY</label>
+                    <input type="radio" name="Alphanumerique" value="qwerty" id="A-choice2" class="A-choice">
+                    <label for="A-choice2" class="L-choice">QWERTY</label>
+                </fieldset>
             </div>
             <div class="option">
                 <p>Modifier</p>
-                <img src="" alt="img Mod" class="img">
+                <img src="../Assets/ctrl.jpg" alt="img Mod" class="img" width="100%">
                 <p class="txt">ctrl</p>
             </div>
             <div class="option">
                 <p>OS</p>
-                <img src="" alt="img OS" class="img">
-                <p class="txt">Windows</p>
+                <img src="../Assets/win.jpg" alt="img OS" class="img" width="100%">
+                <fieldset class="filedset-builder">
+                    <input type="radio" name="OS" value="" id="OS-choice1" class="A-choice" checked>
+                    <label for="OS-choice1" class="L-choice">Windows</label>
+                    <input type="radio" name="OS" value="qwerty" id="OS-choice2" class="A-choice">
+                    <label for="OS-choice2" class="L-choice">IOS</label>
+                </fieldset>
             </div>
         </div>
-        <div class="dl">
-            <input type="button" value="télécharger votre propre design"> 
+        
+        <div class="suivant">
+            <input type="button" value="Suivant" class="btn-suivant">
         </div>
-    </div>
-    <div class="suivant">
-        <input type="button" value="Suivant" class="btn-suivant">
-    </div>
+    </form>
     
     <div class="separ"></div>
     <div class="second1">
