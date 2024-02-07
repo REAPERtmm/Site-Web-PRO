@@ -26,7 +26,29 @@ $user = $_SESSION['user'];
 </head>
 <body>
 
-    <?php if (isset($_POST['FormsentRegister'])){include '../php/database.php'; global $db; $Mail = $user['email']; $Password = $_POST['register-password']; $Nom = $_POST['register-nom']; $Prenom = $_POST['register-prenom']; $DateNaissance = $_POST['register-date']; $Check = $db->query("SELECT Count(*) FROM Users WHERE Email='$Mail'"); $Check = $Check->fetch(); if ($Check[0] == 1) {echo '<div style="color: red; margin-top: 2rem">Adresse mail déjâ utilisé !</div>';}else {$Request = $db->query("INSERT INTO Users(IDUser, Email, Mdp, Nom, Prenom, DateNaissance) VALUE(0, '$Mail', '$Password', '$Nom', '$Prenom', '$DateNaissance')"); $IDCLIENT = $db->query("SELECT IDUser FROM Users WHERE Email='$Mail'"); $IDCLIENT = $IDCLIENT->fetch(); $_SESSION['user'] = array('email' => $Mail, 'IDUser' => $IDCLIENT[0]); header("Location: ./profil.php"); exit();}} ?>
+    <?php if (isset($_POST['FormsentRegister'])){
+        include '../php/database.php'; 
+        global $db; 
+        $Mail = $user['email']; 
+        $Password = $_POST['register-password']; 
+        $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
+        $Nom = $_POST['register-nom']; 
+        $Prenom = $_POST['register-prenom']; 
+        $DateNaissance = $_POST['register-date']; 
+        $Check = $db->query("SELECT Count(*) FROM Users WHERE Email='$Mail'"); 
+        $Check = $Check->fetch(); 
+        if ($Check[0] == 1) {
+            echo '<div style="color: red; margin-top: 2rem">Adresse mail déjâ utilisé !</div>';
+            }else {
+                $Request = $db->query("INSERT INTO Users(IDUser, Email, Mdp, Nom, Prenom, DateNaissance) VALUE(0, '$Mail', '$hashedPassword', '$Nom', '$Prenom', '$DateNaissance')"); 
+                $IDCLIENT = $db->query("SELECT IDUser FROM Users WHERE Email='$Mail'"); 
+                $IDCLIENT = $IDCLIENT->fetch(); 
+                $_SESSION['user'] = array('email' => $Mail, 'IDUser' => $IDCLIENT[0]); 
+                header("Location: ./profil.php"); 
+                exit();
+            }
+        } 
+        ?>
 
     <section>
         <form action="" method="POST">
