@@ -26,27 +26,28 @@
                 <div class="header_top">
                     <div class="logo">
                         <img src="../Assets/logo-removebg-preview.png" alt="Logo" class="logo-img">
-                        <p class="logo-name">SNOWSTORM.GG</p>
+                        <a href="../index.php"><p class="logo-name">SNOWSTORM.GG</p></a>
                     </div>
                     <div class="logo">
-                        <a href="./(page)/Search.html"><i class="fa-solid fa-cart-shopping fa-beat"></i></a>
-                        <a href="./(page)/login.html"><i class="fa-solid fa-user fa-beat"></i></a>
-                        <img src="./Assets/france-flag.webp" alt="France flag" height="40px" width="40px">
+                        <a href="./panier.php"><i class="fa-solid fa-cart-shopping fa-beat"></i></a>
+                        <a href="./login.php"><i class="fa-solid fa-user fa-beat"></i></a>
+                        <img src="../Assets/france-flag.webp" alt="France flag" height="40px" width="40px">
                     </div>
                 </div>
-
+                
                 <div class="header_bot">
                     <div class="navbar_link">
-                        <a href="index.html">NOS PRODUITS</a>
-                        <a href="index.html">PERSONNALISER</a>
-                        <a href="./(page)/Search.html">GALERIE</a>
-                        <a href="index.html">SUPPORT/SAV</a>
-                        <a href="index.html">FAQ</a>
-                        <a href="index.html">CONTACT</a>
+                        <a href="./Product-1.html">NOS PRODUITS</a>
+                        <a href="./personnaliser.php">PERSONNALISER</a>
+                        <a href="./Search.php">GALERIE</a>
+                        <a href="#">SUPPORT/SAV</a>
+                        <a href="#">FAQ</a>
+                        <a href="#">CONTACT</a>
                     </div>
                     <div class="navbar_search">
-                        <form action="" class="search">
-                            <input type="search" placeholder="Rechercher un produit">
+                        <form action="" method="GET" class="search">
+                            <input type="search" placeholder="Rechercher un produit" id="search" name="research">
+                            <?php if(isset($_GET['research'])){header("Location: ../search.php?research=".$_GET['research']);}?>
                         </form>
                     </div>
                 </div>
@@ -56,6 +57,7 @@
             </div>
         </div>
     </header>
+
 
 
     <div class="best-offers-bg">

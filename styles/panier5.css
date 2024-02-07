@@ -47,3 +47,8 @@ body{
 .validation{
     width: 30%;
 }
+
+.bouton_modifier{
+    width: 30%;
+    height: 25px;
+}

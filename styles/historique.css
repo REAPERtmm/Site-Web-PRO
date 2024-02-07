@@ -1,0 +1,12 @@
+.titre {
+    font-size: 30px;
+}
+
+.grid-his {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+
+.subtitlehis {
+    font-weight: 800;
+}
