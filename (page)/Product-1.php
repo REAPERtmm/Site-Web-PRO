@@ -9,20 +9,17 @@
   
     <!-- Favicon -->
     <script src="https://kit.fontawesome.com/d3255ff586.js" crossorigin="anonymous"></script>
-
+    <!-- Fonts API -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/penguin" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/base.css">
-    <link rel="stylesheet" href="../styles/panier2.css">
+    <link rel="stylesheet" href="../styles/product1.css">
+
 </head>
 <body>
-
-<?php  
-    require("../php/database.php");
-    require("../php/config.php");
-
-    $IDUser = $_SESSION["user"]["IDUser"];
-
-?>
     
     <header class="unselectable">
         <div class="header">
@@ -62,51 +59,18 @@
         </div>
     </header>
 
-<!-- ________________________________________________________________________________________________________ -->
-    <div class="panier-top">
-        <div class="ligne1">
-            <div class="left">
-                <p class="box-choice"> 1 </p>
-                <div class="choice-text"> Etape 2 : Adresse </div>
-                <div class="box-choice"> 3 </div>
-                <div class="box-choice"> 4 </div>
-            </div>
+
+    <div class="la-big-div-sa-mere">
+        <div class="sait-drole-si-tu-lie-sa">
+            <img src="" class="img-de-clavier-la-classe-est-pas-trop-longue"
+        </div>
+        <div class="sait-drole-si-tu-lie-sa">
+
         </div>
     </div>
-    <div class="panier-mid">
-        <form action="./panier3.php" method="POST" class="forml">
-            <div class="form-info">
-                <p class="form-text">Prénom*</p>
-                <input type="text" name="prenom" id="prenom" required>
-                <p class="form-text">Nom*</p>
-                <input type="text" name="nom" id="nom" required>
-                <p class="form-text">Adresse*</p>
-                <input type="text" name="adresse" id="adresse" required>
-                <p class="form-text">adresse 2</p>
-                <input type="text" name="adresse2" id="adresse2">
-                <p class="form-text">Code postal*</p>
-                <input type="number" name="CP" id="CP" required>
-                <p class="form-text">Ville*</p>
-                <input type="text" name="ville" id="ville" required>
-                <p class="form-text">Pays*</p>
-                <input type="text" name="pays" id="pays" required>
-                <p class="form-text">Informations supplémentaires</p>
-                <input type="text" name="info" id="info">
-                <p class="form-text">Téléphone*</p>
-                <input type="text" name="telephone" id="telephone" required>
-            </div>
 
-            <input class="bouton_continuer" type="submit" value="Valider" onclick="BeforeNextPage()">
-            <input type="hidden" name="Data" value="<?php print_r($_POST["Data"]);?>" id="Data">
-        </form>
-    </div>
-
-
-
-<!-- ________________________________________________________________________________________________________ -->
     <footer class="footer">
         <div class="footer-container unselectable">
-            <img src="../Assets/logo-removebg-preview.png" alt="Logo de Snowstorm" id="footer-img">
             <p class="logo-name">Snowstorm.GG</p>
         </div>
         <div class="footer-container">

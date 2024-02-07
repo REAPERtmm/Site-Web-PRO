@@ -90,10 +90,8 @@ body {
     background-color: black;
 }
 
-
 .save-box {
     width: fit-content;
-    height: 80%;
     background-color: rgb(161, 156, 156);
     border: 1px black solid;
     max-width: 70%;
@@ -102,7 +100,11 @@ body {
     padding: 1%;
 }
 
-
 .save-box input {
     all:unset;
+}
+
+.bouton_modifier{
+    width: 30%;
+    height: 25px;
 }
