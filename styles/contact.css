@@ -1,0 +1,21 @@
+.div2{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 10px;
+    border: 3px solid;
+}
+.company{
+    
+    font-weight: bold;
+    font-size: 40px;
+
+}
+.contact{
+display: flex;
+font-weight: bold;
+margin: 20px;
+
+
+}
