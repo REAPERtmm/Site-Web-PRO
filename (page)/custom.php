@@ -20,7 +20,7 @@
 <body>
     <?php  
     require("../php/database.php");
-    require("../php/config.php");
+    //require("../php/config.php");
     header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
     header("Cache-Control: post-check=0, pre-check=0", false);
     header("Pragma: no-cache");
@@ -41,6 +41,12 @@
         $IDCustom = -1;
     } else {
         $IDCustom = $_POST["IDCustom"];
+        $query = $db->prepare("SELECT COUNT(*) FROM Customs WHERE IDCustom=:ID AND IDUser=1");
+        $query->execute(['ID'=>$IDCustom]);
+        if($query->fetch()["COUNT(*)"] == 0){
+            $query = $db->prepare("INSERT INTO Customs(IDCustom, IDUser, IDProduit) VALUES (:ID, 1, :IDP)");
+            $query->execute(['ID'=>$IDCustom, 'IDP'=>$IDProduit]);
+        }
     }
 
 
@@ -136,7 +142,6 @@
         </div>
         <div class="other-choice">
             <div class="keycaps-line">
-                <div class="dropdown">
                 <p class="mid-keycaps-text"> Choix du Switch : <span id="choice-keycaps-user" class="choiceuser"> choix de l'utilisateur </span></p>
                 <a class="help" href="https://www.cybertek.fr/blog/peripheriques/clavier-pc/quel-type-de-switch-choisir-pour-son-clavier" >Comment choisir son switch </a>
                 <div class="dropdown">
@@ -146,7 +151,6 @@
                         <button id="#ff0000" onclick="SetKeycaps(this.id, 'Switch Rouge')" class="dropdown-button"> Switch Rouge (total: 31$) </button>
                         <button id="#582900" onclick="SetKeycaps(this.id, 'Switch Marron')" class="dropdown-button"> Switch Marron (total: 122$) </button>
                     </div>
-                </div>
                 </div>
             </div>
 
@@ -349,11 +353,12 @@
   
 
     </div>
-
+    <?php echo $_POST["IDCustom"];?>
     <form action="" id="form-action" method="POST">
         <input type="hidden" id="backplate-color" name="backplate-color" value="bbbbbb">
         <input type="hidden" id="keycaps-color" name="keycaps-color" value="#0000ff">
-        <input type="hidden" id="data" value="">
+        <input type="hidden" id="data" name="data" value="">
+        <input type="hidden" name="IDCustom" value=<?php echo $IDCustom;?>>    
     </form>
 
     <?php
