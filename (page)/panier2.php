@@ -15,6 +15,15 @@
     <link rel="stylesheet" href="../styles/panier2.css">
 </head>
 <body>
+
+<?php  
+    require("../php/database.php");
+    require("../php/config.php");
+
+    $IDUser = $_SESSION["user"]["IDUser"];
+
+
+    ?>
     
     <header class="unselectable">
         <div class="header">
@@ -48,77 +57,47 @@
         </div>
     </header>
 <!-- ________________________________________________________________________________________________________ -->
-    <div class="div1" id="">
-        <h1 class="étape" id="">1</h1>
-        <h1 class="text_2" id="">Étape 2 : panier</h1>
-        <h1 class="étape" id="">3</h1>
-        <h1 class="étape" id="">4</h1>
-        <h1 class="étape" id="">5</h1>
-    </div>   
-    <div class="div2" id="">
-        <div class="sd2-1">
-            <div class="sd2-1-1" id="">
-                <h1 class="text_3">formulaire de connection </h1>
-                <h1 class="text_1" id="">email</h1>
-                <div class="connection" id="">
-                    <button class="in" id="">api de conection google</button>
-                </div>
-                <h1 class="text_1" id="">mot de passe </h1>
-                <div class="co" id="">
-                    <input class="in" id="">
-                    <button class="in" id="">connection</button>
-                </div>
-                <div class="so" id="">
-                    <input type="checkbox" class="" id="">
-                    <h1 class="text_1" id="">se souvenir de moi</h1>
-                </div>
+    <div class="panier-top">
+        <div class="ligne1">
+            <div class="left">
+                <p class="box-choice"> 1 </p>
+                <div class="choice-text"> Etape 2 : Adresse </div>
+                <div class="box-choice"> 3 </div>
+                <div class="box-choice"> 4 </div>
             </div>
-            <div class="white"><br></div>
-            <div class="sd2-1-2" id="">
-                <h1 class="text_3" id="" > formulaire d'inscription</h1>
-                <h1 class="text_1" id="">email *</h1>
-                <input class="in" id="">
-                <h1 class="text_1" id="">Mot de Passe *</h1>
-                <input class="in" id="">
-                <h1 class="text_1" id="">confirmer Mot de passe *</h1>
-                <input class="in" id="">
-                <h1 class="text_1" id="">Nom *</h1>
-                <input class="in" id="">
-                <h1 class="text_1" id="">prenom *</h1>
-                <input class="in" id="">
-                <h1 class="text_1" id="">date de naissance</h1>
-                <div class="date" id="">
-                    <input class="datein" id="">
-                    <input class="datein" id="">
-                    <input class="datein" id="">
-                </div>
-                <button class="validation" id="">valider</button>
-            </div>
-        </div>
-        
-        <div class="sd2-2">
-            <h1 class="text_3" id="">adresse de livraison</h1>
-            <h1 class="text_1" id="">prenom *</h1>
-            <input class="in" id="">
-            <h1 class="text_1" id="">nom *</h1>
-            <input class="in" id="">
-            <h1 class="text_1" id="">adresse *</h1>
-            <input class="in" id="">
-            <h1 class="text_1" id="">adresse 2</h1>
-            <input class="in" id="">
-            <h1 class="text_1" id="">code postal *</h1>
-            <input class="in" id="">
-            <h1 class="text_1" id="">ville *</h1>
-            <input class="in" id="">
-            <h1 class="text_1" id="">pays *</h1>
-            <input class="in" id="">
-            <h1 class="text_1" id="">infomation suplemantaires</h1>
-            <input class="in" id="">
-            <h1 class="text_1" id="">telephone *</h1>
-            <input class="in" id="">
-            <button class="validation" id="">valider</button>
         </div>
     </div>
+    <div class="panier-mid">
+        <form action="./panier3.php" method="POST" class="forml">
+            <div class="form-info">
+                <p class="form-text">Prénom*</p>
+                <input type="text" name="prenom" id="prenom" required>
+                <p class="form-text">Nom*</p>
+                <input type="text" name="nom" id="nom" required>
+                <p class="form-text">Adresse*</p>
+                <input type="text" name="adresse" id="adresse" required>
+                <p class="form-text">adresse 2</p>
+                <input type="text" name="adresse2" id="adresse2">
+                <p class="form-text">Code postal*</p>
+                <input type="number" name="CP" id="CP" required>
+                <p class="form-text">Ville*</p>
+                <input type="text" name="ville" id="ville" required>
+                <p class="form-text">Pays*</p>
+                <input type="text" name="pays" id="pays" required>
+                <p class="form-text">Informations supplémentaires</p>
+                <input type="text" name="info" id="info">
+                <p class="form-text">Téléphone*</p>
+                <input type="text" name="telephone" id="telephone" required>
+            </div>
+
+            <div class="save-box" id="save-config-btn">
+                <input type="submit" id="valid-btn" value="Valider">
+            </div> 
+        </form>
+    </div>
+
+
+
 <!-- ________________________________________________________________________________________________________ -->
     <footer class="footer">
         <div class="footer-container unselectable">

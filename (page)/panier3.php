@@ -15,6 +15,43 @@
     <link rel="stylesheet" href="../styles/panier3.css">
 </head>
 <body>
+    <?php 
+        require("../php/database.php");
+        require("../php/config.php");
+    
+        $IDUser = $_SESSION["user"]["IDUser"];
+
+        $Prenom = $_POST["prenom"];
+        $Nom = $_POST["nom"];
+        $Adresse = $_POST["adresse"];
+        $Adresse2 = $_POST["adresse2"];
+        $CodePostal = $_POST["CP"];
+        $Ville = $_POST["ville"];
+        $Pays = $_POST["pays"];
+        $Info = $_POST["info"];
+        $Telephone = $_POST["telephone"];
+    
+
+        $q = $db ->prepare("INSERT INTO Livraison VALUES (NULL, :IDUser, :Prenom, :Nom, :Adresse, :Adresse2, :CodePostal, :Ville, :Pays, :InfoSupplementaires, :Telephone, :PointRelais)");
+        $q -> execute([
+            "IDUser"=> $IDUser,
+            "Prenom"=> $Prenom,
+            "Nom"=> $Nom,
+            "Adresse"=> $Adresse,
+            "Adresse2"=> $Adresse2,
+            "CodePostal"=> $CodePostal,
+            "Ville"=> $Ville,
+            "Pays"=> $Pays,
+            "InfoSupplementaires"=> $Info,
+            "Telephone"=> $Telephone,
+            "PointRelais"=> 0
+        ]);
+
+        $IDLivraison = $db->lastInsertId();
+        
+
+
+    ?>
     
     <header class="unselectable">
         <div class="header">
@@ -47,39 +84,49 @@
             </div>
         </div>
     </header>
-    <div class="div1" id="">
-        <h1 class="étape" id="">1</h1>
-        <h1 class="étape" id="">2</button>
-        <h1 class="text_3" id="">Étape 3 : Livraison</button>
-        <h1 class="étape" id="">4</button>
-        <h1 class="étape" id="">5</h1>
+
+    <div class="panier3-top">
+        <div class="ligne2">
+            <div class="left">
+                <p class="box-choice"> 1 </p>
+                <div class="box-choice"> 2 </div>
+                <div class="choice-text"> Etape 3: Livraison </div>
+                <div class="box-choice"> 4 </div>
+            </div>
+        </div>
     </div>
-    <div class="div2" id="">
-        <div class="dv2-1" id="">
-            <h1 class="Livraison" id="">Livraison</h1>
+
+    <div class="panier3-mid">
+
+        <div class="line">
+            <div class="line-left">
+                <img src="../Assets/Apps-Colissimo.jpg" alt="Logo de colissimo" width="15%">
+                <p class="mid-text"> Retrait en point relais</p>
+            </div>
+            <div class="line-right">
+                <div class="save-box1" id="check-box1" onclick="SetClickedBox(this.id, 1)"> </div>
+            </div>
         </div>
-        <div class="dv2-2" id="">   
-                <div>
-                    <img class="img_pr" src="../Assets/Livraison-Premiers-Moments.jpg" title="image du produit">
-                    <h1 class="nom_pr" id="" title="type de Livraison">Livraison a domicile</h1>
-                    <input type ="radio" id="choix1" name="Livraison" value="domicile">
-                    <label for="domicile"></label>    
-                </div>
-                
+
+
+        <div class="line">
+            <div class="line-left">
+                <img src="../Assets/Apps-Colissimo.jpg" alt="Logo de colissimo" width="15%">
+                <p class="mid-text"> Livraison à domicile + frais supplémentaires </p>
+            </div>
+            <div class="line-right">
+                <div class="save-box2" id="check-box2" onclick="SetClickedBox(this.id, 0)"> </div>
+            </div>
         </div>
-        <div>
-            <img class="img_pr" src="../Assets/Livraison-Premiers-Moments.jpg" title="image du produit">
-            <h1 class="nom_pr" id="" title="type de Livraison">Retrait en point-relais</h1>
-            <input type ="radio" id="choix2" name="Livraison" value="point-relais">
-            <label for="point-relais"></label>
-        </div> 
         
-    </div>
-        </div>
-        <div class="sd4-2" id="">
-            <button class="bouton_continuer" id="">Confirmer la livraison et poursuivre</button>
-        </div>
-    
+        <form action="panier4.php" id="form-livraison" method="POST">
+            <input type="hidden" id="data2" value="">
+            <div class="save-box" id="save-config-btn">
+                <input type="submit" id="Valid-btn-PR" value="Valider">
+            </div>
+        </form>
+
+    </div> 
 
     <footer class="footer">
         <div class="footer-container unselectable">
@@ -117,6 +164,8 @@
         </div>
     </footer>
     
-    <script src="./script/index.js"></script>
+    <script src="../script/index.js"></script>
+    <script src="../script/panier3.js"></script>
+
 </body>
 </html>
