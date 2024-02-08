@@ -15,7 +15,7 @@
     <link href="https://fonts.cdnfonts.com/css/penguin" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/base.css">
-    <link rel="stylesheet" href="../styles/custom.css">
+    <link rel="stylesheet" href="../styles/custom.css"> 
 </head>
 <body>
     <?php  
