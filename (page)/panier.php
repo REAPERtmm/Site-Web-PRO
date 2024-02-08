@@ -15,53 +15,59 @@
     <link rel="stylesheet" href="../styles/panier.css">
     <?php 
         include '../php/database.php'; 
-        if(!isset($_SESSION['IDUser'])){$_SESSION['IDUser'] = 1;}
+        require("../php/config.php");
+        if(!isset($_SESSION['user']['IDUser'])){$_SESSION['user']['IDUser'] = 1;}
 
         $q_panier = $db->prepare('SELECT * FROM Paniers WHERE IDUser=:ID');
-        $q_panier->bindParam(':ID', $_SESSION['IDUser']);
+        $q_panier->bindParam(':ID', $_SESSION['user']['IDUser']);
         $q_panier->execute();
         $result = $q_panier->fetchAll(PDO::FETCH_ASSOC);
 
 
         $output = array();
+        $IDPanier = array();
         $i = 0;
         foreach($result as $row){
-            if($row["IsCustom"] == 1){
-                $q_Custom = $db->prepare("
-                SELECT Produit.ImgPath, Produit.Nom, Produit.Prix
-                FROM Customs 
-                JOIN Produit 
-                ON Produit.IDProduit = Customs.IDProduit 
-                WHERE Customs.IDCustom = :ID;
-                ");
-                $q_Custom->execute(
-                    ["ID" => $row["IDCustom"]]
-                );
-                $data = $q_Custom->fetch(PDO::FETCH_ASSOC);
-                $data["Amount"] = $row["Amount"];
-                $data["IsCustom"] = $row["IsCustom"];
-                
-                // AJOUTER LE PRIX DES SWITCH, BACKPLATE etc...
+            if($row["IsBought"] == 0){
+                if($row["IsCustom"] == 1){
+                    $q_Custom = $db->prepare("
+                    SELECT Produit.ImgPath, Produit.Nom, Produit.Prix
+                    FROM Customs 
+                    JOIN Produit 
+                    ON Produit.IDProduit = Customs.IDProduit 
+                    WHERE Customs.IDCustom = :ID;
+                    ");
+                    $q_Custom->execute(
+                        ["ID" => $row["IDCustom"]]
+                    );
+                    $data = $q_Custom->fetch(PDO::FETCH_ASSOC);
+                    $data["Amount"] = $row["Amount"];
+                    $data["IsCustom"] = $row["IsCustom"];
+                    
+                    // AJOUTER LE PRIX DES SWITCH, BACKPLATE etc...
 
-                $output[$i] = $data;
-                $i++;
-            } else{
-                $q_Produit = $db->prepare("
-                SELECT ImgPath, Nom, Prix
-                FROM Produit 
-                WHERE IDProduit = :ID;
-                ");
-                $q_Produit->execute(
-                    ["ID" => $row["IDProduit"]]
-                );
-                $data = $q_Produit->fetch(PDO::FETCH_ASSOC);
-                $data["Amount"] = $row["Amount"];
-                $data["IsCustom"] = $row["IsCustom"];
+                    $output[$i] = $data;
+                    $i++;
+                } else{
+                    $q_Produit = $db->prepare("
+                    SELECT ImgPath, Nom, Prix
+                    FROM Produit 
+                    WHERE IDProduit = :ID;
+                    ");
+                    $q_Produit->execute(
+                        ["ID" => $row["IDProduit"]]
+                    );
+                    $data = $q_Produit->fetch(PDO::FETCH_ASSOC);
+                    $data["Amount"] = $row["Amount"];
+                    $data["IsCustom"] = $row["IsCustom"];
 
-                $output[$i] = $data;
-                $i++;
+                    $output[$i] = $data;
+                    $i++;
+                }
+                array_push($IDPanier, $row["IDPanier"]);
             }
         }
+
     ?>
 </head>
 <body>
@@ -93,7 +99,7 @@
                     <div class="navbar_search">
                         <form action="" method="GET" class="search">
                             <input type="search" placeholder="Rechercher un produit" id="search" name="research">
-                            <?php if(isset($_GET['research'])){header("Location: ../search.php?research=".$_GET['research']);}?>
+                            <?php if(isset($_GET['research'])){header("Location: ../Search.php?research=".$_GET['research']);}?>
                         </form>
                     </div>
                 </div>
@@ -154,6 +160,7 @@
             <input class="bouton_continuer" type="submit" value="Confirmer le panier et poursuivre" onclick="BeforeNextPage()">
             <input type="hidden" name="Data" value="" id="Data">
             <input type="hidden" id="Panier" value="<?php echo count($output); ?>">
+            <input type="hidden" name="DataPanier" id="DataPanier" value="<?php print_r($IDPanier); ?>">
         </form>
     </div>
     

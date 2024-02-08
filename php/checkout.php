@@ -1,6 +1,28 @@
 <?php
-
+require '../php/database.php';
 require '../vendor/autoload.php';
+
+
+$IDPanier = $_POST['DataPanier'];
+$test = explode(' ', $IDPanier);
+$size = sizeof($test);
+
+// print_r($test[6][0]);
+// $testt = $test[6];
+// print($testt);
+// $testtt = $test[12];
+// $testttt = explode(')', $testtt);
+// print($testttt[0]);
+
+
+
+for ($i = 6; $i < $size; $i+=6) {
+
+    $q = $db->prepare("UPDATE Paniers SET IsBought= 1 WHERE IDPanier=:IDPanier");
+    $q->execute([
+        "IDPanier"=> $test[$i][0],
+    ]);
+} 
 
 $prix = $_POST['Data'];
 $prix = floatval($prix) * 100;
@@ -11,8 +33,7 @@ $stripe_secret_key = "sk_test_51Oh0CYAM1e9hGOmlQ5Dn28i31c2ZynxclLV63T4ONYU9Kj1a8
 
 $checkout_session = \Stripe\Checkout\Session::create([
     "mode" => "payment",
-    "success_url" => "https://snowstorm.alwaysdata.net/(page)/success.html",
-    "cancel_url" => "https://snowstorm.alwaysdata.net/(page)/panier4.php",
+    "success_url" => "http://site-pro:8082/(page)/success.php",
     'line_items' => [
         [
             "quantity" => 1,
@@ -29,3 +50,5 @@ $checkout_session = \Stripe\Checkout\Session::create([
 
 http_response_code(303);
 header('location: ' . $checkout_session->url);
+
+?>

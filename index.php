@@ -41,14 +41,14 @@
                         <a href="./(page)/Product-1.html">NOS PRODUITS</a>
                         <a href="./(page)/personnaliser.php">PERSONNALISER</a>
                         <a href="./(page)/Search.php">GALERIE</a>
-                        <a href="#">SUPPORT/SAV</a>
-                        <a href="#">FAQ</a>
-                        <a href="#">CONTACT</a>
+                        <a href="./(page)/support.php">SUPPORT/SAV</a>
+                        <a href="./(page)/faq">FAQ</a>
+                        <a href="./(page)/page contact.html.">CONTACT</a>
                     </div>
                     <div class="navbar_search">
                         <form action="" method="GET" class="search">
                             <input type="search" placeholder="Rechercher un produit" id="search" name="research">
-                            <?php if(isset($_GET['research'])){header("Location: ./(page)/search.php?research=".$_GET['research']);}?>
+                            <?php if(isset($_GET['research'])){header("Location: ./(page)/Search.php?research=".$_GET['research']);}?>
                         </form>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
             <div class="offers">
                 <p class="offers-title"> <b>Nos meilleures ventes</b></p>
                 <div class="offers-product">
-                    <a href="" class="offers-compare"> <span><i class="fa-solid fa-plus"></i></span> Comparer </a>
+                    <button class="offers-compare" id="compare-1"> <i class="fa-solid fa-plus"></i> Comparer </button>
                     <img class="offers-img" src="./Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller">
                     <p class="offers-model"> Référence modèle </p>
                 </div>
@@ -89,7 +89,7 @@
             <div class="offers">
                 <p class="offers-title"> <b>Nos Nouveautés</b></p>
                 <div class="offers-product">
-                    <a href="" class="offers-compare"> <span><i class="fa-solid fa-plus"></i></span> Comparer </a>
+                    <button class="offers-compare" id="compare-2"> <i class="fa-solid fa-plus"></i> Comparer </button>
                     <img class="offers-img" src="./Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller">
                     <p class="offers-model"> Référence modèle </p>
                 </div>
@@ -98,7 +98,7 @@
             <div class="offers" id="best-selling">
                 <p class="offers-title"> <b>Nos classiques</b></p>
                 <div class="offers-product">
-                    <a href="" class="offers-compare"> <span><i class="fa-solid fa-plus"></i></span> Comparer </a>
+                    <button class="offers-compare" id="compare-3"> <i class="fa-solid fa-plus"></i> Comparer </button>
                     <img class="offers-img" src="./Assets/Clavier-Carousel-2.jpeg" alt="Image du clavier best seller">
                     <p class="offers-model"> Référence modèle </p>
                 </div>
@@ -136,6 +136,11 @@
 
         </div>
     </div>
+
+
+    <form action="/php/comparateur.php" method="POST" id="form">
+        <input type="hidden" name="IDClicked" id="IDClicked" value="">
+    </form>
 
     <footer class="footer">
         <div class="footer-container unselectable">

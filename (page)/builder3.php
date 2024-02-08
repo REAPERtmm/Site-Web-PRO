@@ -49,7 +49,7 @@
                     <div class="navbar_search">
                         <form action="" method="GET" class="search">
                             <input type="search" placeholder="Rechercher un produit" id="search" name="research">
-                            <?php if(isset($_GET['research'])){header("Location: ../search.php?research=".$_GET['research']);}?>
+                            <?php if(isset($_GET['research'])){header("Location: ../Search.php?research=".$_GET['research']);}?>
                         </form>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                 <div class="box-choice"> 4 </div>
             </div>
             <div class="right"> 
-                    <div class="save-box" id="save-config-btn" onclick="SaveConfig()"> Sauvegarder ma configuration</div>
+                <div class="save-box" id="save-config-btn" onclick="SaveConfig()"> Sauvegarder ma configuration</div>
             </div>
         </div>
     </div>
@@ -149,9 +149,9 @@
             <button class="t40" id="60">ctr</button>
         </div>
     </div>
-    <script src="../script/fillKey.js"></script>
-    <form action="builder4.php" method="post" class="line">
+    <form action="builder4.php" method="post" class="line" id="form">
         <input type="hidden" name="IDCustom" value="<?php echo $_POST["IDCustom"]; ?>">
+        <input type="hidden" name="data" id="data" value="<?php echo $_POST["data"]; ?>">
         <div class="container-option">
             <div class="option">
                 <p>Alphanumérique</p>
@@ -172,18 +172,19 @@
                 <p>OS</p>
                 <img src="../Assets/win.jpg" alt="img OS" class="img" width="100%">
                 <fieldset class="filedset-builder">
-                    <input type="radio" name="OS" value="" id="OS-choice1" class="A-choice" checked>
+                    <input type="radio" name="OS" value="Windows" id="OS-choice1" class="A-choice" checked>
                     <label for="OS-choice1" class="L-choice">Windows</label>
-                    <input type="radio" name="OS" value="qwerty" id="OS-choice2" class="A-choice">
+                    <input type="radio" name="OS" value="IOS" id="OS-choice2" class="A-choice">
                     <label for="OS-choice2" class="L-choice">IOS</label>
                 </fieldset>
             </div>
         </div>
         
         <div class="suivant">
-            <input type="button" value="Suivant" class="btn-suivant">
+            <input type="submit" value="Suivant" class="btn-suivant" onclick="SaveConfig()">
         </div>
     </form>
+    <script src="../script/fillKey.js"></script>
     
     <div class="separ"></div>
     <div class="second1">

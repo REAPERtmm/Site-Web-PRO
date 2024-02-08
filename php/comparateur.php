@@ -14,56 +14,13 @@
     <link rel="stylesheet" href="../styles/base.css">
     <link rel="stylesheet" href="../styles/comparateur.css">
 </head>
+<?php 
+    $ListCompare = $_POST["IDClicked"];
+    $Compare = explode(",", $ListCompare)[0];
+    $IDProduit = (explode("-", $Compare)[1]);
+    
+?>
 <body>
-<?php  
-    include("../php/database.php");
-    header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-    header("Cache-Control: post-check=0, pre-check=0", false);
-    header("Pragma: no-cache");
-    
-    
-    if (isset($_POST['IDProduct']))
-        {
-            $IDProduit = $_POST['IDProduct'];
-        }
-    else
-        {
-            echo "Aucune donnée";
-        }
-
-
-    $q = $db->prepare("SELECT * FROM Attribut WHERE IDProduit = :IDProduit");
-    $q->execute([
-        'IDProduit' => $IDProduit,
-    ]
-    );
-    $q = $q->fetch();
-
-    $Reference = $q["Modele"];
-
-    $qp = $db->prepare("SELECT * FROM Produit WHERE IDProduit = :IDProduit");
-    $qp->execute([
-        'IDProduit' => $IDProduit,
-    ]
-    );
-
-    $qp = $qp->fetch();
-
-    $keyboard_name = $qp["Nom"];
-    $path1 = $qp["Path1"];
-    $path2 = $qp["Path2"];
-    $desc1 = $qp["Description1"];
-    $desc2 = $qp["Description2"];
-    $ImgPath = $qp["ImgPath"];
-
-    $q_avis = $db->prepare("SELECT * FROM Avis INNER JOIN Users ON Avis.IDUser = Users.IDUser WHERE IDProduit = :IDProduit ORDER BY RAND () LIMIT 4;");
-    $q_avis->execute([
-        'IDProduit' => $IDProduit,
-    ]
-    );
-    $q_avis = $q_avis->fetchAll();
-
-    ?>
      
     <header class="unselectable">
         <div class="header">
@@ -97,102 +54,7 @@
         </div>
     </header>
     
-    
-<h1>comparateur</h1>
 
-<div>
-    <img class="img_pr" src="../Assets/Clavier1.webp" alt=""  /> 
-    <img class="img_pr"src="../Assets/Clavier2.webp" alt=""  />
-    <img class="img_pr"src="../Assets/Clavier3.jpg" alt="" />
-   </div>
-   <div>
-   <?php 
-
-
-$dic = [
-    "Informations générales"=> [
-        "Désignation"=> $q["Designation"],
-        "Marque"=> $q["Marque"],
-        "Modèle"=> $q["Modele"],
-    ],
-    "Format du clavier"=> [
-        "Format"=> $q["Format"],
-        "Compact"=> $q["Compact"],
-        "TKL"=> $q["TKL"],
-        "Norme du clavier"=> $q["Norme"],
-        "Localisation"=> $q["Localisation"],
-    ],
-    "Interface"=> [
-        "Sans-fil"=> $q["SansFil"],
-        "Interface avec l'ordinateur"=> $q["InterfaceAvecOrdinateur"],
-        "Technologie de connexion du clavier"=> $q["TechnologieDeConnexionDuClavier"],
-    ],
-    "Ergonomie"=> [
-        "Type de touches"=> $q["TypeDeTouches"],
-        "Type de switch"=> $q["TypeDeSwitch"],
-        "Clavier Rétroéclairé"=> $q["ClavierRetroeclaire"],
-        "Rétroéclairage RGB"=> $q["RetroeclairageRGB"],
-        "Touches macro"=> $q["TouchesMacro"],
-        "Touches Multimédia"=> $q["TouchesMultimedia"],
-        "Pavé numérique"=> $q["PaveNumerique"],
-    ],
-    "Caractéristiques Physiques"=> [
-        "Couleur"=> $q["Couleur"],
-        "Largeur"=> $q["Largeur"],
-        "Hauteur"=> $q["Hauteur"],
-        "Profondeur"=> $q["Profondeur"],
-        "Poids"=> $q["Poids"],
-    ],
-    "Alimentation"=> [
-        "Type d'alimentation"=> $q["TypeAlimentation"],
-    ],
-    "Compatibilité"=> [
-        "OS supportés"=> $q["OSSupportes"],
-        "Utilisation"=> $q["Utilisation"],
-    ],
-    "Garanties"=>  [
-        "Garantie commerciale"=> $q["GarantieCommerciale"],
-        "Garantie légale"=> $q["GarantieLegale"],
-    ],
-
-];
-
-
-echo '<div class="product-sheet">';
-foreach( $dic as $title => $v ) {
-    echo                
-    '<div class="row"> 
-    <div class="blue-tilte"> 
-        '. $title .'
-    </div>
-    <div class="info">';
-    foreach( $v as $smalltitle => $content ) {
-        echo '<p class="left-info">'.$smalltitle.'</p>';
-        if( $smalltitle == "OS supportés" || $smalltitle == "Utilisation") {
-            $contentspecial = explode(";", $content);
-            echo '<div class="right-info">';
-
-            foreach( $contentspecial as $k3 => $v3 ) {
-                echo '<p class="right-info">'.$v3.'</p>' ;
-            }
-            echo '</div>';
-
-        }
-        else{
-            echo 
-            '<p class="right-info">'.$content.'</p>';
-        }
-    };
-    echo 
-    '</div>
-    </div>';
-};
-
-echo '</div>';
-
-?>
-
-   </div>
 
     <footer class="footer">
         <div class="footer-container unselectable">

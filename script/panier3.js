@@ -17,3 +17,9 @@ function SetClickedBox(IDClicked, PointRelais) {
         console.log(FormData2.value);
     }
 }
+
+function BeforeNextPage(){
+    // Done Before Next Page
+    document.getElementById("Data").value = total.innerHTML;
+
+}

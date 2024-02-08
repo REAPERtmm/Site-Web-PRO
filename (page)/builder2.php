@@ -48,7 +48,7 @@
                     <div class="navbar_search">
                         <form action="" method="GET" class="search">
                             <input type="search" placeholder="Rechercher un produit" id="search" name="research">
-                            <?php if(isset($_GET['research'])){header("Location: ../search.php?research=".$_GET['research']);}?>
+                            <?php if(isset($_GET['research'])){header("Location: ../Search.php?research=".$_GET['research']);}?>
                         </form>
                     </div>
                 </div>
@@ -186,13 +186,14 @@
             <button class="t40" id="60">ctr</button>
         </div>
     </div>
+
     <div class="masse">
         <div class="div4" id="" >
             <h1 class="text_3" id="">key groups</h1>
             <div class="sd4-1" id="">
-                <button class="img" id="Keys" onclick="repaint('Keys')"><img src="" class="img1" id="" title="image groups de touche 1"></button>
-                <button class="img" id="Modifier" onclick="repaint('Modifier')"><img src="" class="img2" id="" title="image groups de touche 2"></button>
-                <button class="img" id="OS" onclick="repaint('OS')"><img src="" class="img3" id="" title="image groups de touche 3"></button>
+                <button class="img" id="Keys" onclick="repaint('Keys')"><img src="../Assets/clavier design2.png" class="img-grp" id="" title="image groups de touche 1"></button>
+                <button class="img" id="Modifier" onclick="repaint('Modifier')"><img src="../Assets/clavier design3.png" class="img-grp" id="" title="image groups de touche 2"></button>
+                <button class="img" id="OS" onclick="repaint('OS')"><img src="../Assets/clavier design4.png" class="img-grp" id="" title="image groups de touche 3"></button>
             </div>
         </div>
         <input type="Submit" value="suivant" onclick="BeforeNextPage()">

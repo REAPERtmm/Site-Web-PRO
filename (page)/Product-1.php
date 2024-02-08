@@ -48,7 +48,7 @@
                     <div class="navbar_search">
                         <form action="" method="GET" class="search">
                             <input type="search" placeholder="Rechercher un produit" id="search" name="research">
-                            <?php if(isset($_GET['research'])){header("Location: ../search.php?research=".$_GET['research']);}?>
+                            <?php if(isset($_GET['research'])){header("Location: ../Search.php?research=".$_GET['research']);}?>
                         </form>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
 
     <div class="la-big-div-sa-mere">
         <div class="sait-drole-si-tu-lie-sa">
-            <img src="" class="img-de-clavier-la-classe-est-pas-trop-longue"
+            <img src="" class="img-de-clavier-la-classe-est-pas-trop-longue">
         </div>
         <div class="sait-drole-si-tu-lie-sa">
 

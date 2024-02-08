@@ -24,9 +24,9 @@
     header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
     header("Cache-Control: post-check=0, pre-check=0", false);
     header("Pragma: no-cache");
-
-    $IDUser = $_SESSION["user"]["IDUser"];
     
+    $IDUser = $_SESSION["user"]["IDUser"];
+    $IDUser = 1;
     
     if (isset($_POST['IDProduct']))
         {
@@ -37,15 +37,17 @@
             $IDProduit = 1;
         }
 
-    if (!isset($_POST["IDCustom"])){
-        $IDCustom = -1;
+    if($_POST["IDCustom"] == -1){
+        $query = $db->prepare("INSERT INTO Customs(IDCustom, IDUser, IDProduit) VALUES (NULL, :User, :IDP)");
+        $query->execute(['IDP'=>$IDProduit, 'User'=>$IDUser]);
+        $IDCustom = $db->lastInsertId();
     } else {
         $IDCustom = $_POST["IDCustom"];
-        $query = $db->prepare("SELECT COUNT(*) FROM Customs WHERE IDCustom=:ID AND IDUser=1");
-        $query->execute(['ID'=>$IDCustom]);
+        $query = $db->prepare("SELECT COUNT(*) FROM Customs WHERE IDCustom=:ID AND IDUser=:User");
+        $query->execute(['ID'=>$IDCustom, 'User'=>$IDUser]);
         if($query->fetch()["COUNT(*)"] == 0){
-            $query = $db->prepare("INSERT INTO Customs(IDCustom, IDUser, IDProduit) VALUES (:ID, 1, :IDP)");
-            $query->execute(['ID'=>$IDCustom, 'IDP'=>$IDProduit]);
+            $query = $db->prepare("INSERT INTO Customs(IDCustom, IDUser, IDProduit) VALUES (NULL, :User, :IDP)");
+            $query->execute(['IDP'=>$IDProduit, 'User'=>$IDUser]);
         }
     }
 
@@ -109,7 +111,7 @@
                     <div class="navbar_search">
                         <form action="" method="GET" class="search">
                             <input type="search" placeholder="Rechercher un produit" id="search" name="research">
-                            <?php if(isset($_GET['research'])){header("Location: ../search.php?research=".$_GET['research']);}?>
+                            <?php if(isset($_GET['research'])){header("Location: ../Search.php?research=".$_GET['research']);}?>
                         </form>
                     </div>
                 </div>
@@ -144,7 +146,19 @@
         </div>
         <div class="other-choice">
             <div class="keycaps-line">
-                <p class="mid-keycaps-text"> Choix du Switch : <span id="choice-keycaps-user" class="choiceuser"> choix de l'utilisateur </span></p>
+                <p class="mid-keycaps-text"> Choix du Switch : 
+                    <span id="choice-keycaps-user"> 
+                        <?php  
+                        if(isset($_POST["keycaps-color"])){
+                            switch($_POST["keycaps-color"]){
+                                case "#0000ff": {echo "Switch Bleu"; break;}
+                                case "#ff0000": {echo "Switch Rouge"; break;}
+                                case "#582900": {echo "Switch Marron"; break;}
+                            }
+                        } 
+                        ?> 
+                    </span>
+                </p>
                 <a class="help" href="https://www.cybertek.fr/blog/peripheriques/clavier-pc/quel-type-de-switch-choisir-pour-son-clavier" >Comment choisir son switch </a>
                 <div class="dropdown">
                     <button class="keycaps-choice-box dropbtn" onclick="Dropdown()">Afficher les différents switch</button>
@@ -160,25 +174,25 @@
                 <div class="gauche">
                     <p class="backplate-color-text">Couleur de la backplate</p>
                     <div class="backplate">
-                        <button id="#bbbbbb" class="backplate-btn" onclick="SetBackplate(this.id)">
+                        <button id="#bbbbbb" class="backplate-btn <?php if(isset($_POST["backplate-color"]) && $_POST["backplate-color"] == "#bbbbbb"){echo "clicked-btn";} ?>" onclick="SetBackplate(this.id)">
                             <div class="dot grey" ></div>
                             <p class="backplate-text"> Gris </p>
                         </button>
                     </div>
                     <div class="backplate">
-                        <button id="#000000" class="backplate-btn" onclick="SetBackplate(this.id)">
+                        <button id="#000000" class="backplate-btn <?php if(isset($_POST["backplate-color"]) && $_POST["backplate-color"] == "#000000"){echo "clicked-btn";} ?>" onclick="SetBackplate(this.id)">
                             <div class="dot black" ></div>
                             <p class="backplate-text"> Noir </p>
                         </button>
                     </div>
                     <div class="backplate">
-                        <button id="#ffffff" class="backplate-btn" onclick="SetBackplate(this.id)">
+                        <button id="#ffffff" class="backplate-btn <?php if(isset($_POST["backplate-color"]) && $_POST["backplate-color"] == "#ffffff"){echo "clicked-btn";} ?>" onclick="SetBackplate(this.id)">
                             <div class="dot white" ></div>
                             <p class="backplate-text"> Blanc + 5$ </p>
                         </button>
                     </div>
                     <div class="backplate">
-                        <button id="#cd853f" class="backplate-btn" onclick="SetBackplate(this.id)">
+                        <button id="#cd853f" class="backplate-btn <?php if(isset($_POST["backplate-color"]) && $_POST["backplate-color"] == "#cd853f"){echo "clicked-btn";} ?>" onclick="SetBackplate(this.id)">
                             <div class="dot peru" ></div>
                             <p class="backplate-text"> Peru + 5$ </p>
                         </button>
@@ -362,43 +376,6 @@
         <input type="hidden" id="data" name="data" value="">
         <input type="hidden" name="IDCustom" value=<?php echo $IDCustom;?>>    
     </form>
-
-    <?php
-    
-    if (isset($_POST['backplate-color']) && isset($_POST['keycaps-color'])) {
-        $BackplateColor = $_POST["backplate-color"];
-        $KeycapsColor = $_POST["keycaps-color"];
-    
-
-        $q_check = $db->prepare("SELECT COUNT(*) FROM Customs WHERE IDCustom=:IDCustom");
-        $q_check->execute([
-            "IDCustom"=> $IDCustom,
-        ]);
-        $check = $q_check->fetch();
-
-        if($check[0] > 0){
-            $qc = $db->prepare("UPDATE Customs SET BackplateColor=:BackplateColor, KeycapColor=:KeycapColor WHERE IDCustom=:IDCustom");
-            $qc ->execute([
-                "IDCustom"=> $IDCustom,
-                "BackplateColor"=> $BackplateColor,
-                "KeycapColor"=> $KeycapsColor
-            ]);
-        } else {
-            $qc = $db->prepare("INSERT INTO Customs(IDCustom,IDUser,IDProduit,BackplateColor,KeycapColor) VALUES (NULL, :IDUser, :IDProduit, :BackplateColor,:KeycapColor)");
-            $qc ->execute([
-                "IDUser" => $IDUser,
-                "IDProduit"=> $IDProduit,
-                "BackplateColor"=> $BackplateColor,
-                "KeycapColor"=> $KeycapsColor
-            ]);
-        }
-    }
-
-
-
-    ?>
-
-        
 
 
     <footer class="footer">

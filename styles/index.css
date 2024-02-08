@@ -126,7 +126,10 @@
     padding-right: 5%;
     padding-bottom: 5%;
     padding-top: 2%;
+    cursor: pointer;
 }
+
+
 .offers-title {
     font-size: 25px;
     letter-spacing: -2px;
@@ -181,3 +184,6 @@
     background-position: center;
 }
 
+.selec {
+    background-color: gold;
+}
