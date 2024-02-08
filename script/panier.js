@@ -1,6 +1,7 @@
 
 const PannierSize = parseInt(document.getElementById("Panier").value);
 const total = document.getElementById("Total");
+const FORM = document.getElementById("form-next");
 let prec = -1;
 
 for(var i = 0 ; i < PannierSize ; i++){
@@ -39,7 +40,9 @@ function updatePrix(){
     for(var i = 0 ; i < PannierSize ; i++){
         var amount = document.getElementById("q-"+i);
         var prix = document.getElementById("p-"+i);
+        const inp = document.getElementById(i.toString());
 
+        inp.value = inp.value.split("-")[0] + "-" + amount.value;
         if(amount && prix){
             s += parseInt(amount.value) * parseFloat(prix.textContent);
         }
@@ -49,11 +52,22 @@ function updatePrix(){
     total.innerHTML = s + "€";
 }
 
+function extractData(){
 
+}
 
 
 function BeforeNextPage(){
     // Done Before Next Page
     document.getElementById("Data").value = total.innerHTML;
 
+    // Update the database
+    FORM.action = "../php/updateAmountPanier.php";
+    FORM.target = "_blank";
+    FORM.submit();
+
+    // go on next page
+    FORM.action = "panier2.php";
+    FORM.target = "";
+    FORM.submit();
 }

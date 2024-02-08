@@ -19,10 +19,11 @@
         if(!isset($_SESSION['user']['IDUser'])){$_SESSION['user']['IDUser'] = 1;}
 
         $q_panier = $db->prepare('SELECT * FROM Paniers WHERE IDUser=:ID');
-        $q_panier->bindParam(':ID', $_SESSION['user']['IDUser']);
-        $q_panier->execute();
+        $q_panier->execute([
+            "ID" => $_SESSION['user']['IDUser']
+        ]);
         $result = $q_panier->fetchAll(PDO::FETCH_ASSOC);
-
+        
 
         $output = array();
         $IDPanier = array();
@@ -159,8 +160,13 @@
         <form action="panier2.php" method="post" class="sd4-2" id="form-next">
             <input class="bouton_continuer" type="submit" value="Confirmer le panier et poursuivre" onclick="BeforeNextPage()">
             <input type="hidden" name="Data" value="" id="Data">
-            <input type="hidden" id="Panier" value="<?php echo count($output); ?>">
+            <input type="hidden" name="ArticlesAmount" id="Panier" value="<?php echo count($output); ?>">
             <input type="hidden" name="DataPanier" id="DataPanier" value="<?php print_r($IDPanier); ?>">
+            <?php 
+            for($i = 0 ; $i < count($output) ; $i++){
+                echo '<input type="hidden" name="article-'.$i.'" value="' . $IDPanier[$i]. '-' .$output[$i]["Amount"].'" id="'.$i.'">';
+            }
+            ?>
         </form>
     </div>
     
