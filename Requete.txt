@@ -1,3 +1,0 @@
-
-récupérer les Avis d'un produit avec ses Users
-SELECT (TexteAvis) FROM Avis INNER JOIN Users ON Users.IDUser = Avis.IDUser WHERE Avis.IDProduit = :ID
