@@ -16,70 +16,32 @@
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/base.css">
     <link rel="stylesheet" href="../styles/builder4.css">
+    <link rel="stylesheet" href="../styles/builder2.css">
+    <link rel="stylesheet" href="../styles/custom.css">
 </head>
 <body>
     <?php  
     require("../php/database.php");
-    require("../php/config.php");
+    //require("../php/config.php");
     header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
     header("Cache-Control: post-check=0, pre-check=0", false);
     header("Pragma: no-cache");
 
     $IDUser = $_SESSION["user"]["IDUser"];
-    
+    $IDUser = 1;
 
-    $q = $db->prepare("UPDATE Customs SET Langue=:langue, Modifier=:mod, OS=:os WHERE IDCustom=:ID");
+
+    $q = $db->prepare("SELECT * FROM Customs JOIN (Attribut JOIN Produit ON Produit.IDProduit = Attribut.IDProduit) ON Customs.IDProduit=Produit.IDProduit WHERE Customs.IDCustom = :ID");
     $q->execute([
-        
+        'ID' => $_POST["IDCustom"],
     ]);
-
-
-    
-    if (isset($_POST['IDProduct']))
-        {
-            $IDProduit = $_POST['IDProduct'];
-        }
-    else
-        {
-            $IDProduit = 1;
-        }
-
-    if (!isset($_POST["IDCustom"])){
-        $IDCustom = -1;
-    } else {
-        $IDCustom = $_POST["IDCustom"];
-    }
-
-
-    $q = $db->prepare("SELECT * FROM Attribut WHERE IDProduit = :IDProduit");
-    $q->execute([
-        'IDProduit' => $IDProduit,
-    ]
-    );
     $q = $q->fetch();
-
     $Reference = $q["Modele"];
 
-    $qp = $db->prepare("SELECT * FROM Produit WHERE IDProduit = :IDProduit");
-    $qp->execute([
-        'IDProduit' => $IDProduit,
-    ]
-    );
-
-    $qp = $qp->fetch();
-
-    $keyboard_name = $qp["Nom"];
-    $path1 = $qp["Path1"];
-    $path2 = $qp["Path2"];
-    $desc1 = $qp["Description1"];
-    $desc2 = $qp["Description2"];
-    $ImgPath = $qp["ImgPath"];
-
-    $q_avis = $db->prepare("SELECT * FROM Avis INNER JOIN Users ON Avis.IDUser = Users.IDUser WHERE IDProduit = :IDProduit ORDER BY RAND () LIMIT 4;");
+    $q_avis = $db->prepare("SELECT * FROM (Avis INNER JOIN Users ON Avis.IDUser = Users.IDUser) JOIN Customs ON Customs.IDProduit=Avis.IDProduit WHERE Customs.IDCustom = :ID ORDER BY RAND () LIMIT 4;");
     $q_avis->execute([
-        'IDProduit' => $IDProduit,
-    ]
-    );
+        'ID' => $_POST["IDCustom"],
+    ]);
     $q_avis = $q_avis->fetchAll();
 
     ?>
@@ -121,72 +83,170 @@
         </div>
     </header>
 
-
     <div class="custom-top">
-        <div class="ligne1">
-            <p class="reference"> <?php echo $Reference ?> </p>
-        </div>
         <div class="ligne2">
             <div class="left">
-                <p class="box-choice"> 1 </p>
+                <div class="box-choice"> 1 </div>
                 <div class="box-choice"> 2 </div>
                 <div class="box-choice"> 3 </div>
-                <div class="choice-text"> Etape 4: options </div>
+                <p class="choice-text"> Etape 4: options </p>
             </div>
             <div class="right"> 
-                    <div class="save-box" id="save-config-btn" onclick="SaveConfig()"> Sauvegarder ma configuration</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="custom-mid">
-        <div class="img-line">
-            <?php echo '<img src="../Assets/'.$ImgPath.'" alt="image du clavier" width="100%">' ?>
-        </div>
-        <div class="line2">
-            <div class="line2-left">
-                <div class="dropdown">
-                    <button class="keycaps-choice-box dropbtn" onclick="Dropdown()"> Bandeau déroulant pour les options <i class="fa-solid fa-caret-down"></i> </button>
-                    <div id="myDropdown" class="dropdown-content">
-                        <button id="#0000ff"  onclick="SetKeycaps(this.id, 'Switch Bleu')" class="dropdown-button"> Switch Bleu (total: 91$)</button>
-                        <button id="#ff0000" onclick="SetKeycaps(this.id, 'Switch Rouge')" class="dropdown-button"> Switch Rouge (total: 31$) </button>
-                        <button id="#582900" onclick="SetKeycaps(this.id, 'Switch Marron')" class="dropdown-button"> Switch Marron (total: 122$) </button>
-                    </div>
-                </div>
-            </div>
-            <div class="line2-right">
-
+                <div class="save-box" id="save-config-btn" onclick="SaveConfig()"> Sauvegarder ma configuration</div>
             </div>
         </div>
     </div>
 
 
+    <div class="clavier" id="">
+        <div class="ligne" id="">
+            <button class="t30" id="0">esc</button>
+            <button class="t30" id="1">1</button>
+            <button class="t30" id="2">2</button>
+            <button class="t30" id="3">3</button>
+            <button class="t30" id="4">4</button>
+            <button class="t30" id="5">5</button>
+            <button class="t30" id="6">6</button>
+            <button class="t30" id="7">7</button>
+            <button class="t30" id="8">8</button>
+            <button class="t30" id="9">9</button>
+            <button class="t30" id="10">0</button>
+            <button class="t30" id="11">-</button>
+            <button class="t30" id="12">+</button>
+            <button class="t30" id="13">←</button>
+        </div>
+        <div class="ligne" id="">
+            <button class="t40" id="14">↔</button>
+            <button class="t30" id="15">Q</button>
+            <button class="t30" id="16">W</button>
+            <button class="t30" id="17">E</button>
+            <button class="t30" id="18">R</button>
+            <button class="t30" id="19">T</button>
+            <button class="t30" id="20">Y</button>
+            <button class="t30" id="21">U</button>
+            <button class="t30" id="22">I</button>
+            <button class="t30" id="23">O</button>
+            <button class="t30" id="24">P</button>
+            <button class="t30" id="25">[</button>
+            <button class="t30" id="26">]</button>
+            <button class="t40" id="27">\</button>
+        </div>
+        <div class="ligne" id="">
+            <button class="t50" id="28">▼</button>
+            <button class="t30" id="29">A</button>
+            <button class="t30" id="30">S</button>
+            <button class="t30" id="31">D</button>
+            <button class="t30" id="32">F</button>
+            <button class="t30" id="33">G</button>
+            <button class="t30" id="34">H</button>
+            <button class="t30" id="35">J</button>
+            <button class="t30" id="36">K</button>
+            <button class="t30" id="37">L</button>
+            <button class="t30" id="38">;</button>
+            <button class="t30" id="39">"</button>
+            <button class="t60" id="40">◄</button>
+        </div>
+        <div class="ligne" id="">
+            <button class="t60" id="41">▲</button>
+            <button class="t30" id="42">Z</button>
+            <button class="t30" id="43">X</button>
+            <button class="t30" id="44">C</button>
+            <button class="t30" id="45">V</button>
+            <button class="t30" id="46">B</button>
+            <button class="t30" id="47">N</button>
+            <button class="t30" id="48">M</button>
+            <button class="t30" id="49">&lt;</button>
+            <button class="t30" id="50">&gt;</button>
+            <button class="t30" id="51">/</button>
+            <button class="t80" id="52">▲</button>
+        </div>
+        <div class="ligne" id="">
+            <button class="t40" id="53">ctr</button>
+            <button class="t40" id="54">⊞</button>
+            <button class="t40" id="55">alt</button>
+            <button class="t180" id="56"></button>
+            <button class="t40" id="57">alt</button>
+            <button class="t40" id="58">⊞</button>
+            <button class="t40" id="59">fn</button>
+            <button class="t40" id="60">ctr</button>
+        </div>
+    </div>
 
+    <form action="" id="form-action" method="POST" id="form" class="option-div">
+        <div class="option-container">
+            <div class="row-btn">
+                <div id="arrow">_</div>
+                <input type="button" id="toggle-option" value="Options" onclick="toggleOption()">
+            </div>
+
+            <div class="choice">
+                <input type="checkbox" class="option" name="option1" id="opt1">
+                <label for="opt1">Option1</label>
+            </div>
+            <div class="choice">
+                <input type="checkbox" class="option" name="option2" id="opt2">
+                <label for="opt2">Option2</label>
+            </div>
+            <div class="choice">
+                <input type="checkbox" class="option" name="option3" id="opt3">
+                <label for="opt3">Option3</label>
+            </div>
+            <div class="choice">
+                <input type="checkbox" class="option" name="option4" id="opt4">
+                <label for="opt4">Option4</label>
+            </div>
+        </div>
+
+        <div class="achat-container">
+            <div class="top-row">
+                <input type="number" name="prix" id="prix" value="<?php
+                    $prix = floatval($q["Prix"]);
+                    switch($q["BackplateColor"]){
+                        case "#ffffff": {$prix += 5; break;}
+                        case "#cd853f": {$prix += 5; break;}
+                    }
+                    switch($q["KeycapColor"]){
+                        case "#0000ff": {$prix += 91; break;}
+                        case "#ff0000": {$prix += 31; break;}
+                        case "#582900": {$prix += 122; break;}
+                    }
+                    echo $prix;
+                ?>" readonly>
+                <p id="euro">€</p>
+                <input type="number" min="1" name="amount" id="amount" value="1">
+                <p id="qt">Quantité</p>
+            </div>  
+            <input type="submit" value="Poursuivre l'achat" class="btn-submit">
+        </div>
+        <input type="hidden" name="prixUnit" id="prixUnit" value="<?php echo $prix; ?>">
+        <input type="hidden" name="IDCustom" value="<?php echo $_POST["IDCustom"]; ?>">
+        <input type="hidden" name="data" id="data" value="<?php echo $_POST["data"]; ?>">
+        <input type="hidden" id="data" value="">
+
+    </form>
 
 
     <div class="custom-bot">
         <hr class="black-line">
         <div class="product-info">
             <p class="custom-title"> Présentation du produit</p>
-
-
     <?php 
 
       echo      '<div class="product-presentation">
                 <div class="product-presentation-line1">
                     <div class="product-presentation-line1-left">
-                        <img class="bot-img" src="../Assets/'.$path1.'" alt="Image du clavier : '.$keyboard_name.'">
+                        <img class="bot-img" src="../Assets/'.$q["Path1"].'" alt="Image du clavier1">
                     </div>
                     <div class="product-presentation-line1-right">
-                        <p class="product-presentation-text">'.$desc1.'  </p>
+                        <p class="product-presentation-text">'.$q["Description1"].'  </p>
                     </div>
                 </div>
                 <div class="product-presentation-line2">
                     <div class="product-presentation-line2-left">
-                        <p class="product-presentation-text"> '.$desc2.' </p>
+                        <p class="product-presentation-text"> '.$q["Description2"].' </p>
                     </div>
                     <div class="product-presentation-line2-right">
-                        <img class="bot-img" src="../Assets/'.$path2.'" alt="Image du clavier : '.$keyboard_name.'">
+                        <img class="bot-img" src="../Assets/'.$q["Path2"].'" alt="Image du clavier2">
                     </div>
                 </div>
             </div>
@@ -323,54 +383,9 @@
 
             };
         ?>
-
-  
-
     </div>
 
-    <form action="" id="form-action" method="POST">
-        <input type="hidden" id="backplate-color" name="backplate-color" value="bbbbbb">
-        <input type="hidden" id="keycaps-color" name="keycaps-color" value="#0000ff">
-        <input type="hidden" id="data" value="">
-    </form>
-
-    <?php
-    
-    if (isset($_POST['backplate-color']) && isset($_POST['keycaps-color'])) {
-        $BackplateColor = $_POST["backplate-color"];
-        $KeycapsColor = $_POST["keycaps-color"];
-    
-
-        $q_check = $db->prepare("SELECT COUNT(*) FROM Customs WHERE IDCustom=:IDCustom");
-        $q_check->execute([
-            "IDCustom"=> $IDCustom,
-        ]);
-        $check = $q_check->fetch();
-
-        if($check[0] > 0){
-            $qc = $db->prepare("UPDATE Customs SET BackplateColor=:BackplateColor, KeycapColor=:KeycapColor WHERE IDCustom=:IDCustom");
-            $qc ->execute([
-                "IDCustom"=> $IDCustom,
-                "BackplateColor"=> $BackplateColor,
-                "KeycapColor"=> $KeycapsColor
-            ]);
-        } else {
-            $qc = $db->prepare("INSERT INTO Customs(IDCustom,IDUser,IDProduit,BackplateColor,KeycapColor) VALUES (NULL, :IDUser, :IDProduit, :BackplateColor,:KeycapColor)");
-            $qc ->execute([
-                "IDUser" => $IDUser,
-                "IDProduit"=> $IDProduit,
-                "BackplateColor"=> $BackplateColor,
-                "KeycapColor"=> $KeycapsColor
-            ]);
-        }
-    }
-
-
-
-    ?>
-
-        
-
+    <script src="../script/fillKey.js"></script>
 
     <footer class="footer">
         <div class="footer-container unselectable">
@@ -409,5 +424,5 @@
         </div>
     </footer>
     
-    <script src="../script/custom.js"></script>
+    <script src="../script/Builder4.js"></script>
 </body>

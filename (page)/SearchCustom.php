@@ -46,7 +46,6 @@
                     <div class="navbar_search">
                         <form action="" method="GET" class="search">
                             <input type="search" placeholder="Rechercher un produit" id="search" name="research">
-
                         </form>
                     </div>
                 </div>
@@ -57,7 +56,7 @@
         </div>
     </header>
 
-    <form action="Search.php" method="get" class="form-galerie" id="form-reload">
+    <form action="SearchCustom.php" method="get" class="form-galerie" id="form-reload">
         <div class="IsAsc">
             <input type="checkbox" name="ASC" id="Checkbox-Asc" <?php if($_GET["ASC"]=="on"){echo "checked";}?>>
             <div class="Title-Checkbox">Prix croissant</div>
@@ -70,9 +69,9 @@
             $_SQL_Search = "%" . $_GET["research"] . "%";
 
             if($_GET["ASC"] == "on"){
-                $q = $db->prepare("SELECT * FROM Produit WHERE Nom like :search ORDER BY Prix ASC LIMIT " . $_GET["loadedAmount"]);
+                $q = $db->prepare("SELECT Produit.ImgPath, Customs.Nom, Produit.Prix, Customs.IDCustom, Customs.BackplateColor, Customs.KeycapColor, Customs.AvisCreator FROM Customs INNER JOIN Produit ON Produit.IDProduit=Customs.IDProduit WHERE Customs.Nom like :search ORDER BY Prix ASC LIMIT " . $_GET["loadedAmount"]);
             }else{
-                $q = $db->prepare("SELECT * FROM Produit WHERE Nom like :search ORDER BY Prix DESC LIMIT " . $_GET["loadedAmount"]);      
+                $q = $db->prepare("SELECT Produit.ImgPath, Customs.Nom, Produit.Prix, Customs.IDCustom, Customs.BackplateColor, Customs.KeycapColor, Customs.AvisCreator FROM Customs INNER JOIN Produit ON Produit.IDProduit=Customs.IDProduit WHERE Customs.Nom like :search ORDER BY Prix DESC LIMIT " . $_GET["loadedAmount"]);
             }
             $q->execute([
                 "search" => $_SQL_Search,
@@ -80,24 +79,31 @@
             $q = $q->fetchAll();
 
             foreach ($q as $key => $value) {
-                echo '<form action="Product-1.php" method="post" class="product">';
-                    echo '<div class="img-product">';
+                $prix = floatval($value["Prix"]);
+                switch($value["BackplateColor"]){
+                    case "#ffffff": {$prix += 5; break;}
+                    case "#cd853f": {$prix += 5; break;}
+                }
+                switch($value["KeycapColor"]){
+                    case "#0000ff": {$prix += 91; break;}
+                    case "#ff0000": {$prix += 31; break;}
+                    case "#582900": {$prix += 122; break;}
+                }
+
+                echo '<form action="custom.php" method="post" class="product">';
+                    echo '<button class="img-product">';
                         echo '<img src="../Assets/' . $value["ImgPath"] . '" alt="image" width="100%" height="100%">';
-                    echo '</div>';
-                    echo '<h1 class="title-product">' . $value["Nom"] . '</h1>';
-                    echo '<i class="price-product">' . $value["Prix"] . '€</i>';
-                    
+                    echo '</button>';
+
                     echo '
-                        <input type="hidden" name="IDProduit" value="'.$value["IDProduit"].'">
+                        <input type="hidden" name="IDCustom" value="'.$value["IDCustom"].'">
+                        <input type="hidden" name="keycaps-color" value="'.$value["KeycapColor"].'">
+                        <input type="hidden" name="backplate-color" value="'.$value["BackplateColor"].'">
                     ';
 
-                    $qAvis = $db->prepare("SELECT (TexteAvis) FROM Avis INNER JOIN Users ON Users.IDUser = Avis.IDUser WHERE Avis.IDProduit = :ID ORDER BY RAND () LIMIT 1");
-                    $qAvis->execute([
-                        "ID" => $value["IDProduit"]
-                    ]);
-                    $qAvis = $qAvis->fetch();
-
-                    echo '<p class="Avis">' . $qAvis["TexteAvis"] . '</p>';
+                    echo '<h1 class="title-product">' . $value["Nom"] . '</h1>';
+                    echo '<i class="price-product">' . $prix . '€</i>';
+                    echo '<p class="Avis">' . $value["AvisCreator"] . '</p>';
                 echo "</form>";
             }
         ?>
