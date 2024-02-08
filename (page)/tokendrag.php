@@ -35,9 +35,6 @@
 //     }
 //   }
 
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +52,7 @@
         <div class="form-content">
             <div>
                 <label for="email">Email</label>
-                <input type="email" name="login-email" placeholder="Email" id="email" required>
+                <input type="email" name="email" placeholder="Email" id="email" required>
             </div>
             
             <div>
@@ -74,8 +71,35 @@
 <?php
     if (isset($_POST['FormsentLogin'])) {
         
-        if (condition) {
-            # code...
+        include '../php/database.php';
+        global $db;
+
+        $email = $_POST['email'];
+        $date = $_POST['date'];
+
+        $sql = $db->query("SELECT Count(*) FROM Users WHERE Email='$email' AND DateNaissance='$date'");
+
+        $sql = $sql->fetch();
+
+        if ($sql[0] == 1) {
+            $token = uniqid();
+            $to = $email;
+            $subject = "Changement de mot de passe";
+            $message = "Bonjour, Voici votre lien pour la réinitialisation du mot de passe : \nhttps://snowstorm.alwaysdata.net/(page)/token?token=$token&mail=$email";
+
+            // En-têtes pour spécifier le format de l'e-mail
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-Transfer-Encoding: 8bit" . "\r\n";
+            $headers .= "Content-type: text/html; charset=utf-8" . "\r\n";
+
+            if (mail($to, $subject, $message, $headers)) {
+                echo "<p style='color: green'>L'e-mail a été envoyé avec succès.</p>";
+                header("Location: ./login.php");
+            } else {
+                echo "<p style='color: red'>Erreur lors de l'envoi de l'e-mail.</p>";
+            }
+        } else {
+            echo "<p style='color: red'>L'address e-mail ou la date de naissance Invalide.</p>";
         }
     }
 

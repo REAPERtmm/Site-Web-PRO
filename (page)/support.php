@@ -1,3 +1,10 @@
+<?php 
+require '../php/config.php';
+include '../php/database.php';
+global $db;
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -16,7 +23,7 @@
     <link href="https://fonts.cdnfonts.com/css/penguin" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/base.css">
-    <link rel="stylesheet" href="../styles/historique.css">
+    <link rel="stylesheet" href="../styles/support.css">
 </head>
 <body>
 
@@ -40,9 +47,9 @@
                         <a href="./Product-1.html">NOS PRODUITS</a>
                         <a href="./personnaliser.php">PERSONNALISER</a>
                         <a href="./Search.php">GALERIE</a>
-                        <a href="#">SUPPORT/SAV</a>
+                        <a href="./support.php">SUPPORT/SAV</a>
                         <a href="#">FAQ</a>
-                        <a href="#">CONTACT</a>
+                        <a href="./page contact.html">CONTACT</a>
                     </div>
                     <div class="navbar_search">
                         <form action="" method="GET" class="search">
@@ -58,103 +65,80 @@
         </div>
     </header>
 
+    <div class="container">
+        <h1>Envoyer un mail au SAV</h1>
 
-    <?php 
-    require("../php/database.php");
-    require("../php/config.php");
-    header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-    header("Cache-Control: post-check=0, pre-check=0", false);
-    header("Pragma: no-cache");
+        <form class="form-container" method="POST" action="" >
+            <div class="">
+                <label class="form-label" for="nom">Nom</label>
+                <input class="form-input" type="text" name="nom" id="nom" required />
+            </div>
+            
+            <div class="">
+                <label class="form-label" for="pays">Pays</label>
+                <input class="form-input" type="text" name="pays" id="pays" required />
+            </div>
 
-    $IDUser = $_SESSION["user"]["IDUser"];
+            <div class="">
+                <label class="form-label" for="adresse">Adresse</label>
+                <input class="form-input" type="text" name="adresse" id="adresse" required />
+            </div>
 
-    $q = $db->prepare("SELECT * FROM Paniers WHERE IDUser =:IDUser AND IsBought=:IsBought");
-    $q->execute([
-        "IDUser"=> $IDUser,
-        "IsBought"=> 1,
-    ]);
+            <div class="">
+                <label class="form-label" for="email">Email</label>
+                <input class="form-input" type="email" name="email" id="email" required />
+            </div>
 
-    $qf = $q->fetchAll();
+            <div class="">
+                <label class="form-label" for="tel">Téléphone</label>
+                <input class="form-input" type="tel" name="tel" id="tel" required />
+            </div>
+            
+            <div class="">
+                <label class="form-label" for="subject">Subject</label>
+                <input class="form-input" type="text" name="subject" id="subject" required />
+            </div>
+            
+            <div class="">
+                <label class="form-label" for="Message">Message</label>
+                <textarea class="form-textarea" id="Message" name="Message" required></textarea>
+            </div>
 
-    $equivalent = array(
-        "#bbbbbb" => 0,
-        "#ffffff" => 5,
-        "#000000" => 0,
-        "#cd856f" => 5,
-        "#0000ff" => 91,
-        "#ff0000" => 31,
-        "#582900" => 122,
-    );
+            <button class="form-submit">Envoyer</button>
+        </form>
 
+        <?php
+        if (isset($_POST['formsent'])) {
 
+            $to = "snowstorm@alwaysdata.net";
+            $subject = $_POST['subject'];
+            $message = "<div style='width: 100%; text-align: center'>" . $_POST['nom'] . "<br>" . $_POST['email'] . "<br>" . $_POST['adresse'] . ", " . $_POST['pays'] . "<br>" . $_POST['tel'] . "\r\n" . $_POST['Message'] . "</div>";
+            // Dans le cas où nos lignes comportent plus de 70 caractères, nous les coupons en utilisant wordwrap()
+            $message = wordwrap($message, 70, "\r\n");
+            
+            // En-têtes pour spécifier le format de l'e-mail
+            $headers = "From: " . $_POST['email'] . "\r\n";
+            $headers .= "Reply-To: " . $_POST['email'] . "\r\n";
+            $headers .= "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-Transfer-Encoding: 8bit" . "\r\n";
+            $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
+            // Envoyer l'e-mail
+            ini_set('SMTP','smtp-snowstorm.alwaysdata.net');
+            $mailSent = mail($to, $subject, $message, $headers);
 
-
-
-
-
-    echo ' <div class="titre"> Historique des achats </div>
-    <div class="grid-his">
-            <p class="subtitlehis">Nom du produit</p>       
-            <p class="subtitlehis">Prix Unitaire</p>
-            <p class="subtitlehis"> Quantité</p>
-            <p class="subtitlehis"> Prix totale</p>';
-            foreach ($qf as $row) {
-                $price = 0;
-                if ($row["IsCustom"] == 1) {
-                    $qcustom = $db->prepare("SELECT * FROM Customs WHERE IDCustom =:IDCustom");
-                    $qcustom->execute([
-                        "IDCustom" => $row["IDCustom"],
-                    ]);
-                    $qcustomf = $qcustom->fetch();
-
-
-                    if($qcustomf["KeycapColor"] == "#0000ff") {
-                        $price += 91;
-                    } elseif($qcustomf["KeycapColor"] == "#ff0000") {
-                        $price += 31;
-                    } elseif ($qcustomf["KeycapColor"] == "#582900") {
-                        $price += 122;
-                    }
-
-
-                    if($qcustomf["BackplateColor"] == "#ffffff") {
-                        $price += 5;
-                    } elseif ($qcustomf["BackplateColor"] == "#cd853f") {
-                        $price += 5;
-                    }
-
-
-                    $IDProduit = $qcustomf["IDProduit"];
-                } else {
-                    $IDProduit = $row["IDProduit"];
-                }
-                $qprice = $db->prepare("SELECT Prix, Nom FROM Produit WHERE IDProduit =:IDProduit");
-                $qprice->execute([
-                    "IDProduit" => $IDProduit,
-                ]);
-                $qpricef = $qprice->fetch();
-                $price += $qpricef["Prix"];
-                $Nom = $qpricef["Nom"];
-
-                $Quantity = $row["Amount"];
-
-                $PrixTotale = $Quantity * $price;
-
-                echo '<p> '.$Nom.' </p>';
-                echo '<p> '.$price.' </p>';
-                echo '<p> '.$Quantity.' </p>';
-                echo '<p> '.$PrixTotale.' </p>';
+            // Vérifier si l'e-mail a été envoyé avec succès
+            if ($mailSent) {
+                echo "<p style='color: red'>L'e-mail a été envoyé avec succès.</p>";
+            } else {
+                echo "<p style='color: red'>Erreur lors de l'envoi de l'e-mail.</p>";
             }
+            $mmm = $_POST['email'];
+            header("Location: ./verif.php?email=$mmm");
+            exit();
+        }
+        ?>
 
-
-        echo '</div>';
-
-
-?> 
-
-
-
-
+    </div>
 
     <footer class="footer">
         <div class="footer-container unselectable">
@@ -192,8 +176,8 @@
             </div>
         </div>
     </footer>
-    
+
     <script src="../script/app.js"></script>
-    <script src="../script/index.js"></script>
+
 </body>
 </html>
