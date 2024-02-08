@@ -41,14 +41,14 @@
                         <a href="./(page)/Product-1.html">NOS PRODUITS</a>
                         <a href="./(page)/personnaliser.php">PERSONNALISER</a>
                         <a href="./(page)/Search.php">GALERIE</a>
-                        <a href="#">SUPPORT/SAV</a>
-                        <a href="#">FAQ</a>
-                        <a href="#">CONTACT</a>
+                        <a href="./(page)/support.php">SUPPORT/SAV</a>
+                        <a href="./(page)/faq">FAQ</a>
+                        <a href="./(page)/page contact.html.">CONTACT</a>
                     </div>
                     <div class="navbar_search">
                         <form action="" method="GET" class="search">
                             <input type="search" placeholder="Rechercher un produit" id="search" name="research">
-                            <?php if(isset($_GET['research'])){header("Location: ./(page)/search.php?research=".$_GET['research']);}?>
+                            <?php if(isset($_GET['research'])){header("Location: ./(page)/Search.php?research=".$_GET['research']);}?>
                         </form>
                     </div>
                 </div>

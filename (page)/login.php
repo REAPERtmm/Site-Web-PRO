@@ -1,11 +1,16 @@
 <?php 
 require '../php/config.php';
-include '../php/database.php'; 
+include '../php/database.php';
 global $db;
 
 header("Cache-Control: sno-cache");
 
-print_r($_SESSION);
+
+if (isset($_SESSION['user'])) {
+    header("Location: ./profil.php");
+    exit();
+}
+
 
 if (!empty($_POST['credential'])) {
 
@@ -89,14 +94,14 @@ if (!empty($_POST['credential'])) {
                         <a href="./Product-1.html">NOS PRODUITS</a>
                         <a href="./personnaliser.php">PERSONNALISER</a>
                         <a href="./Search.php">GALERIE</a>
-                        <a href="#">SUPPORT/SAV</a>
+                        <a href="./support.php">SUPPORT/SAV</a>
                         <a href="#">FAQ</a>
-                        <a href="#">CONTACT</a>
+                        <a href="./page contact.html">CONTACT</a>
                     </div>
                     <div class="navbar_search">
                         <form action="" method="GET" class="search">
                             <input type="search" placeholder="Rechercher un produit" id="search" name="research">
-                            <?php if(isset($_GET['research'])){header("Location: ./search.php?research=".$_GET['research']);}?>
+                            <?php if(isset($_GET['research'])){header("Location: ./Search.php?research=".$_GET['research']);}?>
                         </form>
                     </div>
                 </div>
