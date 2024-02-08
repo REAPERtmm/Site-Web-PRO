@@ -16,10 +16,8 @@
     <link href="https://fonts.cdnfonts.com/css/penguin" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/base.css">
-    <link rel="stylesheet" href="../styles/profil.css">
+    <link rel="stylesheet" href="../styles/account.css">
 </head>
-<body>
-
 <?php 
     require("../php/database.php");
     require("../php/config.php");
@@ -29,16 +27,37 @@
 
     $IDUser = $_SESSION["user"]["IDUser"];
 
-    $q = $db->prepare("SELECT Nom, Prenom FROM Users WHERE IDUser =:IDUser");
+    $q = $db->prepare("SELECT * FROM Users WHERE IDUser =:IDUser");
     $q->execute([
         "IDUser" => $IDUser
     ]);
     $qf = $q->fetch();
 
-    $Nom = $qf["Nom"];
-    $Prenom = $qf["Prenom"];
+
+
+    $Emaile = $qf["Email"];
+    $Password = password_hash($qf["Mdp"], PASSWORD_DEFAULT);
+
+
+    if(isset($_POST["emaile"])) {
+        $Emaile = $_POST["emaile"];
+    }
+
+
+    if(isset($_POST["password"])) {
+        $Password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+    }
+
+    $qu = $db->prepare("UPDATE Users SET Email = :Email, Mdp = :Mdp WHERE IDUser = :IDUser");
+    $qu->execute([
+        "Email"=> trim($Emaile),
+        "Mdp"=> $Password,
+        "IDUser"=> $IDUser
+    ]);
 
 ?>
+<body>
+
     
     <header class="unselectable">
         <div class="header">
@@ -61,7 +80,7 @@
                         <a href="./(page)/historique.php">HISTORIQUE</a>
                         <a href="./(page)/Search.php">FAVORIS</a>
                         <a href="index.html">SAUVEGARDES</a>
-                        <a href="./(page)/account.html">COMPTE</a>
+                        <a href="./account.html">COMPTE</a>
                     </div>
                     <div class="navbar_search">
                         <form action="" class="search">
@@ -76,9 +95,33 @@
         </div>
     </header>
 
-    <div class="titre">
-        <p class="text"> Bonjour <?php echo $Prenom.' '.$Nom ?> ! Vous êtes désormais connecté </p>
-        <a href="../index.html" class="save-box"> Retour à l'acceuil </a>
+    <p class="title"> Espace client </p>
+    <div class="info-modif">
+        <form action="account.php" method="POST">
+            <label for="">E-mail</label>
+            <input name="emaile" type="text" value="<?php echo trim($Emaile);?>" required>
+            <label for="">Mot de passe</label>
+            <input name="password" type="password" value="">
+            <input type="submit" value="Sauvegarder les modifications" name="edit-info-submit">
+        </form>
+    </div>
+    <div class="newsletter">
+        <p class="subtitle"> Envie d'être au courant des dernières collections ?  </p>
+        <p class="subtitle"> Inscrivez vous à la newsletter pour être à jour dans les actus !</p>
+        <form action="account.php" method="POST">
+            <input type="submit" value="S'inscrire par mail" name="newsletter-submit">
+        </form>
+        <?php 
+            if(isset($_POST["newsletter-submit"])) {
+                $qn = $db->prepare("UPDATE Users SET Newsletter = 1 WHERE IDUser = :IDUser");
+                $qn->execute([
+                    "IDUser"=> $IDUser
+                ]);
+                echo 'Vous avez été inscrit avec succès !';
+            }
+        
+        
+        ?>
     </div>
 
 
@@ -126,10 +169,3 @@
 
 
 
-
-
-<?php 
-require '../php/config.php';
-
-print_r($_SESSION); 
-?>
