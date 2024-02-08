@@ -1,5 +1,5 @@
 <?php 
-require '../php/config.php';
+// require '../php/config.php';
 include '../php/database.php';
 global $db;
 
@@ -68,7 +68,7 @@ global $db;
     <div class="container">
         <h1>Envoyer un mail au SAV</h1>
 
-        <form class="form-container" method="POST" action="" >
+        <form class="form-container" method="POST" action="./verif.php" >
             <div class="">
                 <label class="form-label" for="nom">Nom</label>
                 <input class="form-input" type="text" name="nom" id="nom" required />
@@ -104,39 +104,8 @@ global $db;
                 <textarea class="form-textarea" id="Message" name="Message" required></textarea>
             </div>
 
-            <button class="form-submit">Envoyer</button>
+            <input class="form-submit" type="submit" value="Envoyer" name="formsent">
         </form>
-
-        <?php
-        if (isset($_POST['formsent'])) {
-
-            $to = "snowstorm@alwaysdata.net";
-            $subject = $_POST['subject'];
-            $message = "<div style='width: 100%; text-align: center'>" . $_POST['nom'] . "<br>" . $_POST['email'] . "<br>" . $_POST['adresse'] . ", " . $_POST['pays'] . "<br>" . $_POST['tel'] . "\r\n" . $_POST['Message'] . "</div>";
-            // Dans le cas où nos lignes comportent plus de 70 caractères, nous les coupons en utilisant wordwrap()
-            $message = wordwrap($message, 70, "\r\n");
-            
-            // En-têtes pour spécifier le format de l'e-mail
-            $headers = "From: " . $_POST['email'] . "\r\n";
-            $headers .= "Reply-To: " . $_POST['email'] . "\r\n";
-            $headers .= "MIME-Version: 1.0" . "\r\n";
-            $headers .= "Content-Transfer-Encoding: 8bit" . "\r\n";
-            $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
-            // Envoyer l'e-mail
-            ini_set('SMTP','smtp-snowstorm.alwaysdata.net');
-            $mailSent = mail($to, $subject, $message, $headers);
-
-            // Vérifier si l'e-mail a été envoyé avec succès
-            if ($mailSent) {
-                echo "<p style='color: red'>L'e-mail a été envoyé avec succès.</p>";
-            } else {
-                echo "<p style='color: red'>Erreur lors de l'envoi de l'e-mail.</p>";
-            }
-            $mmm = $_POST['email'];
-            header("Location: ./verif.php?email=$mmm");
-            exit();
-        }
-        ?>
 
     </div>
 

@@ -3,13 +3,7 @@ require '../php/config.php';
 include '../php/database.php';
 global $db;
 
-header("Cache-Control: sno-cache");
-
-
-if (isset($_SESSION['user'])) {
-    header("Location: ./profil.php");
-    exit();
-}
+header("Cache-Control: no-cache");
 
 
 if (!empty($_POST['credential'])) {
