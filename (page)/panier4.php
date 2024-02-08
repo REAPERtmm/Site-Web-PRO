@@ -1,6 +1,22 @@
 <?php
-require '../php/config.php';
-$prix = $_POST['Data'];
+    require("../php/database.php");
+    require '../php/config.php';
+    $prix = $_POST['Data'];
+    $IDPanier = $_POST["DataPanier"];
+
+    $IDLivraison = $_POST["DataLivraison"];
+    $PointRelais = $_POST["data2"]; //soit 0 soit 1
+    echo $PointRelais;
+
+
+    //ALTER TABLE LIVRAISON SET POINRELAIS
+    if($PointRelais == 'SWpFaQ=='){
+        $q = $db->prepare("UPDATE Livraison SET PointRelais = 1 WHERE IDLivraison = :IDLivraison");
+        $q->execute([
+            "IDLivraison"=> $IDLivraison,
+        ]);
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -77,6 +93,7 @@ $prix = $_POST['Data'];
             <form action="../php/checkout.php" method="post">
                 <p>Produits</p>
                 <h1 class="text_3" id="">total : <?php print_r($prix)?> €</h1>
+                <input type="hidden" name="DataPanier" id="DataPanier" value="<?php print_r($IDPanier); ?>">
                 <input class="bouton_continuer" type="submit" value="Payer" onclick="BeforeNextPage()">
                 <input type="hidden" name="Data" value="<?php print_r($_POST["Data"]);?>" id="Data">
             </form>

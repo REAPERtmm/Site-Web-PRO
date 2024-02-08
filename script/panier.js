@@ -55,4 +55,5 @@ function updatePrix(){
 function BeforeNextPage(){
     // Done Before Next Page
     document.getElementById("Data").value = total.innerHTML;
+
 }
