@@ -81,9 +81,9 @@
 
             foreach ($q as $key => $value) {
                 echo '<form action="Product-1.php" method="post" class="product">';
-                    echo '<div class="img-product">';
+                    echo '<button class="img-product">';
                         echo '<img src="../Assets/' . $value["ImgPath"] . '" alt="image" width="100%" height="100%">';
-                    echo '</div>';
+                    echo '</button>';
                     echo '<h1 class="title-product">' . $value["Nom"] . '</h1>';
                     echo '<i class="price-product">' . $value["Prix"] . '€</i>';
                     

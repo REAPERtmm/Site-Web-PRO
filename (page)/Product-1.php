@@ -11,9 +11,9 @@
 <body>
     <?php 
     include ('../php/database.php'); 
-    require("../php/config.php");
+    //require("../php/config.php");
 
-    $IDProduit = 1;
+    $IDProduit = $_POST["IDProduit"];
     //$IDUser = $_SESSION["user"]["IDUser"];
     $IDUser = 1;
 
