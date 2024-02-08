@@ -62,7 +62,7 @@
 
     <div class="la-big-div-sa-mere">
         <div class="sait-drole-si-tu-lie-sa">
-            <img src="" class="img-de-clavier-la-classe-est-pas-trop-longue"
+            <img src="" class="img-de-clavier-la-classe-est-pas-trop-longue">
         </div>
         <div class="sait-drole-si-tu-lie-sa">
 

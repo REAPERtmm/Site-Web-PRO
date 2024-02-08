@@ -105,6 +105,11 @@ function extract(){
 
 function BeforeNextPage(){
     extract();
+    FORM.action = "../php/load_key_in_page.php";
+    FORM.target = "_blank";
+    FORM.method = "get";
+    FORM.submit();
+
     FORM.action = "builder3.php";
     FORM.target = "";
     FORM.method = "post";
