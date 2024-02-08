@@ -184,16 +184,17 @@
         $q_autre = $db->prepare('SELECT * FROM Produit ORDER BY RAND () LIMIT 3');
         $q_autre->execute();
         $q_autref = $q_autre->fetchAll();
-        echo '<div class="div0">';
+        echo '<form class="div0" method="POST">';
         foreach ($q_autref as $key => $value) {
             $ImgPathAutre = $value['ImgPath'];
             $NomAutre = $value['Nom'];
             echo '<div class="A">';
             echo '<img class="D" src="../Assets/'.$ImgPathAutre.'" title="image de produit">';
+            echo '<input type="hidden" name="IDProduit" value="'.$value["IDProduit"].'">';
             echo '<h1 class="text_1">'.$NomAutre.'</h1>';
             echo '</div>';
         }
-        echo'</div>';
+        echo'</form>';
 
     ?>
     <div>
