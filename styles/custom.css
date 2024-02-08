@@ -433,6 +433,7 @@ body {
 }
 
 .rate {
+    display: flex;
     padding: 0 2%;
     width: 25%;
 }

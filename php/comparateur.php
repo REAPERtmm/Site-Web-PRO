@@ -15,7 +15,8 @@
     <link rel="stylesheet" href="../styles/comparateur.css">
 </head>
  <?php 
-     require("../php/database.php");
+    include '../php/database.php'; 
+    require("../php/config.php");
     $ListCompare = $_POST["IDClicked"];
 
     $Compare1 = explode(",", $ListCompare)[0];
