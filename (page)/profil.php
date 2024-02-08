@@ -22,7 +22,7 @@
 
 <?php 
     require("../php/database.php");
-    //require("../php/config.php");
+    require("../php/config.php");
     header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
     header("Cache-Control: post-check=0, pre-check=0", false);
     header("Pragma: no-cache");
@@ -58,10 +58,10 @@
                 <div class="header_bot">
                     <div class="navbar_link">
                         <a href="../index.html">ACCUEIL </a>
-                        <a href="/(page)/historique.php">HISTORIQUE</a>
+                        <a href="./(page)/historique.php">HISTORIQUE</a>
                         <a href="./(page)/Search.php">FAVORIS</a>
                         <a href="index.html">SAUVEGARDES</a>
-                        <a href="index.html">COMPTE</a>
+                        <a href="./(page)/account.html">COMPTE</a>
                     </div>
                     <div class="navbar_search">
                         <form action="" class="search">

@@ -3,6 +3,10 @@ let current_on = 0;
 let direction = 1;
 let id_interval;
 const CARROUSEL_SIZE = 4;
+let ClickedCompare = [];
+const CompareButtons = document.querySelectorAll(".offers-compare");
+const HiddenFormValue = document.getElementById("IDClicked");
+const HiddenForm = document.getElementById("form");
 
 
 function forced_set(index) {  
@@ -49,3 +53,24 @@ function next_Carrousel(){
 
 set_Carrousel(0);
 id_interval = setInterval(next_Carrousel, 3000);
+
+
+
+
+
+
+// loop through each button and add a click event listener
+CompareButtons.forEach(function(button) {
+  button.addEventListener("click", function(e) {
+
+    if(!ClickedCompare.includes(e.target.id)) {
+        document.getElementById(e.target.id).classList.add("selec");
+        ClickedCompare.push(e.target.id);
+        HiddenFormValue.value = ClickedCompare;
+    }
+    console.log(ClickedCompare);
+    if(ClickedCompare.length == 3) {
+        HiddenForm.submit();
+    }
+  });
+});

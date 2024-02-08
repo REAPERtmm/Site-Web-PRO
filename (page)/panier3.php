@@ -48,6 +48,7 @@
         ]);
 
         $IDLivraison = $db->lastInsertId();
+        $IDPanier = $_POST["DataPanier"];
         
 
 
@@ -127,7 +128,9 @@
         </div>
         
         <form action="panier4.php" id="form-livraison" method="POST">
-            <input type="hidden" id="data2" value="">
+            <input type="hidden" name="DataPanier" id="DataPanier" value="<?php print_r($IDPanier); ?>">
+            <input type="hidden" name="DataLivraison" id="DataLivraison" value="<?php echo $IDLivraison; ?>">    
+            <input type="hidden" name ="data2" id="data2" value="">
             <div class="save-box" id="save-config-btn">
                 <input class="bouton_continuer" type="submit" value="Valider" onclick="BeforeNextPage()">
                 <input type="hidden" name="Data" value="<?php print_r($_POST["Data"]);?>" id="Data">
