@@ -27,30 +27,26 @@
     
     $IDUser = $_SESSION["user"]["IDUser"];
     $IDUser = 1;
-    
-    if (isset($_POST['IDProduct']))
-        {
+
+    if(!isset($_POST["IDCustom"]) || $_POST["IDCustom"] == -1){
+        if(isset($_POST["IDProduit"])){
             $IDProduit = $_POST['IDProduct'];
-        }
-    else
+        } else
         {
             $IDProduit = 1;
         }
-
-    if($_POST["IDCustom"] == -1){
         $query = $db->prepare("INSERT INTO Customs(IDCustom, IDUser, IDProduit) VALUES (NULL, :User, :IDP)");
         $query->execute(['IDP'=>$IDProduit, 'User'=>$IDUser]);
         $IDCustom = $db->lastInsertId();
     } else {
         $IDCustom = $_POST["IDCustom"];
-        $query = $db->prepare("SELECT COUNT(*) FROM Customs WHERE IDCustom=:ID AND IDUser=:User");
-        $query->execute(['ID'=>$IDCustom, 'User'=>$IDUser]);
-        if($query->fetch()["COUNT(*)"] == 0){
-            $query = $db->prepare("INSERT INTO Customs(IDCustom, IDUser, IDProduit) VALUES (NULL, :User, :IDP)");
-            $query->execute(['IDP'=>$IDProduit, 'User'=>$IDUser]);
-        }
+        $query = $db->prepare("SELECT IDProduit FROM Customs WHERE IDCustom=:ID");
+        $query->execute(['ID'=>$IDCustom]);
+        $IDProduit = $query->fetch()["IDProduit"];
     }
 
+    echo "Cusotm : ".$IDCustom;
+    echo "Produit : ".$IDProduit;
 
     $q = $db->prepare("SELECT * FROM Attribut WHERE IDProduit = :IDProduit");
     $q->execute([
@@ -371,8 +367,8 @@
     </div>
     <?php echo $_POST["IDCustom"];?>
     <form action="" id="form-action" method="POST">
-        <input type="hidden" id="backplate-color" name="backplate-color" value="bbbbbb">
-        <input type="hidden" id="keycaps-color" name="keycaps-color" value="#0000ff">
+        <input type="hidden" id="backplate-color" name="backplate-color" value="<?php if(isset($_POST["backplate-color"])){echo $_POST["backplate-color"];}else{echo "undefine";} ?>">
+        <input type="hidden" id="keycaps-color" name="keycaps-color" value="<?php if(isset($_POST["keycaps-color"])){echo $_POST["keycaps-color"];}else{echo "undefine";} ?>">
         <input type="hidden" id="data" name="data" value="">
         <input type="hidden" name="IDCustom" value=<?php echo $IDCustom;?>>    
     </form>
