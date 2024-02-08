@@ -57,12 +57,11 @@
                 
                 <div class="header_bot">
                     <div class="navbar_link">
-                        <a href="./Product-1.html">NOS PRODUITS</a>
-                        <a href="./personnaliser.php">PERSONNALISER</a>
-                        <a href="./Search.php">GALERIE</a>
-                        <a href="#">SUPPORT/SAV</a>
-                        <a href="#">FAQ</a>
-                        <a href="#">CONTACT</a>
+                        <a href="../index.html">ACCUEIL </a>
+                        <a href="./(page)/historique.php">HISTORIQUE</a>
+                        <a href="./(page)/Search.php">FAVORIS</a>
+                        <a href="index.html">SAUVEGARDES</a>
+                        <a href="./(page)/account.html">COMPTE</a>
                     </div>
                     <div class="navbar_search">
                         <form action="" method="GET" class="search">

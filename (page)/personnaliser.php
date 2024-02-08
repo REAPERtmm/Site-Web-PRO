@@ -17,6 +17,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/base.css">
     <link rel="stylesheet" href="../styles/personnaliser.css">
+    <?php include '../php/database.php'; $IDUser = 1;?>
 </head>
 <body>
     
@@ -62,8 +63,44 @@
 
     <div class="best-offers-bg">
         <div class="best-offers">
-
-            <div class="offers">
+            <?php 
+            $q = $db->prepare('SELECT Produit.Nom, Produit.ImgPath, Produit.IDProduit, Customs.IDCustom FROM Customs JOIN Produit ON Customs.IDProduit = Produit.IDProduit WHERE IDUser=:ID');
+            $q->execute([
+                'ID'=>$IDUser,
+            ]);
+            $count = $q->rowCount();
+            $datas = $q->fetchAll();
+            for($i= 0;$i<9;$i++){
+                echo '
+                <div class="offers">
+                    <div class="offers-product">
+                        <form action="custom.php" method="POST">
+                            <div>';
+                if($i < $count){
+                    echo                '<button type="submit"> <img class="offers-img" src="../Assets/'.$datas[$i]["ImgPath"].'" alt="Image du clavier best seller"></button>';
+                    echo                '<input type="hidden" name="IDProduct" value="'.$datas[$i]["IDProduit"].'">';
+                    echo                '<input type="hidden" name="IDCustom" value="'.$datas[$i]["IDCustom"].'">';
+                    echo '  </div>        
+                        </form>           
+                        <p class="offers-model"> '.$datas[$i]["Nom"].' </p>
+                        <p class="offers-model"> ???€ </p>
+                    </div>';
+                } else{
+                    echo                '<button type="submit"> <img class="offers-img" src="../Assets/Clavier1.webp" alt="Image du clavier best seller"></button>';
+                    echo                '<input type="hidden" name="IDProduct" value="1">';
+                    echo                '<input type="hidden" name="IDCustom" value="-1">';
+                    echo '  </div>        
+                        </form>           
+                        <p class="offers-model"> ?Name? </p>
+                        <p class="offers-model"> ???€ </p>
+                    </div>';
+                }
+                echo '
+                </div>';
+            }
+            
+            ?>
+            <!-- <div class="offers">
                 <div class="offers-product">
                     <form action="custom.php" method="POST">
                         <div>
@@ -188,7 +225,7 @@
                     <p class="offers-model"> Référence modèle </p>
                     <p class="offers-model"> Prix </p>
                 </div>
-            </div>
+            </div> -->
 
         </div>
     </div>

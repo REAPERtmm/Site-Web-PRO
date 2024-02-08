@@ -20,7 +20,12 @@
     require("../php/database.php");
     require("../php/config.php");
 
+    //IL FAUT UPDATE LA BASE DE DONNEES DANS PANIER (MODIF LE NOMBRE D'ELEMENTS)
+
     $IDUser = $_SESSION["user"]["IDUser"];
+
+    $IDPanier = $_POST["DataPanier"];
+
 
 ?>
     
@@ -98,6 +103,7 @@
 
             <input class="bouton_continuer" type="submit" value="Valider" onclick="BeforeNextPage()">
             <input type="hidden" name="Data" value="<?php print_r($_POST["Data"]);?>" id="Data">
+            <input type="hidden" name="DataPanier" id="DataPanier" value="<?php print_r($IDPanier); ?>">
         </form>
     </div>
 

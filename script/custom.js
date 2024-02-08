@@ -35,7 +35,8 @@ function SetBackplate(clicked_id_backplate) {
 
 
 function SaveConfig() {
-  FormAction.action = "custom.php";
+  FormAction.action = "../php/SaveCustom.php";
+  FormAction.target = "_blank";
   FormAction.submit();
 }
 
@@ -45,7 +46,9 @@ function NextPage() {
     "Keycaps": KeycapsColor.value
   }
   DataForm.value = btoa(btoa(JSON.stringify(data)));
+  SaveConfig();
   FormAction.action = "builder2.php";
+  FormAction.target = "";
   FormAction.submit();
 }
 

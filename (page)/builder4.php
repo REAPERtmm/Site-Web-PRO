@@ -31,7 +31,7 @@
     $q = $db->prepare("UPDATE Customs SET Langue=:langue, Modifier=:mod, OS=:os WHERE IDCustom=:ID");
     $q->execute([
         
-    ])
+    ]);
 
 
     
