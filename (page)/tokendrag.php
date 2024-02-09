@@ -1,11 +1,11 @@
 <?php
 
 //   if (isset($_POST['envoie'])) {
-    
+
 //     $token = uniqid();
 //     $MAIL = $_POST['email'];
 //     $url = "https://destiny-2-4life.alwaysdata.net/pages/token?token=$token&mail=$MAIL";
-    
+
 //     include 'database.php';
 //     global $db;
 
@@ -39,13 +39,15 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Password Recovery</title>
 </head>
+
 <body>
-    
+
 
     <form action="" method="POST">
         <h3 class="form-title">Récupération du mot de passe</h3>
@@ -54,53 +56,54 @@
                 <label for="email">Email</label>
                 <input type="email" name="email" placeholder="Email" id="email" required>
             </div>
-            
+
             <div>
                 <label for="date">Date de naissance</label>
                 <input type="date" name="date" id="date" required>
             </div>
 
-            <input name="FormsentLogin" class="button" type="submit" value="Connexion"/>
+            <input name="FormsentLogin" class="button" type="submit" value="Connexion" />
         </div>
     </form>
 
 
 </body>
+
 </html>
 
 <?php
-    if (isset($_POST['FormsentLogin'])) {
-        
-        include '../php/database.php';
-        global $db;
+if (isset($_POST['FormsentLogin'])) {
 
-        $email = $_POST['email'];
-        $date = $_POST['date'];
+    include '../php/database.php';
+    global $db;
 
-        $sql = $db->query("SELECT Count(*) FROM Users WHERE Email='$email' AND DateNaissance='$date'");
+    $email = $_POST['email'];
+    $date = $_POST['date'];
 
-        $sql = $sql->fetch();
+    $sql = $db->query("SELECT Count(*) FROM Users WHERE Email='$email' AND DateNaissance='$date'");
 
-        if ($sql[0] == 1) {
-            $token = uniqid();
-            $to = $email;
-            $subject = "Changement de mot de passe";
-            $message = "Bonjour, Voici votre lien pour la réinitialisation du mot de passe : \nhttps://snowstorm.alwaysdata.net/(page)/token?token=$token&mail=$email";
+    $sql = $sql->fetch();
 
-            // En-têtes pour spécifier le format de l'e-mail
-            $headers = "MIME-Version: 1.0" . "\r\n";
-            $headers .= "Content-Transfer-Encoding: 8bit" . "\r\n";
-            $headers .= "Content-type: text/html; charset=utf-8" . "\r\n";
+    if ($sql[0] == 1) {
+        $token = uniqid();
+        $to = $email;
+        $subject = "Changement de mot de passe";
+        $message = "Bonjour, Voici votre lien pour la réinitialisation du mot de passe : \nhttps://snowstorm.alwaysdata.net/(page)/token?token=$token&mail=$email";
 
-            if (mail($to, $subject, $message, $headers)) {
-                echo "<p style='color: green'>L'e-mail a été envoyé avec succès.</p>";
-                header("Location: ./login.php");
-            } else {
-                echo "<p style='color: red'>Erreur lors de l'envoi de l'e-mail.</p>";
-            }
+        // En-têtes pour spécifier le format de l'e-mail
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-Transfer-Encoding: 8bit" . "\r\n";
+        $headers .= "Content-type: text/html; charset=utf-8" . "\r\n";
+
+        if (mail($to, $subject, $message, $headers)) {
+            echo "<p style='color: green'>L'e-mail a été envoyé avec succès.</p>";
+            header("Location: ./login.php");
         } else {
-            echo "<p style='color: red'>L'address e-mail ou la date de naissance Invalide.</p>";
+            echo "<p style='color: red'>Erreur lors de l'envoi de l'e-mail.</p>";
         }
+    } else {
+        echo "<p style='color: red'>L'address e-mail ou la date de naissance Invalide.</p>";
     }
+}
 
 ?>

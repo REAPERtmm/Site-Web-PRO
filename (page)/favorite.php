@@ -1,43 +1,45 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SNOWSTORM.GG</title>
-  
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  
+
     <!-- Favicon -->
     <script src="https://kit.fontawesome.com/d3255ff586.js" crossorigin="anonymous"></script>
 
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/base.css">
     <link rel="stylesheet" href="../styles/favorite.css">
-    <?php 
-        include '../php/database.php'; 
-        require("../php/config.php");
-        require("../php/forceconnect.php");
+    <?php
+    include '../php/database.php';
+    require("../php/config.php");
+    require("../php/forceconnect.php");
 
-        $q_fav = $db->prepare('SELECT * FROM (Favoris INNER JOIN  Produit ON Favoris.IDProduit = Produit.IDProduit)  WHERE Favoris.IDUser = :ID');
-        $q_fav->execute([
-            "ID" => $_SESSION['user']['IDUser']
-        ]);
-        $result = $q_fav->fetchAll(PDO::FETCH_ASSOC);
+    $q_fav = $db->prepare('SELECT * FROM (Favoris INNER JOIN  Produit ON Favoris.IDProduit = Produit.IDProduit)  WHERE Favoris.IDUser = :ID');
+    $q_fav->execute([
+        "ID" => $_SESSION['user']['IDUser']
+    ]);
+    $result = $q_fav->fetchAll(PDO::FETCH_ASSOC);
 
-        foreach($result as $row){
-            $IDProduit = $row["IDProduit"];
-            $IDUser = $row["IDUser"];
-        }
-        
+    foreach ($result as $row) {
+        $IDProduit = $row["IDProduit"];
+        $IDUser = $row["IDUser"];
+    }
 
 
-        
+
+
 
     ?>
 </head>
+
 <body>
-    
-<header class="unselectable">
+
+    <header class="unselectable">
         <div class="header">
             <div class="header_top">
                 <div class="logo">
@@ -63,7 +65,9 @@
                 <div class="navbar_search">
                     <form action="" class="search">
                         <input type="text" placeholder="Rechercher un produit">
-                        <?php if(isset($_GET['research'])){header("Location: ./Search.php?research=".$_GET['research']);}?>
+                        <?php if (isset($_GET['research'])) {
+                            header("Location: ./Search.php?research=" . $_GET['research']);
+                        } ?>
                     </form>
                 </div>
             </div>
@@ -84,23 +88,23 @@
         <h1 class="prix" id="">Prix</h1>
         <h1 class="quant" id="">Quantité</h1>
         <h1></h1>
-        
-        <?php 
-            $i = 0;
-            foreach($result as $row){
-                echo '<img class="img_pr" src="../Assets/'. $row["ImgPath"] .'" alt="image du produit"  id="i-'.$i.'">';
-                echo '<h1 class="nom_pr" id="n-'.$i.'">' . $row["Nom"]. '</h1>';
-                echo '<button class="FavBtn" onclick="SelecFav('.$i.')" id="b-'.$i.'">  </button>';
-                echo '<p class="prix_pr" id="p-'.$i.'">' . $row["Prix"] . '€</p>';
-                echo '<input type="number" name="quant_pr" class="quant_pr" id="q-'.$i.'" value="1" readonly>';
-                echo '<input type="hidden"  id="id-'.$i.'" value="'.$row["IDProduit"].'" readonly>';
-                echo '  <div class="btn-div"  id="d-'.$i.'">
-                            <button class="bouton_modifier" onclick="ModifyRow('.$i.')"><img class="modifier" src="https://icones.pro/wp-content/uploads/2022/07/icone-crayon-bleu.png" height="100%"></button>
-                            <button class="delet" onclick="DeleteRow('.$i.')">supprimer</button>
+
+        <?php
+        $i = 0;
+        foreach ($result as $row) {
+            echo '<img class="img_pr" src="../Assets/' . $row["ImgPath"] . '" alt="image du produit"  id="i-' . $i . '">';
+            echo '<h1 class="nom_pr" id="n-' . $i . '">' . $row["Nom"] . '</h1>';
+            echo '<button class="FavBtn" onclick="SelecFav(' . $i . ')" id="b-' . $i . '">  </button>';
+            echo '<p class="prix_pr" id="p-' . $i . '">' . $row["Prix"] . '€</p>';
+            echo '<input type="number" name="quant_pr" class="quant_pr" id="q-' . $i . '" value="1" readonly>';
+            echo '<input type="hidden"  id="id-' . $i . '" value="' . $row["IDProduit"] . '" readonly>';
+            echo '  <div class="btn-div"  id="d-' . $i . '">
+                            <button class="bouton_modifier" onclick="ModifyRow(' . $i . ')"><img class="modifier" src="https://icones.pro/wp-content/uploads/2022/07/icone-crayon-bleu.png" height="100%"></button>
+                            <button class="delet" onclick="DeleteRow(' . $i . ')">supprimer</button>
                         </div>';
-                    $i++;
-                    }
-        
+            $i++;
+        }
+
         ?>
     </div>
     <div class="div3" id="">
@@ -109,7 +113,14 @@
         </div>
         <div class="sd3-2" id="">
             <h1 class="text_2" id="">Sous-total :</h1>
-            <h1 class="" id="Total"><?php $total = 0; foreach($result as $row){$total += floatval($row["Prix"]);} echo $total; echo '€'; ?></h1>
+            <h1 class="" id="Total">
+                <?php $total = 0;
+                foreach ($result as $row) {
+                    $total += floatval($row["Prix"]);
+                }
+                echo $total;
+                echo '€'; ?>
+            </h1>
         </div>
     </div>
     <div class="div4" id="">
@@ -122,7 +133,7 @@
             <input type="hidden" name="ArticlesAmount" id="Panier" value="<?php echo count($result); ?>">
         </form>
     </div>
-    
+
     <footer class="footer">
         <div class="footer-container unselectable">
             <img src="../Assets/logo-removebg-preview.png" alt="Logo de Snowstorm" id="footer-img">
@@ -159,8 +170,9 @@
             </div>
         </div>
     </footer>
-    
+
     <script src="../script/favorite.js"></script>
     <script src="../script/index.js"></script>
 </body>
+
 </html>

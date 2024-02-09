@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SNOWSTORM.GG</title>
-  
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  
+
     <!-- Favicon -->
     <script src="https://kit.fontawesome.com/d3255ff586.js" crossorigin="anonymous"></script>
     <!-- Fonts API -->
@@ -19,8 +20,9 @@
     <link rel="stylesheet" href="../styles/builder2.css">
     <link rel="stylesheet" href="../styles/custom.css">
 </head>
+
 <body>
-    <?php  
+    <?php
     require("../php/database.php");
     require("../php/config.php");
     require("../php/forceconnect.php");
@@ -31,19 +33,19 @@
     header("Cache-Control: post-check=0, pre-check=0", false);
     header("Pragma: no-cache");
 
-    if(isset($_POST["Submit"])){
+    if (isset($_POST["Submit"])) {
         $query1265154zqd154z4584 = $db->prepare("UPDATE Customs SET MessageC=:Mess WHERE IDCustom=:ID");
         $query1265154zqd154z4584->execute([
-            "Mess"=> $_POST["option1"],
-            "ID"=> $_POST["IDCustom"],
+            "Mess" => $_POST["option1"],
+            "ID" => $_POST["IDCustom"],
         ]);
 
         $check = $db->prepare('SELECT * FROM Paniers WHERE IDUser = :IDUser AND IDCustom = :ID');
         $check->execute([
-            'IDUser'=> $IDUser,
+            'IDUser' => $IDUser,
             'ID' => $_POST["IDCustom"]
         ]);
-        if($check->rowCount() == 0) {
+        if ($check->rowCount() == 0) {
             $query = $db->prepare('INSERT INTO Paniers VALUES(:IDUser, 1, :IDCustom, NULL, NULL, :Amount, 0)');
             $query->execute([
                 "IDUser" => $IDUser,
@@ -54,9 +56,9 @@
             $previousAmount = $check->fetch()["Amount"];
             $query2 = $db->prepare("UPDATE Paniers SET Amount = :Amount WHERE IDCustom = :IDCustom AND IDUser = :IDUser");
             $query2->execute([
-                "Amount"=> $previousAmount + $_POST["amount"],
+                "Amount" => $previousAmount + $_POST["amount"],
                 "IDCustom" => $_POST["IDCustom"],
-                "IDUser"=> $IDUser,
+                "IDUser" => $IDUser,
             ]);
         }
         header("Location: panier.php");
@@ -103,7 +105,9 @@
                 <div class="navbar_search">
                     <form action="" class="search">
                         <input type="text" placeholder="Rechercher un produit">
-                        <?php if(isset($_GET['research'])){header("Location: ./Search.php?research=".$_GET['research']);}?>
+                        <?php if (isset($_GET['research'])) {
+                            header("Location: ./Search.php?research=" . $_GET['research']);
+                        } ?>
                     </form>
                 </div>
             </div>
@@ -118,7 +122,7 @@
                 <div class="box-choice"> 3 </div>
                 <p class="choice-text"> Etape 4: options </p>
             </div>
-            <div class="right"> 
+            <div class="right">
                 <div class="save-box" id="save-config-btn" onclick="SaveConfig()"> Sauvegarder ma configuration</div>
             </div>
         </div>
@@ -227,22 +231,37 @@
         <div class="achat-container">
             <div class="top-row">
                 <input type="number" name="prix" id="prix" value="<?php
-                    $prix = floatval($q["Prix"]);
-                    switch($q["BackplateColor"]){
-                        case "#ffffff": {$prix += 5; break;}
-                        case "#cd853f": {$prix += 5; break;}
+                $prix = floatval($q["Prix"]);
+                switch ($q["BackplateColor"]) {
+                    case "#ffffff": {
+                        $prix += 5;
+                        break;
                     }
-                    switch($q["KeycapColor"]){
-                        case "#0000ff": {$prix += 91; break;}
-                        case "#ff0000": {$prix += 31; break;}
-                        case "#582900": {$prix += 122; break;}
+                    case "#cd853f": {
+                        $prix += 5;
+                        break;
                     }
-                    echo $prix;
+                }
+                switch ($q["KeycapColor"]) {
+                    case "#0000ff": {
+                        $prix += 91;
+                        break;
+                    }
+                    case "#ff0000": {
+                        $prix += 31;
+                        break;
+                    }
+                    case "#582900": {
+                        $prix += 122;
+                        break;
+                    }
+                }
+                echo $prix;
                 ?>" readonly>
                 <p id="euro">€</p>
                 <input type="number" min="1" name="amount" id="amount" value="1">
                 <p id="qt">Quantité</p>
-            </div>  
+            </div>
             <input type="submit" name="Submit" value="Poursuivre l'achat" class="btn-submit">
         </div>
         <input type="hidden" name="prixUnit" id="prixUnit" value="<?php echo $prix; ?>">
@@ -257,23 +276,23 @@
         <hr class="black-line">
         <div class="product-info">
             <p class="custom-title"> Présentation du produit</p>
-    <?php 
+            <?php
 
-      echo      '<div class="product-presentation">
+            echo '<div class="product-presentation">
                 <div class="product-presentation-line1">
                     <div class="product-presentation-line1-left">
-                        <img class="bot-img" src="../Assets/'.$q["Path1"].'" alt="Image du clavier1">
+                        <img class="bot-img" src="../Assets/' . $q["Path1"] . '" alt="Image du clavier1">
                     </div>
                     <div class="product-presentation-line1-right">
-                        <p class="product-presentation-text">'.$q["Description1"].'  </p>
+                        <p class="product-presentation-text">' . $q["Description1"] . '  </p>
                     </div>
                 </div>
                 <div class="product-presentation-line2">
                     <div class="product-presentation-line2-left">
-                        <p class="product-presentation-text"> '.$q["Description2"].' </p>
+                        <p class="product-presentation-text"> ' . $q["Description2"] . ' </p>
                     </div>
                     <div class="product-presentation-line2-right">
-                        <img class="bot-img" src="../Assets/'.$q["Path2"].'" alt="Image du clavier2">
+                        <img class="bot-img" src="../Assets/' . $q["Path2"] . '" alt="Image du clavier2">
                     </div>
                 </div>
             </div>
@@ -283,173 +302,176 @@
         </div>
     </div>'
 
-    ?>
-    
-
-    <?php 
+                ?>
 
 
-    $dic = [
-        "Informations générales"=> [
-            "Désignation"=> $q["Designation"],
-            "Marque"=> $q["Marque"],
-            "Modèle"=> $q["Modele"],
-        ],
-        "Format du clavier"=> [
-            "Format"=> $q["Format"],
-            "Compact"=> $q["Compact"],
-            "TKL"=> $q["TKL"],
-            "Norme du clavier"=> $q["Norme"],
-            "Localisation"=> $q["Localisation"],
-        ],
-        "Interface"=> [
-            "Sans-fil"=> $q["SansFil"],
-            "Interface avec l'ordinateur"=> $q["InterfaceAvecOrdinateur"],
-            "Technologie de connexion du clavier"=> $q["TechnologieDeConnexionDuClavier"],
-        ],
-        "Ergonomie"=> [
-            "Type de touches"=> $q["TypeDeTouches"],
-            "Type de switch"=> $q["TypeDeSwitch"],
-            "Clavier Rétroéclairé"=> $q["ClavierRetroeclaire"],
-            "Rétroéclairage RGB"=> $q["RetroeclairageRGB"],
-            "Touches macro"=> $q["TouchesMacro"],
-            "Touches Multimédia"=> $q["TouchesMultimedia"],
-            "Pavé numérique"=> $q["PaveNumerique"],
-        ],
-        "Caractéristiques Physiques"=> [
-            "Couleur"=> $q["Couleur"],
-            "Largeur"=> $q["Largeur"],
-            "Hauteur"=> $q["Hauteur"],
-            "Profondeur"=> $q["Profondeur"],
-            "Poids"=> $q["Poids"],
-        ],
-        "Alimentation"=> [
-            "Type d'alimentation"=> $q["TypeAlimentation"],
-        ],
-        "Compatibilité"=> [
-            "OS supportés"=> $q["OSSupportes"],
-            "Utilisation"=> $q["Utilisation"],
-        ],
-        "Garanties"=>  [
-            "Garantie commerciale"=> $q["GarantieCommerciale"],
-            "Garantie légale"=> $q["GarantieLegale"],
-        ],
-
-    ];
+            <?php
 
 
-    echo '<div class="product-sheet">';
-    foreach( $dic as $title => $v ) {
-        echo                
-        '<div class="row"> 
+            $dic = [
+                "Informations générales" => [
+                    "Désignation" => $q["Designation"],
+                    "Marque" => $q["Marque"],
+                    "Modèle" => $q["Modele"],
+                ],
+                "Format du clavier" => [
+                    "Format" => $q["Format"],
+                    "Compact" => $q["Compact"],
+                    "TKL" => $q["TKL"],
+                    "Norme du clavier" => $q["Norme"],
+                    "Localisation" => $q["Localisation"],
+                ],
+                "Interface" => [
+                    "Sans-fil" => $q["SansFil"],
+                    "Interface avec l'ordinateur" => $q["InterfaceAvecOrdinateur"],
+                    "Technologie de connexion du clavier" => $q["TechnologieDeConnexionDuClavier"],
+                ],
+                "Ergonomie" => [
+                    "Type de touches" => $q["TypeDeTouches"],
+                    "Type de switch" => $q["TypeDeSwitch"],
+                    "Clavier Rétroéclairé" => $q["ClavierRetroeclaire"],
+                    "Rétroéclairage RGB" => $q["RetroeclairageRGB"],
+                    "Touches macro" => $q["TouchesMacro"],
+                    "Touches Multimédia" => $q["TouchesMultimedia"],
+                    "Pavé numérique" => $q["PaveNumerique"],
+                ],
+                "Caractéristiques Physiques" => [
+                    "Couleur" => $q["Couleur"],
+                    "Largeur" => $q["Largeur"],
+                    "Hauteur" => $q["Hauteur"],
+                    "Profondeur" => $q["Profondeur"],
+                    "Poids" => $q["Poids"],
+                ],
+                "Alimentation" => [
+                    "Type d'alimentation" => $q["TypeAlimentation"],
+                ],
+                "Compatibilité" => [
+                    "OS supportés" => $q["OSSupportes"],
+                    "Utilisation" => $q["Utilisation"],
+                ],
+                "Garanties" => [
+                    "Garantie commerciale" => $q["GarantieCommerciale"],
+                    "Garantie légale" => $q["GarantieLegale"],
+                ],
+
+            ];
+
+
+            echo '<div class="product-sheet">';
+            foreach ($dic as $title => $v) {
+                echo
+                    '<div class="row"> 
         <div class="blue-tilte"> 
-            '. $title .'
+            ' . $title . '
         </div>
         <div class="info">';
-        foreach( $v as $smalltitle => $content ) {
-            echo '<p class="left-info">'.$smalltitle.'</p>';
-            if( $smalltitle == "OS supportés" || $smalltitle == "Utilisation") {
-                $contentspecial = explode(";", $content);
-                echo '<div class="right-info">';
+                foreach ($v as $smalltitle => $content) {
+                    echo '<p class="left-info">' . $smalltitle . '</p>';
+                    if ($smalltitle == "OS supportés" || $smalltitle == "Utilisation") {
+                        $contentspecial = explode(";", $content);
+                        echo '<div class="right-info">';
 
-                foreach( $contentspecial as $k3 => $v3 ) {
-                    echo '<p class="right-info">'.$v3.'</p>' ;
+                        foreach ($contentspecial as $k3 => $v3) {
+                            echo '<p class="right-info">' . $v3 . '</p>';
+                        }
+                        echo '</div>';
+
+                    } else {
+                        echo
+                            '<p class="right-info">' . $content . '</p>';
+                    }
                 }
-                echo '</div>';
-
-            }
-            else{
-                echo 
-                '<p class="right-info">'.$content.'</p>';
-            }
-        };
-        echo 
-        '</div>
+                ;
+                echo
+                    '</div>
         </div>';
-    };
+            }
+            ;
 
-    echo '</div>';
+            echo '</div>';
 
-    ?>
+            ?>
 
-    <p class="rate-title"> Avis</p>
-    <div class="rate-box">
+            <p class="rate-title"> Avis</p>
+            <div class="rate-box">
 
-        <?php
+                <?php
 
-            foreach ($q_avis as $key => $value) {
+                foreach ($q_avis as $key => $value) {
 
 
-                $Note = $value["NoteAvis"];
-                $Texte = $value["TexteAvis"];
-                $Nom = $value["Nom"];
-                $Prenom = $value["Prenom"];
+                    $Note = $value["NoteAvis"];
+                    $Texte = $value["TexteAvis"];
+                    $Nom = $value["Nom"];
+                    $Prenom = $value["Prenom"];
 
-                echo '
+                    echo '
                     <div class="rate">
                         <div class="rate-pseudo">
-                            <p class="pseudo"> <i class="fa-solid fa-user"></i> '.$Prenom.' '.$Nom.' </p>
+                            <p class="pseudo"> <i class="fa-solid fa-user"></i> ' . $Prenom . ' ' . $Nom . ' </p>
                         </div>
                         <div class="rate-text">
-                            <p class="text">'.$Texte.'</p>
+                            <p class="text">' . $Texte . '</p>
                         </div>
                         <div class="star-box">';
 
-                        for ( $i = 0; $i < 5; $i++){
-                            if ($i < $Note) {
-                                echo '<i class="fa-solid fa-star filled"></i>';
-                            } else {
-                                echo '<i class="fa-regular fa-star unfilled"></i>';
-                            }
-                        };
+                    for ($i = 0; $i < 5; $i++) {
+                        if ($i < $Note) {
+                            echo '<i class="fa-solid fa-star filled"></i>';
+                        } else {
+                            echo '<i class="fa-regular fa-star unfilled"></i>';
+                        }
+                    }
+                    ;
 
 
-                echo '
+                    echo '
                         </div>
                     </div>';
 
-            };
-        ?>
-    </div>
-
-    <script src="../script/fillKey.js"></script>
-
-    <footer class="footer">
-        <div class="footer-container unselectable">
-            <img src="../Assets/logo-removebg-preview.png" alt="Logo de Snowstorm" id="footer-img">
-            <p class="logo-name">Snowstorm.GG</p>
-        </div>
-        <div class="footer-container">
-            <p class="title"> Catégories</p>
-            <p class="subtitle"> Nouveautés </p>
-            <p class="subtitle"> Meilleures ventes </p>
-            <p class="subtitle"> Classiques </p>
-            <p class="subtitle"> Préfaits </p>
-            <p class="subtitle"> Personnaliser </p>
-        </div>
-        <div class="footer-container">
-            <p class="title"> Informations </p>
-            <p class="subtitle"> Nous contacter </p>
-            <p class="subtitle"> Livraison </p>
-            <p class="subtitle"> Mentions légales </p>
-            <p class="subtitle"> Confidentialité </p>
-            <p class="subtitle"> Conditions d'utilisation </p>
-        </div>
-        <div class="footer-container">
-            <p class="title"> Mon compte </p>
-            <p class="subtitle"> Mes commandes </p>
-            <p class="subtitle"> Mes customs </p>
-            <p class="subtitle"> Mes informations </p>
-        </div>
-        <div class="footer-container">
-            <p class="title"> Nos réseaux </p>
-            <div class="footer-img">
-                <i class="fa-brands fa-youtube"></i>
-                <i class="fa-brands fa-x-twitter"></i>
-                <i class="fa-brands fa-square-facebook"></i>
+                }
+                ;
+                ?>
             </div>
-        </div>
-    </footer>
-    
-    <script src="../script/Builder4.js"></script>
+
+            <script src="../script/fillKey.js"></script>
+
+            <footer class="footer">
+                <div class="footer-container unselectable">
+                    <img src="../Assets/logo-removebg-preview.png" alt="Logo de Snowstorm" id="footer-img">
+                    <p class="logo-name">Snowstorm.GG</p>
+                </div>
+                <div class="footer-container">
+                    <p class="title"> Catégories</p>
+                    <p class="subtitle"> Nouveautés </p>
+                    <p class="subtitle"> Meilleures ventes </p>
+                    <p class="subtitle"> Classiques </p>
+                    <p class="subtitle"> Préfaits </p>
+                    <p class="subtitle"> Personnaliser </p>
+                </div>
+                <div class="footer-container">
+                    <p class="title"> Informations </p>
+                    <p class="subtitle"> Nous contacter </p>
+                    <p class="subtitle"> Livraison </p>
+                    <p class="subtitle"> Mentions légales </p>
+                    <p class="subtitle"> Confidentialité </p>
+                    <p class="subtitle"> Conditions d'utilisation </p>
+                </div>
+                <div class="footer-container">
+                    <p class="title"> Mon compte </p>
+                    <p class="subtitle"> Mes commandes </p>
+                    <p class="subtitle"> Mes customs </p>
+                    <p class="subtitle"> Mes informations </p>
+                </div>
+                <div class="footer-container">
+                    <p class="title"> Nos réseaux </p>
+                    <div class="footer-img">
+                        <i class="fa-brands fa-youtube"></i>
+                        <i class="fa-brands fa-x-twitter"></i>
+                        <i class="fa-brands fa-square-facebook"></i>
+                    </div>
+                </div>
+            </footer>
+
+            <script src="../script/Builder4.js"></script>
 </body>

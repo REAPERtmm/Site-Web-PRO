@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SNOWSTORM.GG</title>
-  
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  
+
     <!-- Favicon -->
     <script src="https://kit.fontawesome.com/d3255ff586.js" crossorigin="anonymous"></script>
 
@@ -14,9 +15,10 @@
     <link rel="stylesheet" href="../styles/base.css">
     <link rel="stylesheet" href="../styles/panier2.css">
 </head>
+
 <body>
 
-<?php  
+    <?php
     require("../php/database.php");
     require("../php/config.php");
     require("../php/forceconnect.php");
@@ -26,8 +28,8 @@
     $IDPanier = $_POST["DataPanier"];
 
 
-?>
-    
+    ?>
+
     <header class="unselectable">
         <div class="header">
             <div class="header_top">
@@ -54,14 +56,16 @@
                 <div class="navbar_search">
                     <form action="" class="search">
                         <input type="text" placeholder="Rechercher un produit">
-                        <?php if(isset($_GET['research'])){header("Location: ./Search.php?research=".$_GET['research']);}?>
+                        <?php if (isset($_GET['research'])) {
+                            header("Location: ./Search.php?research=" . $_GET['research']);
+                        } ?>
                     </form>
                 </div>
             </div>
         </div>
     </header>
 
-<!-- ________________________________________________________________________________________________________ -->
+    <!-- ________________________________________________________________________________________________________ -->
     <div class="panier-top">
         <div class="ligne1">
             <div class="left">
@@ -96,15 +100,15 @@
             </div>
 
             <input class="bouton_continuer" type="submit" value="Valider" onclick="BeforeNextPage()">
-            <input type="hidden" name="Data" value="<?php print_r($_POST["Data"]);?>" id="Data">
+            <input type="hidden" name="Data" value="<?php print_r($_POST["Data"]); ?>" id="Data">
             <input type="hidden" name="DataPanier" id="DataPanier" value="<?php print_r($IDPanier); ?>">
         </form>
     </div>
 
 
 
-<!-- ________________________________________________________________________________________________________ -->
-<footer class="footer">
+    <!-- ________________________________________________________________________________________________________ -->
+    <footer class="footer">
         <div class="footer-container unselectable">
             <img src="../Assets/logo-removebg-preview.png" alt="Logo de Snowstorm" id="footer-img">
             <p class="logo-name">Snowstorm.GG</p>
@@ -140,7 +144,8 @@
             </div>
         </div>
     </footer>
-    
+
     <script src="./script/index.js"></script>
 </body>
+
 </html>

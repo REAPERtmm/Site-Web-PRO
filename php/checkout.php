@@ -33,7 +33,7 @@ $stripe_secret_key = "sk_test_51Oh0CYAM1e9hGOmlQ5Dn28i31c2ZynxclLV63T4ONYU9Kj1a8
 
 $checkout_session = \Stripe\Checkout\Session::create([
     "mode" => "payment",
-    "success_url" => "http://site-pro:8082/(page)/success.php",
+    "success_url" => "https://snowstorm.alwaysdata.net/(page)/success.php",
     'line_items' => [
         [
             "quantity" => 1,

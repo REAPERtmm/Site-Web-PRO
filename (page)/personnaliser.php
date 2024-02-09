@@ -1,30 +1,34 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SNOWSTORM.GG</title>
-  
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  
+
     <!-- Favicon -->
     <script src="https://kit.fontawesome.com/d3255ff586.js" crossorigin="anonymous"></script>
     <!-- Fonts API -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/penguin" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/base.css">
     <link rel="stylesheet" href="../styles/personnaliser.css">
     <?php include '../php/database.php';
-        require("../php/config.php");
-        require("../php/forceconnect.php");
-        $IDUser = $_SESSION["user"]["IDUser"];?>
+    require("../php/config.php");
+    require("../php/forceconnect.php");
+    $IDUser = $_SESSION["user"]["IDUser"]; ?>
 </head>
+
 <body>
-    
-<header class="unselectable">
+
+    <header class="unselectable">
         <div class="header">
             <div class="header_top">
                 <div class="logo">
@@ -50,7 +54,9 @@
                 <div class="navbar_search">
                     <form action="" class="search">
                         <input type="text" placeholder="Rechercher un produit">
-                        <?php if(isset($_GET['research'])){header("Location: ./Search.php?research=".$_GET['research']);}?>
+                        <?php if (isset($_GET['research'])) {
+                            header("Location: ./Search.php?research=" . $_GET['research']);
+                        } ?>
                     </form>
                 </div>
             </div>
@@ -61,27 +67,27 @@
 
     <div class="best-offers-bg">
         <div class="best-offers">
-            <?php 
+            <?php
             $q = $db->prepare('SELECT Customs.Nom, Produit.ImgPath, Produit.IDProduit, Customs.IDCustom, Customs.BackplateColor, Customs.KeycapColor FROM Customs JOIN Produit ON Customs.IDProduit = Produit.IDProduit WHERE IDUser=:ID');
             $q->execute([
-                'ID'=>$IDUser,
+                'ID' => $IDUser,
             ]);
             $count = $q->rowCount();
             $datas = $q->fetchAll();
-            for($i= 0;$i<$count;$i++){
+            for ($i = 0; $i < $count; $i++) {
                 echo '
                 <div class="offers">
                     <div class="offers-product">
                         <form action="custom.php" method="POST">
                             <div>
-                                <button type="submit"> <img class="offers-img" src="../Assets/'.$datas[$i]["ImgPath"].'" alt="Image du clavier best seller"></button>
-                                <input type="hidden" name="IDProduct" value="'.$datas[$i]["IDProduit"].'">
-                                <input type="hidden" name="IDCustom" value="'.$datas[$i]["IDCustom"].'">
-                                <input type="hidden" name="keycaps-color" value="'.$datas[$i]["KeycapColor"].'">
-                                <input type="hidden" name="backplate-color" value="'.$datas[$i]["BackplateColor"].'">
+                                <button type="submit"> <img class="offers-img" src="../Assets/' . $datas[$i]["ImgPath"] . '" alt="Image du clavier best seller"></button>
+                                <input type="hidden" name="IDProduct" value="' . $datas[$i]["IDProduit"] . '">
+                                <input type="hidden" name="IDCustom" value="' . $datas[$i]["IDCustom"] . '">
+                                <input type="hidden" name="keycaps-color" value="' . $datas[$i]["KeycapColor"] . '">
+                                <input type="hidden" name="backplate-color" value="' . $datas[$i]["BackplateColor"] . '">
                             </div>        
                         </form>           
-                        <p class="offers-model"> '.$datas[$i]["Nom"].' </p>
+                        <p class="offers-model"> ' . $datas[$i]["Nom"] . ' </p>
                         <p class="offers-model">  </p>
                     </div>
                 </div>

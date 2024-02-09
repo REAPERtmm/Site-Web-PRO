@@ -1,6 +1,6 @@
-<?php 
-    require("../php/config.php");
-    require("../php/forceconnect.php");
+<?php
+require("../php/config.php");
+require("../php/forceconnect.php");
 include '../php/database.php';
 global $db;
 
@@ -8,27 +8,31 @@ global $db;
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SNOWSTORM.GG</title>
-  
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  
+
     <!-- Favicon -->
     <script src="https://kit.fontawesome.com/d3255ff586.js" crossorigin="anonymous"></script>
     <!-- Fonts API -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/penguin" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/base.css">
     <link rel="stylesheet" href="../styles/support.css">
 </head>
+
 <body>
 
-<header class="unselectable">
+    <header class="unselectable">
         <div class="header">
             <div class="header_top">
                 <div class="logo">
@@ -54,7 +58,9 @@ global $db;
                 <div class="navbar_search">
                     <form action="" class="search">
                         <input type="text" placeholder="Rechercher un produit">
-                        <?php if(isset($_GET['research'])){header("Location: ./Search.php?research=".$_GET['research']);}?>
+                        <?php if (isset($_GET['research'])) {
+                            header("Location: ./Search.php?research=" . $_GET['research']);
+                        } ?>
                     </form>
                 </div>
             </div>
@@ -64,12 +70,12 @@ global $db;
     <div class="container">
         <h1>Envoyer un mail au SAV</h1>
 
-        <form class="form-container" method="POST" action="./verif.php" >
+        <form class="form-container" method="POST" action="./verif.php">
             <div class="">
                 <label class="form-label" for="nom">Nom</label>
                 <input class="form-input" type="text" name="nom" id="nom" required />
             </div>
-            
+
             <div class="">
                 <label class="form-label" for="pays">Pays</label>
                 <input class="form-input" type="text" name="pays" id="pays" required />
@@ -89,12 +95,12 @@ global $db;
                 <label class="form-label" for="tel">Téléphone</label>
                 <input class="form-input" type="tel" name="tel" id="tel" required />
             </div>
-            
+
             <div class="">
                 <label class="form-label" for="subject">Subject</label>
                 <input class="form-input" type="text" name="subject" id="subject" required />
             </div>
-            
+
             <div class="">
                 <label class="form-label" for="Message">Message</label>
                 <textarea class="form-textarea" id="Message" name="Message" required></textarea>
@@ -145,4 +151,5 @@ global $db;
     <script src="../script/app.js"></script>
 
 </body>
+
 </html>
