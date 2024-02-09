@@ -36,7 +36,7 @@
                 
                 <div class="header_bot">
                     <div class="navbar_link">
-                        <a href="./(page)/Product-1.html">NOS PRODUITS</a>
+                        <a href="./(page)/Search.php">NOS PRODUITS</a>
                         <a href="./(page)/personnaliser.php">PERSONNALISER</a>
                         <a href="./(page)/SearchCustom.php">GALERIE</a>
                         <a href="./(page)/support.php">SUPPORT/SAV</a>
