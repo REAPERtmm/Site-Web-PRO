@@ -14,105 +14,414 @@
     <link rel="stylesheet" href="../styles/base.css">
     <link rel="stylesheet" href="../styles/comparateur.css">
 </head>
+ <?php 
+    include '../php/database.php'; 
+    require("../php/config.php");
+    require("../php/forceconnect.php");
+    $ListCompare = $_POST["IDClicked"];
+
+    $Compare1 = explode(",", $ListCompare)[0];
+    $IDProduit1 = (explode("-", $Compare1)[1]);
+
+    $Compare2 = explode(",", $ListCompare)[1];
+    $IDProduit2 = (explode("-", $Compare2)[1]);
+
+    $Compare3 = explode(",", $ListCompare)[2];
+    $IDProduit3 = (explode("-", $Compare3)[1]);
+
+
+
+    $qp1 = $db->prepare("SELECT * FROM Produit WHERE IDProduit = :IDProduit");
+    $qp1->execute([
+        'IDProduit' => $IDProduit1,
+    ]
+    );
+
+    $qp1 = $qp1->fetch();
+
+    $qp2 = $db->prepare("SELECT * FROM Produit WHERE IDProduit = :IDProduit");
+    $qp2->execute([
+        'IDProduit' => $IDProduit2,
+    ]
+    );
+
+    $qp2 = $qp2->fetch();
+
+    $qp3 = $db->prepare("SELECT * FROM Produit WHERE IDProduit = :IDProduit");
+    $qp3->execute([
+        'IDProduit' => $IDProduit3,
+    ]
+    );
+
+    $qp3 = $qp3->fetch();
+
+    $ImgPath1 = $qp1["ImgPath"];
+    $Nom1 = $qp1["Nom"];
+    $Prix1 = $qp1["Prix"];
+
+    $ImgPath2 = $qp2["ImgPath"];
+    $Nom2 = $qp2["Nom"];
+    $Prix2 = $qp2["Prix"];
+
+    $ImgPath3 = $qp3["ImgPath"];
+    $Nom3 = $qp3["Nom"];
+    $Prix3 = $qp3["Prix"];
+
+    
+?> 
 <body>
-<?php  
-    include("../php/database.php");
-    header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-    header("Cache-Control: post-check=0, pre-check=0", false);
-    header("Pragma: no-cache");
-    
-    
-    if (isset($_POST['IDProduct']))
-        {
-            $IDProduit = $_POST['IDProduct'];
-        }
-    else
-        {
-            echo "Aucune donnée";
-        }
-
-
-    $q = $db->prepare("SELECT * FROM Attribut WHERE IDProduit = :IDProduit");
-    $q->execute([
-        'IDProduit' => $IDProduit,
-    ]
-    );
-    $q = $q->fetch();
-
-    $Reference = $q["Modele"];
-
-    $qp = $db->prepare("SELECT * FROM Produit WHERE IDProduit = :IDProduit");
-    $qp->execute([
-        'IDProduit' => $IDProduit,
-    ]
-    );
-
-    $qp = $qp->fetch();
-
-    $keyboard_name = $qp["Nom"];
-    $path1 = $qp["Path1"];
-    $path2 = $qp["Path2"];
-    $desc1 = $qp["Description1"];
-    $desc2 = $qp["Description2"];
-    $ImgPath = $qp["ImgPath"];
-
-    $q_avis = $db->prepare("SELECT * FROM Avis INNER JOIN Users ON Avis.IDUser = Users.IDUser WHERE IDProduit = :IDProduit ORDER BY RAND () LIMIT 4;");
-    $q_avis->execute([
-        'IDProduit' => $IDProduit,
-    ]
-    );
-    $q_avis = $q_avis->fetchAll();
-
-    ?>
-    
     <header class="unselectable">
         <div class="header">
-            <div class="header-grp">
-                <div class="header_top">
-                    <div class="logo">
-                        <img src="../Assets/logo-removebg-preview.png" alt="Logo" class="logo-img">
-                        <a href="../index.php"><p class="logo-name">SNOWSTORM.GG</p></a>
-                    </div>
-                    <div class="logo">
-                        <a href="./panier.php"><i class="fa-solid fa-cart-shopping fa-beat"></i></a>
-                        <a href="./login.php"><i class="fa-solid fa-user fa-beat"></i></a>
-                        <img src="../Assets/france-flag.webp" alt="France flag" height="40px" width="40px">
-                    </div>
+            <div class="header_top">
+                <div class="logo">
+                    <img src="../Assets/logo-removebg-preview.png" alt="Logo" class="logo-img">
+                    <p class="logo-name">SNOWSTORM.GG</p>
                 </div>
-                
-                <div class="header_bot">
-                    <div class="navbar_link">
-                        <a href="./Product-1.html">NOS PRODUITS</a>
-                        <a href="./personnaliser.php">PERSONNALISER</a>
-                        <a href="./Search.php">GALERIE</a>
-                        <a href="#">SUPPORT/SAV</a>
-                        <a href="#">FAQ</a>
-                        <a href="#">CONTACT</a>
-                    </div>
-                    <div class="navbar_search">
-                        <form action="" method="GET" class="search">
-                            <input type="search" placeholder="Rechercher un produit" id="search" name="research">
-                            <?php if(isset($_GET['research'])){header("Location: ../Search.php?research=".$_GET['research']);}?>
-                        </form>
-                    </div>
+                <div class="logo">
+                    <a href="../(page)/Search.html"><i class="fa-solid fa-cart-shopping fa-beat"></i></a>
+                    <a href="../(page)/login.html"><i class="fa-solid fa-user fa-beat"></i></a>
+                    <img src="../Assets/france-flag.webp" alt="France flag" height="40px" width="40px">
                 </div>
             </div>
-            <div class="header__navbar--toggle">
-                <span class="header__navbar--toggle-icons"></span>
+
+            <div class="header_bot">
+                <div class="navbar_link">
+                    <a href="index.html">NOS PRODUITS</a>
+                    <a href="index.html">PERSONNALISER</a>
+                    <a href="../(page)/Search.html">GALERIE</a>
+                    <a href="index.html">SUPPORT/SAV</a>
+                    <a href="index.html">FAQ</a>
+                    <a href="index.html">CONTACT</a>
+                </div>
+                <div class="navbar_search">
+                    <form action="" class="search">
+                        <input type="text" placeholder="Rechercher un produit">
+                    </form>
+                </div>
             </div>
         </div>
     </header>
+
+    <div class="top-line">
+        <p class="big-title"> COMPARATEUR </p>
+    </div>
+
+    <div class="grid-compa">
+        <img class="imga" src="../Assets/<?php  echo $ImgPath1 ?>" alt="Image du clavier best seller" >
+        <img class="imga" src="../Assets/<?php  echo $ImgPath2 ?>" alt="Image du clavier best seller" >
+        <img class="imga" src="../Assets/<?php  echo $ImgPath3 ?>" alt="Image du clavier best seller">
+        
+        <div class="ref"> <?php echo $Nom1 ?></div>
+        <div class="ref"> <?php echo $Nom2 ?></div>
+        <div class="ref"> <?php echo $Nom3 ?></div>
+        
+        <div class="price"> <?php echo $Prix1 ."€" ?></div>
+        <div class="price"> <?php echo $Prix2 ."€" ?></div>
+        <div class="price"> <?php echo $Prix3 ."€" ?></div>
+
+        <div>
+            <div class="product-info">
+
+
+                <?php 
+                $q = $db->prepare("SELECT * FROM Attribut WHERE IDProduit = :IDProduit");
+                $q->execute([
+                    'IDProduit' => $IDProduit1,
+                ]
+                );
+                $q = $q->fetch();
+            
+                $Reference = $q["Modele"];
+
+                $dic = [
+                    "Informations générales"=> [
+                        "Désignation"=> $q["Designation"],
+                        "Marque"=> $q["Marque"],
+                        "Modèle"=> $q["Modele"],
+                    ],
+                    "Format du clavier"=> [
+                        "Format"=> $q["Format"],
+                        "Compact"=> $q["Compact"],
+                        "TKL"=> $q["TKL"],
+                        "Norme du clavier"=> $q["Norme"],
+                        "Localisation"=> $q["Localisation"],
+                    ],
+                    "Interface"=> [
+                        "Sans-fil"=> $q["SansFil"],
+                        "Interface avec l'ordinateur"=> $q["InterfaceAvecOrdinateur"],
+                        "Technologie de connexion du clavier"=> $q["TechnologieDeConnexionDuClavier"],
+                    ],
+                    "Ergonomie"=> [
+                        "Type de touches"=> $q["TypeDeTouches"],
+                        "Type de switch"=> $q["TypeDeSwitch"],
+                        "Clavier Rétroéclairé"=> $q["ClavierRetroeclaire"],
+                        "Rétroéclairage RGB"=> $q["RetroeclairageRGB"],
+                        "Touches macro"=> $q["TouchesMacro"],
+                        "Touches Multimédia"=> $q["TouchesMultimedia"],
+                        "Pavé numérique"=> $q["PaveNumerique"],
+                    ],
+                    "Caractéristiques Physiques"=> [
+                        "Couleur"=> $q["Couleur"],
+                        "Largeur"=> $q["Largeur"],
+                        "Hauteur"=> $q["Hauteur"],
+                        "Profondeur"=> $q["Profondeur"],
+                        "Poids"=> $q["Poids"],
+                    ],
+                    "Alimentation"=> [
+                        "Type d'alimentation"=> $q["TypeAlimentation"],
+                    ],
+                    "Compatibilité"=> [
+                        "OS supportés"=> $q["OSSupportes"],
+                        "Utilisation"=> $q["Utilisation"],
+                    ],
+                    "Garanties"=>  [
+                        "Garantie commerciale"=> $q["GarantieCommerciale"],
+                        "Garantie légale"=> $q["GarantieLegale"],
+                    ],
+
+                ];
+
+
+                echo '<div class="product-sheet">';
+                foreach( $dic as $title => $v ) {
+                    echo                
+                    '<div class="row"> 
+                    <div class="blue-tilte"> 
+                        '. $title .'
+                    </div>
+                    <div class="info">';
+                    foreach( $v as $smalltitle => $content ) {
+                        echo '<p class="left-info">'.$smalltitle.'</p>';
+                        if( $smalltitle == "OS supportés" || $smalltitle == "Utilisation") {
+                            $contentspecial = explode(";", $content);
+                            echo '<div class="right-info">';
+
+                            foreach( $contentspecial as $k3 => $v3 ) {
+                                echo '<p class="right-info">'.$v3.'</p>' ;
+                            }
+                            echo '</div>';
+
+                        }
+                        else{
+                            echo 
+                            '<p class="right-info">'.$content.'</p>';
+                        }
+                    };
+                    echo 
+                    '</div>
+                    </div>';
+                };
+
+                echo '</div>';
+
+                ?>
+            </div>
+
+        </div>
+        <div>
+            <div class="product-info">
+
+
+                <?php 
+                $q = $db->prepare("SELECT * FROM Attribut WHERE IDProduit = :IDProduit");
+                $q->execute([
+                    'IDProduit' => $IDProduit2,
+                ]
+                );
+                $q = $q->fetch();
+            
+                $Reference = $q["Modele"];
+
+                $dic = [
+                    "Informations générales"=> [
+                        "Désignation"=> $q["Designation"],
+                        "Marque"=> $q["Marque"],
+                        "Modèle"=> $q["Modele"],
+                    ],
+                    "Format du clavier"=> [
+                        "Format"=> $q["Format"],
+                        "Compact"=> $q["Compact"],
+                        "TKL"=> $q["TKL"],
+                        "Norme du clavier"=> $q["Norme"],
+                        "Localisation"=> $q["Localisation"],
+                    ],
+                    "Interface"=> [
+                        "Sans-fil"=> $q["SansFil"],
+                        "Interface avec l'ordinateur"=> $q["InterfaceAvecOrdinateur"],
+                        "Technologie de connexion du clavier"=> $q["TechnologieDeConnexionDuClavier"],
+                    ],
+                    "Ergonomie"=> [
+                        "Type de touches"=> $q["TypeDeTouches"],
+                        "Type de switch"=> $q["TypeDeSwitch"],
+                        "Clavier Rétroéclairé"=> $q["ClavierRetroeclaire"],
+                        "Rétroéclairage RGB"=> $q["RetroeclairageRGB"],
+                        "Touches macro"=> $q["TouchesMacro"],
+                        "Touches Multimédia"=> $q["TouchesMultimedia"],
+                        "Pavé numérique"=> $q["PaveNumerique"],
+                    ],
+                    "Caractéristiques Physiques"=> [
+                        "Couleur"=> $q["Couleur"],
+                        "Largeur"=> $q["Largeur"],
+                        "Hauteur"=> $q["Hauteur"],
+                        "Profondeur"=> $q["Profondeur"],
+                        "Poids"=> $q["Poids"],
+                    ],
+                    "Alimentation"=> [
+                        "Type d'alimentation"=> $q["TypeAlimentation"],
+                    ],
+                    "Compatibilité"=> [
+                        "OS supportés"=> $q["OSSupportes"],
+                        "Utilisation"=> $q["Utilisation"],
+                    ],
+                    "Garanties"=>  [
+                        "Garantie commerciale"=> $q["GarantieCommerciale"],
+                        "Garantie légale"=> $q["GarantieLegale"],
+                    ],
+
+                ];
+
+
+                echo '<div class="product-sheet">';
+                foreach( $dic as $title => $v ) {
+                    echo                
+                    '<div class="row"> 
+                    <div class="blue-tilte"> 
+                        '. $title .'
+                    </div>
+                    <div class="info">';
+                    foreach( $v as $smalltitle => $content ) {
+                        echo '<p class="left-info">'.$smalltitle.'</p>';
+                        if( $smalltitle == "OS supportés" || $smalltitle == "Utilisation") {
+                            $contentspecial = explode(";", $content);
+                            echo '<div class="right-info">';
+
+                            foreach( $contentspecial as $k3 => $v3 ) {
+                                echo '<p class="right-info">'.$v3.'</p>' ;
+                            }
+                            echo '</div>';
+
+                        }
+                        else{
+                            echo 
+                            '<p class="right-info">'.$content.'</p>';
+                        }
+                    };
+                    echo 
+                    '</div>
+                    </div>';
+                };
+
+                echo '</div>';
+
+                ?>
+            </div>
+
+        </div>
+        <div>
+            <div class="product-info">
+
+
+                <?php 
+                $q = $db->prepare("SELECT * FROM Attribut WHERE IDProduit = :IDProduit");
+                $q->execute([
+                    'IDProduit' => $IDProduit3,
+                ]
+                );
+                $q = $q->fetch();
+            
+                $Reference = $q["Modele"];
+
+                $dic = [
+                    "Informations générales"=> [
+                        "Désignation"=> $q["Designation"],
+                        "Marque"=> $q["Marque"],
+                        "Modèle"=> $q["Modele"],
+                    ],
+                    "Format du clavier"=> [
+                        "Format"=> $q["Format"],
+                        "Compact"=> $q["Compact"],
+                        "TKL"=> $q["TKL"],
+                        "Norme du clavier"=> $q["Norme"],
+                        "Localisation"=> $q["Localisation"],
+                    ],
+                    "Interface"=> [
+                        "Sans-fil"=> $q["SansFil"],
+                        "Interface avec l'ordinateur"=> $q["InterfaceAvecOrdinateur"],
+                        "Technologie de connexion du clavier"=> $q["TechnologieDeConnexionDuClavier"],
+                    ],
+                    "Ergonomie"=> [
+                        "Type de touches"=> $q["TypeDeTouches"],
+                        "Type de switch"=> $q["TypeDeSwitch"],
+                        "Clavier Rétroéclairé"=> $q["ClavierRetroeclaire"],
+                        "Rétroéclairage RGB"=> $q["RetroeclairageRGB"],
+                        "Touches macro"=> $q["TouchesMacro"],
+                        "Touches Multimédia"=> $q["TouchesMultimedia"],
+                        "Pavé numérique"=> $q["PaveNumerique"],
+                    ],
+                    "Caractéristiques Physiques"=> [
+                        "Couleur"=> $q["Couleur"],
+                        "Largeur"=> $q["Largeur"],
+                        "Hauteur"=> $q["Hauteur"],
+                        "Profondeur"=> $q["Profondeur"],
+                        "Poids"=> $q["Poids"],
+                    ],
+                    "Alimentation"=> [
+                        "Type d'alimentation"=> $q["TypeAlimentation"],
+                    ],
+                    "Compatibilité"=> [
+                        "OS supportés"=> $q["OSSupportes"],
+                        "Utilisation"=> $q["Utilisation"],
+                    ],
+                    "Garanties"=>  [
+                        "Garantie commerciale"=> $q["GarantieCommerciale"],
+                        "Garantie légale"=> $q["GarantieLegale"],
+                    ],
+
+                ];
+
+
+                echo '<div class="product-sheet">';
+                foreach( $dic as $title => $v ) {
+                    echo                
+                    '<div class="row"> 
+                    <div class="blue-tilte"> 
+                        '. $title .'
+                    </div>
+                    <div class="info">';
+                    foreach( $v as $smalltitle => $content ) {
+                        echo '<p class="left-info">'.$smalltitle.'</p>';
+                        if( $smalltitle == "OS supportés" || $smalltitle == "Utilisation") {
+                            $contentspecial = explode(";", $content);
+                            echo '<div class="right-info">';
+
+                            foreach( $contentspecial as $k3 => $v3 ) {
+                                echo '<p class="right-info">'.$v3.'</p>' ;
+                            }
+                            echo '</div>';
+
+                        }
+                        else{
+                            echo 
+                            '<p class="right-info">'.$content.'</p>';
+                        }
+                    };
+                    echo 
+                    '</div>
+                    </div>';
+                };
+
+                echo '</div>';
+
+                ?>
+            </div>
+
+        </div>
+
+
+    </div>
+    </div>
     
-<h1>comparateur</h1>
 
-<div>
-    <img class="img_pr" src="../Assets/Clavier1.webp" alt=""  /> 
-    <img class="img_pr"src="../Assets/Clavier2.webp" alt=""  />
-    <img class="img_pr"src="../Assets/Clavier3.jpg" alt="" />
-   </div>
-   <div>
-
-   </div>
 
     <footer class="footer">
         <div class="footer-container unselectable">
@@ -150,6 +459,6 @@
         </div>
     </footer>
     
-    <script src="./script/index.js"></script>
+    <script src="../script/index.js"></script>
 </body>
 </html>

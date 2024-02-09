@@ -18,6 +18,7 @@
     <?php 
         require("../php/database.php");
         require("../php/config.php");
+        require("../php/forceconnect.php");
 
         $IDUser = $_SESSION["user"]["IDUser"];
 

@@ -19,8 +19,7 @@
 <?php  
     require("../php/database.php");
     require("../php/config.php");
-
-    //IL FAUT UPDATE LA BASE DE DONNEES DANS PANIER (MODIF LE NOMBRE D'ELEMENTS)
+    require("../php/forceconnect.php");
 
     $IDUser = $_SESSION["user"]["IDUser"];
 

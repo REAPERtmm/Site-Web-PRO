@@ -17,7 +17,10 @@
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/base.css">
     <link rel="stylesheet" href="../styles/personnaliser.css">
-    <?php include '../php/database.php'; $IDUser = 1;?>
+    <?php include '../php/database.php';
+        require("../php/config.php");
+        require("../php/forceconnect.php");
+        $IDUser = $_SESSION["user"]["IDUser"];?>
 </head>
 <body>
     

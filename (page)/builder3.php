@@ -18,7 +18,11 @@
     <link rel="stylesheet" href="../styles/base.css">
     <link rel="stylesheet" href="../styles/builder2.css">
     <link rel="stylesheet" href="../styles/builder3.css">
-    <?php include '../php/database.php'; ?>
+    <?php
+     include '../php/database.php';
+     require("../php/config.php");
+     require("../php/forceconnect.php");
+     ?>
 </head>
 <body>
     

@@ -16,11 +16,11 @@
     <?php 
         include '../php/database.php'; 
         require("../php/config.php");
-        if(!isset($_SESSION['user']['IDUser'])){$_SESSION['user']['IDUser'] = 1;}
+        require("../php/forceconnect.php");
 
-        $q_fav = $db->prepare('SELECT * FROM (Favoris INNER JOIN  Produit ON Favoris.IDProduit = Produit.IDProduit)  WHERE Favoris.IDUser = 1');
+        $q_fav = $db->prepare('SELECT * FROM (Favoris INNER JOIN  Produit ON Favoris.IDProduit = Produit.IDProduit)  WHERE Favoris.IDUser = :ID');
         $q_fav->execute([
-            //"ID" => $_SESSION['user']['IDUser']
+            "ID" => $_SESSION['user']['IDUser']
         ]);
         $result = $q_fav->fetchAll(PDO::FETCH_ASSOC);
 

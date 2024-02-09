@@ -1,5 +1,6 @@
 <?php 
-// require '../php/config.php';
+    require("../php/config.php");
+    require("../php/forceconnect.php");
 include '../php/database.php';
 global $db;
 

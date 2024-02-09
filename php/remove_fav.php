@@ -3,8 +3,8 @@
     include ('../php/database.php'); 
     require("../php/config.php");
 
-     //$IDUser = $_SESSION["user"]["IDUser"];
-     $IDUser = 1;
+     $IDUser = $_SESSION["user"]["IDUser"];
+
 
      $q = $db->prepare("DELETE FROM Favoris WHERE IDUser = :IDUser AND IDProduit = :IDProduit");
      $q->execute([

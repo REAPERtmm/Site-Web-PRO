@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="../styles/search.css">
     <?php 
         include '../php/database.php';
+        require("../php/config.php");
+        require("../php/forceconnect.php");
         if(!isset($_GET["ASC"])){ $_GET["ASC"] = "off";};
         if(!isset($_GET["research"])){ $_GET["research"] = "";};
         if(!isset($_GET["loadedAmount"])){ $_GET["loadedAmount"] = "4";};
