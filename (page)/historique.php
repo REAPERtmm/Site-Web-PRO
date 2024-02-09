@@ -37,11 +37,11 @@
 
                 <div class="header_bot">
                     <div class="navbar_link">
-                        <a href="../index.html">ACCUEIL </a>
-                        <a href="./(page)/historique.php">HISTORIQUE</a>
-                        <a href="./(page)/Search.php">FAVORIS</a>
-                        <a href="index.html">SAUVEGARDES</a>
-                        <a href="./account.html">COMPTE</a>
+                        <a href="../index.php">ACCUEIL </a>
+                        <a href="./historique.php">HISTORIQUE</a>
+                        <a href="./favorite.php">FAVORIS</a>
+                        <a href="./personnaliser.php">SAUVEGARDES</a>
+                        <a href="./account.php">COMPTE</a>
                     </div>
                     <div class="navbar_search">
                         <form action="" class="search">
@@ -155,7 +155,7 @@
 
 
 
-    <footer class="footer">
+<footer class="footer">
         <div class="footer-container unselectable">
             <img src="../Assets/logo-removebg-preview.png" alt="Logo de Snowstorm" id="footer-img">
             <p class="logo-name">Snowstorm.GG</p>

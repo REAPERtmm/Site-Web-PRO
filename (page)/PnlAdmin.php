@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../styles/PnlAdmin.css">
+    <link rel="stylesheet" href="../styles/base.css">
     <?php
         include '../php/database.php';
 
@@ -37,6 +38,38 @@
     ?>
 </head>
 <body>
+<header class="unselectable">
+        <div class="header">
+            <div class="header_top">
+                <div class="logo">
+                    <img src="../Assets/logo-removebg-preview.png" alt="Logo" class="logo-img">
+                    <p class="logo-name">SNOWSTORM.GG</p>
+                </div>
+                <div class="logo">
+                    <a href="../(page)/Search.html"><i class="fa-solid fa-cart-shopping fa-beat"></i></a>
+                    <a href="../(page)/login.html"><i class="fa-solid fa-user fa-beat"></i></a>
+                    <img src="../Assets/france-flag.webp" alt="France flag" height="40px" width="40px">
+                </div>
+            </div>
+
+            <div class="header_bot">
+                <div class="navbar_link">
+                    <a href="./Search.php">NOS PRODUITS</a>
+                    <a href="./personnaliser.php">PERSONNALISER</a>
+                    <a href="./SearchCustom.php">GALERIE</a>
+                    <a href="./support.php">SUPPORT/SAV</a>
+                    <a href="#">FAQ</a>
+                    <a href="./page-contact.html">CONTACT</a>
+                </div>
+                <div class="navbar_search">
+                    <form action="" class="search">
+                        <input type="text" placeholder="Rechercher un produit">
+                        <?php if(isset($_GET['research'])){header("Location: ./Search.php?research=".$_GET['research']);}?>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
     <h1 class="titre">PANNEL ADMIN</h1>   
     <div>
         <?php 
@@ -118,6 +151,43 @@
                 </fieldset>
             </form>
     </div> 
+
+    <footer class="footer">
+        <div class="footer-container unselectable">
+            <img src="../Assets/logo-removebg-preview.png" alt="Logo de Snowstorm" id="footer-img">
+            <p class="logo-name">Snowstorm.GG</p>
+        </div>
+        <div class="footer-container">
+            <p class="title"> Catégories</p>
+            <p class="subtitle"> Nouveautés </p>
+            <p class="subtitle"> Meilleures ventes </p>
+            <p class="subtitle"> Classiques </p>
+            <p class="subtitle"> Préfaits </p>
+            <p class="subtitle"> Personnaliser </p>
+        </div>
+        <div class="footer-container">
+            <p class="title"> Informations </p>
+            <p class="subtitle"> Nous contacter </p>
+            <p class="subtitle"> Livraison </p>
+            <p class="subtitle"> Mentions légales </p>
+            <p class="subtitle"> Confidentialité </p>
+            <p class="subtitle"> Conditions d'utilisation </p>
+        </div>
+        <div class="footer-container">
+            <p class="title"> Mon compte </p>
+            <p class="subtitle"> Mes commandes </p>
+            <p class="subtitle"> Mes customs </p>
+            <p class="subtitle"> Mes informations </p>
+        </div>
+        <div class="footer-container">
+            <p class="title"> Nos réseaux </p>
+            <div class="footer-img">
+                <i class="fa-brands fa-youtube"></i>
+                <i class="fa-brands fa-x-twitter"></i>
+                <i class="fa-brands fa-square-facebook"></i>
+            </div>
+        </div>
+    </footer>
     
 </body>
 </html>

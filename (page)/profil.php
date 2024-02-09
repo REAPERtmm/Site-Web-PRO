@@ -58,7 +58,7 @@
                 
                 <div class="header_bot">
                     <div class="navbar_link">
-                        <a href="../index.html">ACCUEIL </a>
+                        <a href="../index.php">ACCUEIL </a>
                         <a href="./historique.php">HISTORIQUE</a>
                         <a href="./favorite.php">FAVORIS</a>
                         <a href="./personnaliser.php">SAUVEGARDES</a>

@@ -70,7 +70,7 @@
     
 ?> 
 <body>
-    <header class="unselectable">
+<header class="unselectable">
         <div class="header">
             <div class="header_top">
                 <div class="logo">
@@ -82,43 +82,26 @@
                     <a href="../(page)/login.html"><i class="fa-solid fa-user fa-beat"></i></a>
                     <img src="../Assets/france-flag.webp" alt="France flag" height="40px" width="40px">
                 </div>
-                <div class="header_bot">
-                    <div class="navbar_link">
-                        <a href="./Product-1.html">NOS PRODUITS</a>
-                        <a href="./personnaliser.php">PERSONNALISER</a>
-                        <a href="./SearchCustom.php">GALERIE</a>
-                        <a href="#">SUPPORT/SAV</a>
-                        <a href="#">FAQ</a>
-                        <a href="#">CONTACT</a>
-                    </div>
-                    <div class="navbar_search">
-                        <form action="" method="GET" class="search">
-                            <input type="search" placeholder="Rechercher un produit" id="search" name="research">
-                            <?php if(isset($_GET['research'])){header("Location: ./Search.php?research=".$_GET['research']);}?>
-                        </form>
-                    </div>
-
-                </div>
             </div>
 
             <div class="header_bot">
                 <div class="navbar_link">
-                    <a href="index.html">NOS PRODUITS</a>
-                    <a href="index.html">PERSONNALISER</a>
-                    <a href="../(page)/Search.html">GALERIE</a>
-                    <a href="index.html">SUPPORT/SAV</a>
-                    <a href="index.html">FAQ</a>
-                    <a href="index.html">CONTACT</a>
+                    <a href="./Search.php">NOS PRODUITS</a>
+                    <a href="./personnaliser.php">PERSONNALISER</a>
+                    <a href="./SearchCustom.php">GALERIE</a>
+                    <a href="./support.php">SUPPORT/SAV</a>
+                    <a href="#">FAQ</a>
+                    <a href="./page-contact.html">CONTACT</a>
                 </div>
                 <div class="navbar_search">
                     <form action="" class="search">
                         <input type="text" placeholder="Rechercher un produit">
+                        <?php if(isset($_GET['research'])){header("Location: ./Search.php?research=".$_GET['research']);}?>
                     </form>
                 </div>
             </div>
         </div>
     </header>
-
     <div class="top-line">
         <p class="big-title"> COMPARATEUR </p>
     </div>
@@ -442,6 +425,7 @@
 
     <footer class="footer">
         <div class="footer-container unselectable">
+            <img src="../Assets/logo-removebg-preview.png" alt="Logo de Snowstorm" id="footer-img">
             <p class="logo-name">Snowstorm.GG</p>
         </div>
         <div class="footer-container">

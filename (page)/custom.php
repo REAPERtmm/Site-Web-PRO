@@ -92,16 +92,17 @@
 
             <div class="header_bot">
                 <div class="navbar_link">
-                    <a href="index.html">NOS PRODUITS</a>
-                    <a href="index.html">PERSONNALISER</a>
-                    <a href="../(page)/Search.html">GALERIE</a>
+                    <a href="./Search.php">NOS PRODUITS</a>
+                    <a href="./personnaliser.php">PERSONNALISER</a>
+                    <a href="./SearchCustom.php">GALERIE</a>
                     <a href="./support.php">SUPPORT/SAV</a>
-                    <a href="index.html">FAQ</a>
+                    <a href="#">FAQ</a>
                     <a href="./page-contact.html">CONTACT</a>
                 </div>
                 <div class="navbar_search">
                     <form action="" class="search">
                         <input type="text" placeholder="Rechercher un produit">
+                        <?php if(isset($_GET['research'])){header("Location: ./Search.php?research=".$_GET['research']);}?>
                     </form>
                 </div>
             </div>
