@@ -27,7 +27,7 @@ global $db;
 </head>
 <body>
 
-    <header class="unselectable">
+<header class="unselectable">
         <div class="header">
             <div class="header-grp">
                 <div class="header_top">
@@ -46,10 +46,10 @@ global $db;
                     <div class="navbar_link">
                         <a href="./Product-1.html">NOS PRODUITS</a>
                         <a href="./personnaliser.php">PERSONNALISER</a>
-                        <a href="./Search.php">GALERIE</a>
-                        <a href="./support.php">SUPPORT/SAV</a>
+                        <a href="./SearchCustom.php">GALERIE</a>
+                        <a href="#">SUPPORT/SAV</a>
                         <a href="#">FAQ</a>
-                        <a href="./page contact.html">CONTACT</a>
+                        <a href="#">CONTACT</a>
                     </div>
                     <div class="navbar_search">
                         <form action="" method="GET" class="search">
