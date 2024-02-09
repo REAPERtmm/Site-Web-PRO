@@ -75,7 +75,7 @@
                 <div class="div5">
                     <h1 class="text_11">En stock</h1>
                     <div class="div6">
-                        <h1 class="text_1">quantité</h1>
+                        <h1 class="text_1">Quantité</h1>
                         <input type="number" class="lavardenombrearentrepourlaquantité" id="quantity" value="1">
                     </div>
                 </div>
@@ -94,9 +94,32 @@
             </div>
             <div class="div8">
                 <form action="" method="POST" id="form-panier">
+                    <?php 
+                    $checkq = $db->prepare('SELECT * FROM Paniers WHERE IDUser = :IDUser AND IDProduit = :IDProduit');
+                    $checkq->execute([
+                        'IDUser'=> $IDUser,
+                        "IDProduit"=> $_POST["IDProduit"],
+                    ]);
+                    if($checkq->rowCount() != 0) {
+                        $checkqf = $checkq->fetchAll();
+                        foreach($checkqf as $key => $value) {
+                            if($value["IsBought"] == 1) {
+                                echo '<input name="avis" type="text" placeholder="Veuillez rentrez un commentaire" value="">';
+                                echo'<label for=""> Note </label>';
+                                echo '<input name="avis-note" type="number" min="0" max="5" value="5">';
+                                echo '<input name="avis-btn" type="submit" value="Envoyer le commentaire">';
+                        }
+                    }
+    
+                        
+                    }
+                    ?>
                     <input type="submit" class="pourcent" name="acheter-btn" id="acheter-btn" onclick="SetForm()" value="Acheter">
                     <input type="hidden" id="hidden-quant" name="hidden-quant" value="">
+                    <input type="hidden" id="IDProduit" name="IDProduit" value=" <?php echo $IDProduit ?>">
+                    <input type="hidden" id="IDUser" name="IDUser" value=" <?php echo $IDUser ?>">
                     <input type="submit" class="pourcent" name="ajouter-btn" id="ajouter-btn" onclick="SetForm()" value="Ajouter au panier">
+                    <input type="submit" class="pourcent" name="fav-btn" id="fav-btn" value="Mettre en favoris">
                 </form>
                 <?php 
                 if(isset($_POST["ajouter-btn"]) || isset($_POST["acheter-btn"])) { 
@@ -125,12 +148,29 @@
                     if (isset($_POST["acheter-btn"])) {
                         header("Location: panier.php");
                     }
-                    
-
-
-
-
                 }
+                if(isset($_POST["fav-btn"])) {
+                    $q = $db->prepare("INSERT INTO Favoris VALUES (NULL, :IDProduit, :IDUser)");
+                    $q->execute([
+                        "IDProduit"=> $_POST["IDProduit"],
+                        "IDUser"=> $IDUser,
+                    ]);
+                    echo 'Produit ajouté au favoris avec succès !';
+                }
+                
+                if(isset($_POST['avis-btn'])) {
+                    $q = $db->prepare('INSERT INTO Avis VALUES(NULL, :IDUser, :IDProduit, :NoteAvis, :TexteAvis)');
+                    $q->execute([
+                        'IDUser'=> $IDUser,
+                        'IDProduit'=> $_POST['IDProduit'],
+                        'NoteAvis'=> $_POST['avis-note'],
+                        'TexteAvis' => $_POST['avis'],
+                    ]);
+                }
+
+
+
+
                 ?>
             </div>
         </div>
