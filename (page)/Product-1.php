@@ -12,10 +12,10 @@
     <?php 
     include ('../php/database.php'); 
     require("../php/config.php");
+    require("../php/forceconnect.php");
 
     $IDProduit = $_POST["IDProduit"];
-    //$IDUser = $_SESSION["user"]["IDUser"];
-    $IDUser = 1;
+    $IDUser = $_SESSION["user"]["IDUser"];
 
     $qp = $db->prepare("SELECT * FROM Produit WHERE IDProduit = :IDProduit");
     $qp->execute([

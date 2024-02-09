@@ -20,13 +20,13 @@
 <body>
     <?php  
     require("../php/database.php");
-    //require("../php/config.php");
+    require("../php/config.php");
+    require("../php/forceconnect.php");
     header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
     header("Cache-Control: post-check=0, pre-check=0", false);
     header("Pragma: no-cache");
     
     $IDUser = $_SESSION["user"]["IDUser"];
-    $IDUser = 1;
 
     if(!isset($_POST["IDCustom"]) || $_POST["IDCustom"] == -1){
         if(isset($_POST["IDProduit"])){
@@ -45,8 +45,6 @@
         $IDProduit = $query->fetch()["IDProduit"];
     }
 
-    echo "Cusotm : ".$IDCustom;
-    echo "Produit : ".$IDProduit;
 
     $q = $db->prepare("SELECT * FROM Attribut WHERE IDProduit = :IDProduit");
     $q->execute([
@@ -359,7 +357,6 @@
   
 
     </div>
-    <?php echo $_POST["IDCustom"];?>
     <form action="" id="form-action" method="POST">
         <input type="hidden" id="backplate-color" name="backplate-color" value="<?php if(isset($_POST["backplate-color"])){echo $_POST["backplate-color"];}else{echo "undefine";} ?>">
         <input type="hidden" id="keycaps-color" name="keycaps-color" value="<?php if(isset($_POST["keycaps-color"])){echo $_POST["keycaps-color"];}else{echo "undefine";} ?>">

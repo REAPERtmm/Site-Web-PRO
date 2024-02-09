@@ -22,13 +22,13 @@
 <body>
     <?php  
     require("../php/database.php");
-    //require("../php/config.php");
+    require("../php/config.php");
+    require("../php/forceconnect.php");
     header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
     header("Cache-Control: post-check=0, pre-check=0", false);
     header("Pragma: no-cache");
 
-    $IDUser = $_SESSION["user"]["IDUser"];
-    $IDUser = 1;
+    
 
 
     $q = $db->prepare("SELECT * FROM Customs JOIN (Attribut JOIN Produit ON Produit.IDProduit = Attribut.IDProduit) ON Customs.IDProduit=Produit.IDProduit WHERE Customs.IDCustom = :ID");

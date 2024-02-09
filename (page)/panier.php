@@ -16,7 +16,8 @@
     <?php 
         include '../php/database.php'; 
         require("../php/config.php");
-        if(!isset($_SESSION['user']['IDUser'])){$_SESSION['user']['IDUser'] = 1;}
+        require("../php/forceconnect.php");
+  
 
         $q_panier = $db->prepare('SELECT * FROM Paniers WHERE IDUser=:ID');
         $q_panier->execute([

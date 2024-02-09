@@ -1,6 +1,7 @@
 <?php
     require("../php/database.php");
-    require '../php/config.php';
+    require("../php/config.php");
+    require("../php/forceconnect.php");
     $prix = $_POST['Data'];
     $IDPanier = $_POST["DataPanier"];
 
