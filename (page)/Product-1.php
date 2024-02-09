@@ -11,7 +11,7 @@
 <body>
     <?php 
     include ('../php/database.php'); 
-    //require("../php/config.php");
+    require("../php/config.php");
 
     $IDProduit = $_POST["IDProduit"];
     //$IDUser = $_SESSION["user"]["IDUser"];
@@ -81,14 +81,14 @@
                 </div>
                 <div class="div7">
                     <div class="div7left">
-                        <form action="Product-1.php" method="POST">
+                        <a href="#repere">
                             <input type="submit" class="pourcent" name="fiche-btn" id="fiche-btn" value="Fiche technique">
-                        </form>
+                        </a>
                     </div>
                     <div class="div7right">
-                        <form action="Product-1.php" method="POST">
+                        <a href="#repere2">
                             <input type="submit" class="pourcent" name="avis-btn" id="avis-btn" value="Avis">
-                        </form>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -100,15 +100,11 @@
                 </form>
                 <?php 
                 if(isset($_POST["ajouter-btn"]) || isset($_POST["acheter-btn"])) { 
-                    echo 'Produit ajouté avec succès !';
                     $check = $db->prepare('SELECT * FROM Paniers WHERE IDUser = :IDUser AND IDProduit = :IDProduit');
                     $check->execute([
                         'IDUser'=> $IDUser,
                         'IDProduit' => $IDProduit
                     ]);
-                    if (isset($_POST["acheter-btn"])) {
-                        header("Location: panier.php");
-                    }
                     if($check->rowCount() == 0) {
                         $query = $db->prepare('INSERT INTO Paniers VALUES(:IDUser, 0,NULL,:IDProduit,NULL,:Amount,0)');
                         $query->execute([
@@ -125,6 +121,10 @@
                             "IDUser"=> $IDUser,
                         ]);
                     }
+                    echo 'Produit ajouté avec succès !';
+                    if (isset($_POST["acheter-btn"])) {
+                        header("Location: panier.php");
+                    }
                     
 
 
@@ -135,9 +135,141 @@
             </div>
         </div>
     </div>
-    <div class="rate-box">
+
+    <div class="separ"></div>
+    <h1 class="text_3">vous aimerez également :</h1>
+    
+    <div class="div0">
+
+    <?php 
+        $q_autre = $db->prepare('SELECT * FROM Produit WHERE IDProduit != :IDProduit ORDER BY RAND () LIMIT 3');
+        $q_autre->execute([
+            "IDProduit" => $IDProduit,
+        ]);
+        $q_autref = $q_autre->fetchAll();
+        foreach ($q_autref as $key => $value) {
+            echo '<form class="A" method="POST">';
+            $ImgPathAutre = $value['ImgPath'];
+            $NomAutre = $value['Nom'];
+            echo '<button >';
+            echo '<img class="D" src="../Assets/'.$ImgPathAutre.'" title="image de produit">';
+            echo '<input type="hidden" name="IDProduit" value="'.$value["IDProduit"].'">';
+            echo '<h1 class="text_1">'.$NomAutre.'</h1>';
+            echo '</button>';
+            echo'</form>';
+        }
+        
+
+    ?>
+    </div>
+
+    <div>
+        <div class="product-info">
+
+
+                <?php 
+                $q = $db->prepare("SELECT * FROM Attribut WHERE IDProduit = :IDProduit");
+                $q->execute([
+                    'IDProduit' => $IDProduit,
+                ]
+                );
+                if($q->rowCount() != 0) {
+                    $q = $q->fetch();
+                
+                    $Reference = $q["Modele"];
+
+                    $dic = [
+                        "Informations générales"=> [
+                            "Désignation"=> $q["Designation"],
+                            "Marque"=> $q["Marque"],
+                            "Modèle"=> $q["Modele"],
+                        ],
+                        "Format du clavier"=> [
+                            "Format"=> $q["Format"],
+                            "Compact"=> $q["Compact"],
+                            "TKL"=> $q["TKL"],
+                            "Norme du clavier"=> $q["Norme"],
+                            "Localisation"=> $q["Localisation"],
+                        ],
+                        "Interface"=> [
+                            "Sans-fil"=> $q["SansFil"],
+                            "Interface avec l'ordinateur"=> $q["InterfaceAvecOrdinateur"],
+                            "Technologie de connexion du clavier"=> $q["TechnologieDeConnexionDuClavier"],
+                        ],
+                        "Ergonomie"=> [
+                            "Type de touches"=> $q["TypeDeTouches"],
+                            "Type de switch"=> $q["TypeDeSwitch"],
+                            "Clavier Rétroéclairé"=> $q["ClavierRetroeclaire"],
+                            "Rétroéclairage RGB"=> $q["RetroeclairageRGB"],
+                            "Touches macro"=> $q["TouchesMacro"],
+                            "Touches Multimédia"=> $q["TouchesMultimedia"],
+                            "Pavé numérique"=> $q["PaveNumerique"],
+                        ],
+                        "Caractéristiques Physiques"=> [
+                            "Couleur"=> $q["Couleur"],
+                            "Largeur"=> $q["Largeur"],
+                            "Hauteur"=> $q["Hauteur"],
+                            "Profondeur"=> $q["Profondeur"],
+                            "Poids"=> $q["Poids"],
+                        ],
+                        "Alimentation"=> [
+                            "Type d'alimentation"=> $q["TypeAlimentation"],
+                        ],
+                        "Compatibilité"=> [
+                            "OS supportés"=> $q["OSSupportes"],
+                            "Utilisation"=> $q["Utilisation"],
+                        ],
+                        "Garanties"=>  [
+                            "Garantie commerciale"=> $q["GarantieCommerciale"],
+                            "Garantie légale"=> $q["GarantieLegale"],
+                        ],
+
+                    ];
+
+
+                    echo '<div class="product-sheet" id="repere">';
+                    foreach( $dic as $title => $v ) {
+                        echo                
+                        '<div class="row"> 
+                        <div class="blue-tilte"> 
+                            '. $title .'
+                        </div>
+                        <div class="info">';
+                        
+                        foreach( $v as $smalltitle => $content ) {
+                            echo '<p class="left-info">'.$smalltitle.'</p>';
+                            if( $smalltitle == "OS supportés" || $smalltitle == "Utilisation") {
+                                $contentspecial = explode(";", $content);
+                                echo '<div class="right-info">';
+
+                                
+
+                                foreach( $contentspecial as $k3 => $v3 ) {
+                                    echo '<p class="right-info">'.$v3.'</p>' ;
+                                }
+                                echo '</div>';
+
+                            }
+                            else{
+                                echo 
+                                '<p class="right-info">'.$content.'</p>';
+                            }
+                        };
+                        echo 
+                        '</div>
+                        </div>';
+                    };
+
+                    echo '</div>';
+                }
+
+                ?>
+        </div>
+
+    </div>
+    <div class="rate-box" id="repere2">
         <?php 
-            if(isset($_POST["avis-btn"])){
+         
                 $q_avis = $db->prepare("SELECT * FROM Avis INNER JOIN Users ON Avis.IDUser = Users.IDUser WHERE Avis.IDProduit = :IDProduit ORDER BY RAND () LIMIT 4;");
                 $q_avis->execute([
                     'IDProduit' => $IDProduit,
@@ -178,134 +310,9 @@
                         </div>';
         
                 };
-            }
+            
         
         ?>
-    </div>
-    <div class="separ"></div>
-    <h1 class="text_3">vous aimerez également :</h1>
-    
-    <?php 
-        $q_autre = $db->prepare('SELECT * FROM Produit ORDER BY RAND () LIMIT 3');
-        $q_autre->execute();
-        $q_autref = $q_autre->fetchAll();
-        echo '<form class="div0" method="POST">';
-        foreach ($q_autref as $key => $value) {
-            $ImgPathAutre = $value['ImgPath'];
-            $NomAutre = $value['Nom'];
-            echo '<div class="A">';
-            echo '<img class="D" src="../Assets/'.$ImgPathAutre.'" title="image de produit">';
-            echo '<input type="hidden" name="IDProduit" value="'.$value["IDProduit"].'">';
-            echo '<h1 class="text_1">'.$NomAutre.'</h1>';
-            echo '</div>';
-        }
-        echo'</form>';
-
-    ?>
-    <div>
-        <div class="product-info">
-
-
-                <?php 
-                $q = $db->prepare("SELECT * FROM Attribut WHERE IDProduit = :IDProduit");
-                $q->execute([
-                    'IDProduit' => $IDProduit,
-                ]
-                );
-                $q = $q->fetch();
-            
-                $Reference = $q["Modele"];
-
-                $dic = [
-                    "Informations générales"=> [
-                        "Désignation"=> $q["Designation"],
-                        "Marque"=> $q["Marque"],
-                        "Modèle"=> $q["Modele"],
-                    ],
-                    "Format du clavier"=> [
-                        "Format"=> $q["Format"],
-                        "Compact"=> $q["Compact"],
-                        "TKL"=> $q["TKL"],
-                        "Norme du clavier"=> $q["Norme"],
-                        "Localisation"=> $q["Localisation"],
-                    ],
-                    "Interface"=> [
-                        "Sans-fil"=> $q["SansFil"],
-                        "Interface avec l'ordinateur"=> $q["InterfaceAvecOrdinateur"],
-                        "Technologie de connexion du clavier"=> $q["TechnologieDeConnexionDuClavier"],
-                    ],
-                    "Ergonomie"=> [
-                        "Type de touches"=> $q["TypeDeTouches"],
-                        "Type de switch"=> $q["TypeDeSwitch"],
-                        "Clavier Rétroéclairé"=> $q["ClavierRetroeclaire"],
-                        "Rétroéclairage RGB"=> $q["RetroeclairageRGB"],
-                        "Touches macro"=> $q["TouchesMacro"],
-                        "Touches Multimédia"=> $q["TouchesMultimedia"],
-                        "Pavé numérique"=> $q["PaveNumerique"],
-                    ],
-                    "Caractéristiques Physiques"=> [
-                        "Couleur"=> $q["Couleur"],
-                        "Largeur"=> $q["Largeur"],
-                        "Hauteur"=> $q["Hauteur"],
-                        "Profondeur"=> $q["Profondeur"],
-                        "Poids"=> $q["Poids"],
-                    ],
-                    "Alimentation"=> [
-                        "Type d'alimentation"=> $q["TypeAlimentation"],
-                    ],
-                    "Compatibilité"=> [
-                        "OS supportés"=> $q["OSSupportes"],
-                        "Utilisation"=> $q["Utilisation"],
-                    ],
-                    "Garanties"=>  [
-                        "Garantie commerciale"=> $q["GarantieCommerciale"],
-                        "Garantie légale"=> $q["GarantieLegale"],
-                    ],
-
-                ];
-
-
-                echo '<div class="product-sheet">';
-                foreach( $dic as $title => $v ) {
-                    echo                
-                    '<div class="row"> 
-                    <div class="blue-tilte"> 
-                        '. $title .'
-                    </div>
-                    <div class="info">';
-                    
-                    foreach( $v as $smalltitle => $content ) {
-                        echo '<p class="left-info">'.$smalltitle.'</p>';
-                        if( $smalltitle == "OS supportés" || $smalltitle == "Utilisation") {
-                            $contentspecial = explode(";", $content);
-                            echo '<div class="right-info">';
-
-                            if(isset($_POST["fiche-btn"])){
-                                echo '<script src="../script/ScrollHereOnLoad.js"></script>';
-                            }
-
-                            foreach( $contentspecial as $k3 => $v3 ) {
-                                echo '<p class="right-info">'.$v3.'</p>' ;
-                            }
-                            echo '</div>';
-
-                        }
-                        else{
-                            echo 
-                            '<p class="right-info">'.$content.'</p>';
-                        }
-                    };
-                    echo 
-                    '</div>
-                    </div>';
-                };
-
-                echo '</div>';
-
-
-                ?>
-        </div>
-
     </div>
 
 <!-- _____________________________________________________________________________________________ -->
