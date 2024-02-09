@@ -1,5 +1,6 @@
 <?php
 include '../php/database.php';
+include '../php/config.php';
 global $db;
 
 header("Cache-Control: no-cache");
@@ -80,8 +81,8 @@ if (!empty($_POST['credential'])) {
                     <p class="logo-name">SNOWSTORM.GG</p>
                 </div>
                 <div class="logo">
-                    <a href="../(page)/Search.html"><i class="fa-solid fa-cart-shopping fa-beat"></i></a>
-                    <a href="../(page)/login.html"><i class="fa-solid fa-user fa-beat"></i></a>
+                    <a href="./panier.php"><i class="fa-solid fa-cart-shopping fa-beat"></i></a>
+                    <a href="./login.php"><i class="fa-solid fa-user fa-beat"></i></a>
                     <img src="../Assets/france-flag.webp" alt="France flag" height="40px" width="40px">
                 </div>
             </div>
@@ -95,6 +96,9 @@ if (!empty($_POST['credential'])) {
                     <a href="#">FAQ</a>
                     <a href="./page-contact.html">CONTACT</a>
                     <a href="./profil.php"> COMPTE</a>
+                    <?php if(isset($_SESSION["user"]) && $_SESSION["user"]["IsAdmin"] == 1) {
+                        echo "<a href='./PnlAdmin.php'> Page Admin</a>";
+                    } ?>
                 </div>
                 <div class="navbar_search">
                     <form action="" class="search">
@@ -112,7 +116,7 @@ if (!empty($_POST['credential'])) {
     if (isset($_POST['FormsentLogin'])) {
         $Mail = $_POST['login-email'];
         $Password = $_POST['login-password'];
-        $mdp = $db->query("SELECT Mdp FROM Users WHERE Email='$Mail'");
+        $mdp = $db->query("SELECT Mdp, IsAdmin FROM Users WHERE Email='$Mail'");
         $mdp = $mdp->fetch();
         if (empty($mdp)) {
             echo '<div style="color: red; margin-top: 2rem">Adresse mail ou mot de passe invalide !</div>';
@@ -121,7 +125,7 @@ if (!empty($_POST['credential'])) {
             if ($PasswordVerify) {
                 $IDCLIENT = $db->query("SELECT IDUser FROM Users WHERE Email='$Mail'");
                 $IDCLIENT = $IDCLIENT->fetch();
-                $_SESSION['user'] = array('email' => $Mail, 'IDUser' => $IDCLIENT[0]);
+                $_SESSION['user'] = array('email' => $Mail, 'IDUser' => $IDCLIENT[0], 'IsAdmin' => $mdp[1]);
                 header("Location: ./profil.php");
                 exit();
             } else {

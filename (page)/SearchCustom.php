@@ -27,8 +27,8 @@
                     <p class="logo-name">SNOWSTORM.GG</p>
                 </div>
                 <div class="logo">
-                    <a href="../(page)/Search.html"><i class="fa-solid fa-cart-shopping fa-beat"></i></a>
-                    <a href="../(page)/login.html"><i class="fa-solid fa-user fa-beat"></i></a>
+                    <a href="./panier.php"><i class="fa-solid fa-cart-shopping fa-beat"></i></a>
+                    <a href="./login.php"><i class="fa-solid fa-user fa-beat"></i></a>
                     <img src="../Assets/france-flag.webp" alt="France flag" height="40px" width="40px">
                 </div>
             </div>
