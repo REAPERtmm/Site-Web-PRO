@@ -1,48 +1,52 @@
 <?php
-    require("../php/database.php");
-    require("../php/config.php");
-    require("../php/forceconnect.php");
-    $prix = $_POST['Data'];
-    $IDPanier = $_POST["DataPanier"];
+require("../php/database.php");
+require("../php/config.php");
+require("../php/forceconnect.php");
+$prix = $_POST['Data'];
+$IDPanier = $_POST["DataPanier"];
 
-    $IDLivraison = $_POST["DataLivraison"];
-    $PointRelais = $_POST["data2"]; //soit 0 soit 1
-    echo $PointRelais;
+$IDLivraison = $_POST["DataLivraison"];
+$PointRelais = $_POST["data2"]; //soit 0 soit 1
+echo $PointRelais;
 
 
-    //ALTER TABLE LIVRAISON SET POINRELAIS
-    if($PointRelais == 'SWpFaQ=='){
-        $q = $db->prepare("UPDATE Livraison SET PointRelais = 1 WHERE IDLivraison = :IDLivraison");
-        $q->execute([
-            "IDLivraison"=> $IDLivraison,
-        ]);
-    }
+//ALTER TABLE LIVRAISON SET POINRELAIS
+if ($PointRelais == 'SWpFaQ==') {
+    $q = $db->prepare("UPDATE Livraison SET PointRelais = 1 WHERE IDLivraison = :IDLivraison");
+    $q->execute([
+        "IDLivraison" => $IDLivraison,
+    ]);
+}
 
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SNOWSTORM.GG</title>
-  
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  
+
     <!-- Favicon -->
     <script src="https://kit.fontawesome.com/d3255ff586.js" crossorigin="anonymous"></script>
     <!-- Fonts API -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/penguin" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/base.css">
     <link rel="stylesheet" href="../styles/panier4.css">
 </head>
+
 <body>
-    
-<header class="unselectable">
+
+    <header class="unselectable">
         <div class="header">
             <div class="header_top">
                 <div class="logo">
@@ -58,23 +62,26 @@
 
             <div class="header_bot">
                 <div class="navbar_link">
-                    <a href="index.html">NOS PRODUITS</a>
-                    <a href="index.html">PERSONNALISER</a>
-                    <a href="../(page)/Search.html">GALERIE</a>
+                    <a href="./Search.php">NOS PRODUITS</a>
+                    <a href="./personnaliser.php">PERSONNALISER</a>
+                    <a href="./SearchCustom.php">GALERIE</a>
                     <a href="./support.php">SUPPORT/SAV</a>
-                    <a href="index.html">FAQ</a>
+                    <a href="#">FAQ</a>
                     <a href="./page-contact.html">CONTACT</a>
                 </div>
                 <div class="navbar_search">
                     <form action="" class="search">
                         <input type="text" placeholder="Rechercher un produit">
+                        <?php if (isset($_GET['research'])) {
+                            header("Location: ./Search.php?research=" . $_GET['research']);
+                        } ?>
                     </form>
                 </div>
             </div>
         </div>
     </header>
 
-<!-- _____________________________________________________________________________________________ -->
+    <!-- _____________________________________________________________________________________________ -->
 
     <div class="div1" id="">
         <h1 class="étape" id="">1</h1>
@@ -87,10 +94,12 @@
         <div class="sd2-3">
             <form action="../php/checkout.php" method="post">
                 <p>Produits</p>
-                <h1 class="text_3" id="">total : <?php print_r($prix)?> €</h1>
+                <h1 class="text_3" id="">total :
+                    <?php print_r($prix) ?> €
+                </h1>
                 <input type="hidden" name="DataPanier" id="DataPanier" value="<?php print_r($IDPanier); ?>">
                 <input class="bouton_continuer" type="submit" value="Payer" onclick="BeforeNextPage()">
-                <input type="hidden" name="Data" value="<?php print_r($_POST["Data"]);?>" id="Data">
+                <input type="hidden" name="Data" value="<?php print_r($_POST["Data"]); ?>" id="Data">
             </form>
         </div>
         <div class="sd2-3">
@@ -99,7 +108,7 @@
         </div>
     </div>
 
-<!-- _____________________________________________________________________________________________ -->
+    <!-- _____________________________________________________________________________________________ -->
     <footer class="footer">
         <div class="footer-container unselectable">
             <img src="../Assets/logo-removebg-preview.png" alt="Logo de Snowstorm" id="footer-img">
@@ -136,8 +145,8 @@
             </div>
         </div>
     </footer>
-    
     <script src="../script/app.js"></script>
 
 </body>
+
 </html>

@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SNOWSTORM.GG</title>
-  
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  
+
     <!-- Favicon -->
     <script src="https://kit.fontawesome.com/d3255ff586.js" crossorigin="anonymous"></script>
 
@@ -14,47 +15,48 @@
     <link rel="stylesheet" href="../styles/base.css">
     <link rel="stylesheet" href="../styles/panier3.css">
 </head>
+
 <body>
-    <?php 
-        require("../php/database.php");
-        require("../php/config.php");
-        require("../php/forceconnect.php");
+    <?php
+    require("../php/database.php");
+    require("../php/config.php");
+    require("../php/forceconnect.php");
 
-        $IDUser = $_SESSION["user"]["IDUser"];
+    $IDUser = $_SESSION["user"]["IDUser"];
 
-        $Prenom = $_POST["prenom"];
-        $Nom = $_POST["nom"];
-        $Adresse = $_POST["adresse"];
-        $Adresse2 = $_POST["adresse2"];
-        $CodePostal = $_POST["CP"];
-        $Ville = $_POST["ville"];
-        $Pays = $_POST["pays"];
-        $Info = $_POST["info"];
-        $Telephone = $_POST["telephone"];
-    
+    $Prenom = $_POST["prenom"];
+    $Nom = $_POST["nom"];
+    $Adresse = $_POST["adresse"];
+    $Adresse2 = $_POST["adresse2"];
+    $CodePostal = $_POST["CP"];
+    $Ville = $_POST["ville"];
+    $Pays = $_POST["pays"];
+    $Info = $_POST["info"];
+    $Telephone = $_POST["telephone"];
 
-        $q = $db ->prepare("INSERT INTO Livraison VALUES (NULL, :IDUser, :Prenom, :Nom, :Adresse, :Adresse2, :CodePostal, :Ville, :Pays, :InfoSupplementaires, :Telephone, :PointRelais)");
-        $q -> execute([
-            "IDUser"=> $IDUser,
-            "Prenom"=> $Prenom,
-            "Nom"=> $Nom,
-            "Adresse"=> $Adresse,
-            "Adresse2"=> $Adresse2,
-            "CodePostal"=> $CodePostal,
-            "Ville"=> $Ville,
-            "Pays"=> $Pays,
-            "InfoSupplementaires"=> $Info,
-            "Telephone"=> $Telephone,
-            "PointRelais"=> 0
-        ]);
 
-        $IDLivraison = $db->lastInsertId();
-        $IDPanier = $_POST["DataPanier"];
-        
+    $q = $db->prepare("INSERT INTO Livraison VALUES (NULL, :IDUser, :Prenom, :Nom, :Adresse, :Adresse2, :CodePostal, :Ville, :Pays, :InfoSupplementaires, :Telephone, :PointRelais)");
+    $q->execute([
+        "IDUser" => $IDUser,
+        "Prenom" => $Prenom,
+        "Nom" => $Nom,
+        "Adresse" => $Adresse,
+        "Adresse2" => $Adresse2,
+        "CodePostal" => $CodePostal,
+        "Ville" => $Ville,
+        "Pays" => $Pays,
+        "InfoSupplementaires" => $Info,
+        "Telephone" => $Telephone,
+        "PointRelais" => 0
+    ]);
+
+    $IDLivraison = $db->lastInsertId();
+    $IDPanier = $_POST["DataPanier"];
+
 
 
     ?>
-    
+
     <header class="unselectable">
         <div class="header">
             <div class="header_top">
@@ -71,16 +73,19 @@
 
             <div class="header_bot">
                 <div class="navbar_link">
-                    <a href="index.html">NOS PRODUITS</a>
-                    <a href="index.html">PERSONNALISER</a>
-                    <a href="../(page)/Search.html">GALERIE</a>
+                    <a href="./Search.php">NOS PRODUITS</a>
+                    <a href="./personnaliser.php">PERSONNALISER</a>
+                    <a href="./SearchCustom.php">GALERIE</a>
                     <a href="./support.php">SUPPORT/SAV</a>
-                    <a href="index.html">FAQ</a>
+                    <a href="#">FAQ</a>
                     <a href="./page-contact.html">CONTACT</a>
                 </div>
                 <div class="navbar_search">
                     <form action="" class="search">
                         <input type="text" placeholder="Rechercher un produit">
+                        <?php if (isset($_GET['research'])) {
+                            header("Location: ./Search.php?research=" . $_GET['research']);
+                        } ?>
                     </form>
                 </div>
             </div>
@@ -121,18 +126,18 @@
                 <div class="save-box2" id="check-box2" onclick="SetClickedBox(this.id, 0)"> </div>
             </div>
         </div>
-        
+
         <form action="panier4.php" id="form-livraison" method="POST">
             <input type="hidden" name="DataPanier" id="DataPanier" value="<?php print_r($IDPanier); ?>">
-            <input type="hidden" name="DataLivraison" id="DataLivraison" value="<?php echo $IDLivraison; ?>">    
-            <input type="hidden" name ="data2" id="data2" value="">
+            <input type="hidden" name="DataLivraison" id="DataLivraison" value="<?php echo $IDLivraison; ?>">
+            <input type="hidden" name="data2" id="data2" value="">
             <div class="save-box" id="save-config-btn">
                 <input class="bouton_continuer" type="submit" value="Valider" onclick="BeforeNextPage()">
-                <input type="hidden" name="Data" value="<?php print_r($_POST["Data"]);?>" id="Data">
+                <input type="hidden" name="Data" value="<?php print_r($_POST["Data"]); ?>" id="Data">
             </div>
         </form>
 
-    </div> 
+    </div>
 
     <footer class="footer">
         <div class="footer-container unselectable">
@@ -170,9 +175,10 @@
             </div>
         </div>
     </footer>
-    
+
     <script src="../script/index.js"></script>
     <script src="../script/panier3.js"></script>
 
 </body>
+
 </html>

@@ -41,7 +41,7 @@
                         <a href="./(page)/SearchCustom.php">GALERIE</a>
                         <a href="./(page)/support.php">SUPPORT/SAV</a>
                         <a href="#">FAQ</a>
-                        <a href="./(page)/page contact.html.">CONTACT</a>
+                        <a href="./(page)/page-contact.html">CONTACT</a>
                     </div>
                     <div class="navbar_search">
                         <form action="" method="GET" class="search">
@@ -136,13 +136,13 @@
     </div>
 
 
-    <form action="/php/comparateur.php" method="POST" id="form">
+    <form action="/(page)/comparateur.php" method="POST" id="form">
         <input type="hidden" name="IDClicked" id="IDClicked" value="">
     </form>
 
     <footer class="footer">
         <div class="footer-container unselectable">
-            <img src="./Assets/logo-removebg-preview.png" alt="Logo de Snowstorm" id="footer-img">
+            <img src="../Assets/logo-removebg-preview.png" alt="Logo de Snowstorm" id="footer-img">
             <p class="logo-name">Snowstorm.GG</p>
         </div>
         <div class="footer-container">

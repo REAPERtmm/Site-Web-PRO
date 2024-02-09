@@ -13,7 +13,7 @@
     <br>
     <br>
     <p>Vous pouvez retourner à l'accueil en cliquant sur le bouton ci-dessous.</p>
-    <a href="../index.html">buton de retour à l'accueil</a>
+    <a href="../index.php">buton de retour à l'accueil</a>
 
 </body>
 </html>

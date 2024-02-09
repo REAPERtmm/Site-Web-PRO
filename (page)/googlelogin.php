@@ -1,4 +1,4 @@
-<?php 
+<?php
 require '../php/config.php';
 
 $user = $_SESSION['user'];
@@ -6,49 +6,53 @@ $user = $_SESSION['user'];
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SNOWSTORM.GG</title>
-  
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  
+
     <!-- Favicon -->
     <script src="https://kit.fontawesome.com/d3255ff586.js" crossorigin="anonymous"></script>
     <!-- Fonts API -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/penguin" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/base.css">
     <link rel="stylesheet" href="../styles/login.css">
 </head>
+
 <body>
 
-    <?php if (isset($_POST['FormsentRegister'])){
-        include '../php/database.php'; 
-        global $db; 
-        $Mail = $user['email']; 
-        $Password = $_POST['register-password']; 
+    <?php if (isset($_POST['FormsentRegister'])) {
+        include '../php/database.php';
+        global $db;
+        $Mail = $user['email'];
+        $Password = $_POST['register-password'];
         $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
-        $Nom = $_POST['register-nom']; 
-        $Prenom = $_POST['register-prenom']; 
-        $DateNaissance = $_POST['register-date']; 
-        $Check = $db->query("SELECT Count(*) FROM Users WHERE Email='$Mail'"); 
-        $Check = $Check->fetch(); 
+        $Nom = $_POST['register-nom'];
+        $Prenom = $_POST['register-prenom'];
+        $DateNaissance = $_POST['register-date'];
+        $Check = $db->query("SELECT Count(*) FROM Users WHERE Email='$Mail'");
+        $Check = $Check->fetch();
         if ($Check[0] == 1) {
             echo '<div style="color: red; margin-top: 2rem">Adresse mail déjâ utilisé !</div>';
-            }else {
-                $Request = $db->query("INSERT INTO Users(IDUser, Email, Mdp, Nom, Prenom, DateNaissance) VALUE(0, '$Mail', '$hashedPassword', '$Nom', '$Prenom', '$DateNaissance')"); 
-                $IDCLIENT = $db->query("SELECT IDUser FROM Users WHERE Email='$Mail'"); 
-                $IDCLIENT = $IDCLIENT->fetch(); 
-                $_SESSION['user'] = array('email' => $Mail, 'IDUser' => $IDCLIENT[0]); 
-                header("Location: ./profil.php"); 
-                exit();
-            }
-        } 
-        ?>
+        } else {
+            $Request = $db->query("INSERT INTO Users(IDUser, Email, Mdp, Nom, Prenom, DateNaissance) VALUE(0, '$Mail', '$hashedPassword', '$Nom', '$Prenom', '$DateNaissance')");
+            $IDCLIENT = $db->query("SELECT IDUser FROM Users WHERE Email='$Mail'");
+            $IDCLIENT = $IDCLIENT->fetch();
+            $_SESSION['user'] = array('email' => $Mail, 'IDUser' => $IDCLIENT[0]);
+            header("Location: ./profil.php");
+            exit();
+        }
+    }
+    ?>
 
     <section>
         <form action="" method="POST">
@@ -56,15 +60,18 @@ $user = $_SESSION['user'];
             <div class="form-content">
                 <div>
                     <label for="register-Email">Email</label>
-                    <input type="email" name="register-email" value="<?php echo $user['email'] ?>" id="register-Email" disabled>
+                    <input type="email" name="register-email" value="<?php echo $user['email'] ?>" id="register-Email"
+                        disabled>
                 </div>
                 <div>
                     <label for="register-password">Mot de passe</label>
-                    <input type="password" name="register-password" placeholder="Password" id="register-password" required>
+                    <input type="password" name="register-password" placeholder="Password" id="register-password"
+                        required>
                 </div>
                 <div>
                     <label for="register-password-verified">Confirmer le mot de passe</label>
-                    <input type="password" name="register-password-verified" placeholder="Password" id="register-password-verified" required>
+                    <input type="password" name="register-password-verified" placeholder="Password"
+                        id="register-password-verified" required>
                     <span id="error_msg"></span>
                 </div>
                 <div>
@@ -81,7 +88,8 @@ $user = $_SESSION['user'];
                 </div>
             </div>
             <div class="form-submit">
-                <input name="FormsentRegister" class="button" id="FormsentRegisterSubmit" type="submit" value="Valider"/>
+                <input name="FormsentRegister" class="button" id="FormsentRegisterSubmit" type="submit"
+                    value="Valider" />
             </div>
         </form>
     </section>
@@ -91,4 +99,5 @@ $user = $_SESSION['user'];
     <script src="https://accounts.google.com/gsi/client" async></script>
 
 </body>
+
 </html>

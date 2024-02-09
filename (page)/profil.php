@@ -1,33 +1,37 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SNOWSTORM.GG</title>
-  
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  
+
     <!-- Favicon -->
     <script src="https://kit.fontawesome.com/d3255ff586.js" crossorigin="anonymous"></script>
     <!-- Fonts API -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/penguin" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/base.css">
     <link rel="stylesheet" href="../styles/profil.css">
 </head>
+
 <body>
 
-<?php 
+    <?php
     require("../php/database.php");
     require("../php/config.php");
     require("../php/forceconnect.php");
     header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
     header("Cache-Control: post-check=0, pre-check=0", false);
     header("Pragma: no-cache");
-    
+
     $IDUser = $_SESSION["user"]["IDUser"];
 
     $q = $db->prepare("SELECT Nom, Prenom FROM Users WHERE IDUser =:IDUser");
@@ -39,15 +43,17 @@
     $Nom = $qf["Nom"];
     $Prenom = $qf["Prenom"];
 
-?>
-    
+    ?>
+
     <header class="unselectable">
         <div class="header">
             <div class="header-grp">
                 <div class="header_top">
                     <div class="logo">
                         <img src="../Assets/logo-removebg-preview.png" alt="Logo" class="logo-img">
-                        <a href="../index.php"><p class="logo-name">SNOWSTORM.GG</p></a>
+                        <a href="../index.php">
+                            <p class="logo-name">SNOWSTORM.GG</p>
+                        </a>
                     </div>
                     <div class="logo">
                         <a href="./panier.php"><i class="fa-solid fa-cart-shopping fa-beat"></i></a>
@@ -55,10 +61,10 @@
                         <img src="../Assets/france-flag.webp" alt="France flag" height="40px" width="40px">
                     </div>
                 </div>
-                
+
                 <div class="header_bot">
                     <div class="navbar_link">
-                        <a href="../index.html">ACCUEIL </a>
+                        <a href="../index.php">ACCUEIL </a>
                         <a href="./historique.php">HISTORIQUE</a>
                         <a href="./favorite.php">FAVORIS</a>
                         <a href="./personnaliser.php">SAUVEGARDES</a>
@@ -68,7 +74,9 @@
                     <div class="navbar_search">
                         <form action="" method="GET" class="search">
                             <input type="search" placeholder="Rechercher un produit" id="search" name="research">
-                            <?php if(isset($_GET['research'])){header("Location: ./Search.php?research=".$_GET['research']);}?>
+                            <?php if (isset($_GET['research'])) {
+                                header("Location: ./Search.php?research=" . $_GET['research']);
+                            } ?>
                         </form>
                     </div>
                 </div>
@@ -80,7 +88,9 @@
     </header>
 
     <div class="titre">
-        <p class="text"> Bonjour <?php echo $Prenom.' '.$Nom ?> ! Vous êtes désormais connecté </p>
+        <p class="text"> Bonjour
+            <?php echo $Prenom . ' ' . $Nom ?> ! Vous êtes désormais connecté
+        </p>
         <a href="../index.php" class="save-box"> Retour à l'acceuil </a>
     </div>
 
@@ -121,18 +131,19 @@
             </div>
         </div>
     </footer>
-    
+
     <script src="../script/app.js"></script>
     <script src="../script/index.js"></script>
 </body>
+
 </html>
 
 
 
 
 
-<?php 
+<?php
 require '../php/config.php';
 
-print_r($_SESSION); 
+print_r($_SESSION);
 ?>
