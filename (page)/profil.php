@@ -92,6 +92,15 @@
             <?php echo $Prenom . ' ' . $Nom ?> ! Vous êtes désormais connecté
         </p>
         <a href="../index.php" class="save-box"> Retour à l'acceuil </a>
+        <form action="" method="POST">
+            <input type="submit" name="deconnexion" value="Déconnexion">
+        </form>
+        <?php 
+        if(isset($_POST['deconnexion'])) { 
+            session_destroy();
+            header('location : login.php');
+        }
+        ?>
     </div>
 
 

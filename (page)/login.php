@@ -94,6 +94,7 @@ if (!empty($_POST['credential'])) {
                     <a href="./support.php">SUPPORT/SAV</a>
                     <a href="#">FAQ</a>
                     <a href="./page-contact.html">CONTACT</a>
+                    <a href="./profil.php"> COMPTE</a>
                 </div>
                 <div class="navbar_search">
                     <form action="" class="search">
