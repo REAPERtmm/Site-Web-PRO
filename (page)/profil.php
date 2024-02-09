@@ -63,11 +63,12 @@
                         <a href="./favorite.php">FAVORIS</a>
                         <a href="./personnaliser.php">SAUVEGARDES</a>
                         <a href="./account.php">COMPTE</a>
+
                     </div>
                     <div class="navbar_search">
                         <form action="" method="GET" class="search">
                             <input type="search" placeholder="Rechercher un produit" id="search" name="research">
-                            <?php if(isset($_GET['research'])){header("Location: ../Search.php?research=".$_GET['research']);}?>
+                            <?php if(isset($_GET['research'])){header("Location: ./Search.php?research=".$_GET['research']);}?>
                         </form>
                     </div>
                 </div>

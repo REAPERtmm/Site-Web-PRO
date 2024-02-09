@@ -1,33 +1,27 @@
-<?php 
-    require("../php/config.php");
-    require("../php/forceconnect.php");
-include '../php/database.php';
-global $db;
-
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SNOWSTORM.GG</title>
+    <title>SNOWSTORM.GG/FAVORITES</title>
   
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   
     <!-- Favicon -->
     <script src="https://kit.fontawesome.com/d3255ff586.js" crossorigin="anonymous"></script>
+    <script src="../script/favorite.js"></script>
     <!-- Fonts API -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/penguin" rel="stylesheet">
     <!-- CSS -->
-    <link rel="stylesheet" href="../styles/base.css">
-    <link rel="stylesheet" href="../styles/support.css">
+    <link rel="stylesheet" href="../styles/design.css">
+    <link rel="stylesheet" href="../styles/design.css">
 </head>
-<body>
 
+<body>
+    
 <header class="unselectable">
         <div class="header">
             <div class="header-grp">
@@ -66,50 +60,46 @@ global $db;
         </div>
     </header>
 
-    <div class="container">
-        <h1>Envoyer un mail au SAV</h1>
-
-        <form class="form-container" method="POST" action="./verif.php" >
-            <div class="">
-                <label class="form-label" for="nom">Nom</label>
-                <input class="form-input" type="text" name="nom" id="nom" required />
-            </div>
-            
-            <div class="">
-                <label class="form-label" for="pays">Pays</label>
-                <input class="form-input" type="text" name="pays" id="pays" required />
-            </div>
-
-            <div class="">
-                <label class="form-label" for="adresse">Adresse</label>
-                <input class="form-input" type="text" name="adresse" id="adresse" required />
-            </div>
-
-            <div class="">
-                <label class="form-label" for="email">Email</label>
-                <input class="form-input" type="email" name="email" id="email" required />
-            </div>
-
-            <div class="">
-                <label class="form-label" for="tel">Téléphone</label>
-                <input class="form-input" type="tel" name="tel" id="tel" required />
-            </div>
-            
-            <div class="">
-                <label class="form-label" for="subject">Subject</label>
-                <input class="form-input" type="text" name="subject" id="subject" required />
-            </div>
-            
-            <div class="">
-                <label class="form-label" for="Message">Message</label>
-                <textarea class="form-textarea" id="Message" name="Message" required></textarea>
-            </div>
-
-            <input class="form-submit" type="submit" value="Envoyer" name="formsent">
-        </form>
-
+       
+    <div class="div1" id="">
+        <h1 class="étape" id="">1</h1>
+        <h1 class="étape" id="">2</h1>
+        <h1 class="text_3" id="">Étape 3 : choix de la langue et design</h1>
+        <h1 class="étape" id="">4</h1>
+        <button class="save-conf" id="">sauvgarder la confihuration</button>
     </div>
+        <img class="grosclavier" src="../Assets/clavier design.png" alt="photo clavier design" id="">
+    
+    <div class="changedesign" id="">
+        <div class="préclavier" id="">
+            <h5 class="pcla" id="">Alphanumérique</h5>
+            <img src="../Assets/clavier design2.png" alt="photo clavier design Alphanumérique" id="" width="70%" height="50%">
+            <div class="bpetdescrit" id="">
+                <h6 class="pcla1" id="">French</h6>
+                <button class="bpdesign">Change</button>
+            </div>
+        </div>
 
+        <div class="préclavier" id="">
+            <h5 class="pcla" id="">Modifier</h5>
+            <img src="../Assets/clavier design3.png" alt="photo clavier design Modern with média" id="" width="70%" height="50%">
+            <div class="bpetdescrit" id="">    
+                <h6 class="pcla2" id="">Modern with média</h6>
+                <button class="bpdesign">Change</button>
+            </div>
+        </div>
+
+        <div class="préclavier" id="">
+            <h5 class="pcla" id="">OS</h5>
+            <img src="../Assets/clavier design4.png" alt="photo clavier design Windows 10" id="" width="70%" height="50%">
+            <div class="bpetdescrit" id="">    
+                <h6 class="pcla3" id="">Windows 10</h6>
+                <button class="bpdesign">Change</button>
+            </div>
+        </div>
+        <button class="grosboutton" id="">Téléchager votre propre design</button>
+        <button class="suivant" id="">suivant</button>
+    </div>    
     <footer class="footer">
         <div class="footer-container unselectable">
             <img src="../Assets/logo-removebg-preview.png" alt="Logo de Snowstorm" id="footer-img">
@@ -146,8 +136,5 @@ global $db;
             </div>
         </div>
     </footer>
-
-    <script src="../script/app.js"></script>
-
-</body>
-</html>
+    
+    </html>

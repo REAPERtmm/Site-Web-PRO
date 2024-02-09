@@ -19,8 +19,6 @@
     <link rel="stylesheet" href="./styles/index.css">
 </head>
 <body>
-    
-
     <header class="unselectable">
         <div class="header">
             <div class="header-grp">
@@ -40,9 +38,9 @@
                     <div class="navbar_link">
                         <a href="./(page)/Product-1.html">NOS PRODUITS</a>
                         <a href="./(page)/personnaliser.php">PERSONNALISER</a>
-                        <a href="./(page)/Search.php">GALERIE</a>
+                        <a href="./(page)/SearchCustom.php">GALERIE</a>
                         <a href="./(page)/support.php">SUPPORT/SAV</a>
-                        <a href="./(page)/faq">FAQ</a>
+                        <a href="#">FAQ</a>
                         <a href="./(page)/page contact.html.">CONTACT</a>
                     </div>
                     <div class="navbar_search">
