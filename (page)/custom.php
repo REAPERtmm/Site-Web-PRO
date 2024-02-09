@@ -29,12 +29,10 @@
     $IDUser = $_SESSION["user"]["IDUser"];
 
     if(!isset($_POST["IDCustom"]) || $_POST["IDCustom"] == -1){
-        if(isset($_POST["IDProduit"])){
-            $IDProduit = $_POST['IDProduct'];
-        } else
-        {
-            $IDProduit = 1;
-        }
+        $qjnqzddhbqz = $db->prepare("SELECT IDProduit FROM Produit ORDER BY RAND () LIMIT 1");
+        $qjnqzddhbqz->execute();
+        $IDProduit = $qjnqzddhbqz->fetch()["IDProduit"];
+
         $query = $db->prepare("INSERT INTO Customs(IDCustom, IDUser, IDProduit) VALUES (NULL, :User, :IDP)");
         $query->execute(['IDP'=>$IDProduit, 'User'=>$IDUser]);
         $IDCustom = $db->lastInsertId();

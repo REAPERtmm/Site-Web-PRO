@@ -92,7 +92,7 @@
                         <form action="custom.php" method="POST">
                             <div>
                                 <button type="submit"> <img class="offers-img" src="../Assets/CreateNew.jpg" alt="Image du clavier best seller"></button>
-                                <input type="hidden" name="IDProduct" value="1">
+                                <input type="hidden" name="IDProduct" value="-1">
                                 <input type="hidden" name="IDCustom" value="-1">
                             </div>        
                         </form>           
