@@ -21,13 +21,24 @@
                 "Path2"=>$_POST["path2"],
                 "Description2"=>$_POST["Description2"]
             ]);
-        };
+        }else if(isset($_POST["Insert-Produit"])) {
+            unset($_POST["Insert-Produit"]);
+            $q = $db->prepare("INSERT INTO Produit(Nom, Prix, ImgPath, Path1, Description1, Path2, Description2) VALUES (:Nom, :Prix, :ImgPath, :Path1, :Description1, :Path2, :Description2)");
+            $q->execute([
+                "Nom"=>$_POST["Nom"],
+                "Prix"=>$_POST["Prix"],
+                "ImgPath"=>$_POST["ImgPath"],
+                "Path1"=>$_POST["path1"],
+                "Description1"=>$_POST["Description1"],
+                "Path2"=>$_POST["path2"],
+                "Description2"=>$_POST["Description2"]
+            ]);
+        } ;
     ?>
 </head>
 <body>
     <h1 class="titre">PANNEL ADMIN</h1>   
     <div>
-
         <?php 
         $q = $db->prepare("SELECT * FROM Produit");
         $q->execute();
@@ -71,9 +82,41 @@
             </form>
             ';
         }
-
         ?>
-        
+    <form class="div-Produits" method="post">
+                <fieldset class="Row">
+                    <input type="hidden" name="IDProduit" value="">
+                    <div class="set">
+                        <label for="Nom">Nom</label>
+                        <input type="text" name="Nom" value="" id="Nom">
+                    </div>
+                    <div class="set">
+                        <label for="Prix">Prix(€)</label>
+                        <input type="number" min="0" step=".01" name="Prix" id="Prix" value="">
+                    </div>
+                    <div class="set">
+                        <label for="ImgPath">Img Presentation</label>
+                        <input type="text" name="ImgPath" value="" id="ImgPath">
+                    </div>
+                    <div class="set">
+                        <label for="path1">Img Presentation2</label>
+                        <input type="text" name="path1" value="" id="path1">
+                    </div>
+                    <div class="set">
+                        <label for="path2">Img Presentation3</label>
+                        <input type="text" name="path2" value="" id="path">
+                    </div>
+                    <div class="set">
+                        <label for="desc1">Description1</label>
+                        <textarea name="Description1" id="desc1" cols="30" rows="10"></textarea>
+                    </div>
+                    <div class="set">
+                        <label for="desc2">Description2</label>
+                        <textarea name="Description2" id="desc2" cols="30" rows="10"></textarea>
+                    </div>
+                    <input type="submit" name="Insert-Produit">
+                </fieldset>
+            </form>
     </div> 
     
 </body>

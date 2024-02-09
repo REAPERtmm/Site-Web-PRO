@@ -24,11 +24,43 @@
     require("../php/database.php");
     require("../php/config.php");
     require("../php/forceconnect.php");
+
+    $IDUser = $_SESSION["user"]["IDUser"];
+
     header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
     header("Cache-Control: post-check=0, pre-check=0", false);
     header("Pragma: no-cache");
 
-    
+    if(isset($_POST["Submit"])){
+        $query1265154zqd154z4584 = $db->prepare("UPDATE Customs SET MessageC=:Mess WHERE IDCustom=:ID");
+        $query1265154zqd154z4584->execute([
+            "Mess"=> $_POST["option1"],
+            "ID"=> $_POST["IDCustom"],
+        ]);
+
+        $check = $db->prepare('SELECT * FROM Paniers WHERE IDUser = :IDUser AND IDCustom = :ID');
+        $check->execute([
+            'IDUser'=> $IDUser,
+            'ID' => $_POST["IDCustom"]
+        ]);
+        if($check->rowCount() == 0) {
+            $query = $db->prepare('INSERT INTO Paniers VALUES(:IDUser, 1, :IDCustom, NULL, NULL, :Amount, 0)');
+            $query->execute([
+                "IDUser" => $IDUser,
+                "IDCustom" => $_POST["IDCustom"],
+                "Amount" => $_POST["amount"],
+            ]);
+        } else {
+            $previousAmount = $check->fetch()["Amount"];
+            $query2 = $db->prepare("UPDATE Paniers SET Amount = :Amount WHERE IDCustom = :IDCustom AND IDUser = :IDUser");
+            $query2->execute([
+                "Amount"=> $previousAmount + $_POST["amount"],
+                "IDCustom" => $_POST["IDCustom"],
+                "IDUser"=> $IDUser,
+            ]);
+        }
+        header("Location: panier.php");
+    }
 
 
     $q = $db->prepare("SELECT * FROM Customs JOIN (Attribut JOIN Produit ON Produit.IDProduit = Attribut.IDProduit) ON Customs.IDProduit=Produit.IDProduit WHERE Customs.IDCustom = :ID");
@@ -174,8 +206,8 @@
             </div>
 
             <div class="choice">
-                <input type="checkbox" class="option" name="option1" id="opt1">
-                <label for="opt1">Option1</label>
+                <label for="opt1">Message au Constructeur :</label>
+                <textarea name="option1" id="opt1" cols="30" rows="10">Message Vide</textarea>
             </div>
             <div class="choice">
                 <input type="checkbox" class="option" name="option2" id="opt2">
@@ -210,7 +242,7 @@
                 <input type="number" min="1" name="amount" id="amount" value="1">
                 <p id="qt">Quantité</p>
             </div>  
-            <input type="submit" value="Poursuivre l'achat" class="btn-submit">
+            <input type="submit" name="Submit" value="Poursuivre l'achat" class="btn-submit">
         </div>
         <input type="hidden" name="prixUnit" id="prixUnit" value="<?php echo $prix; ?>">
         <input type="hidden" name="IDCustom" value="<?php echo $_POST["IDCustom"]; ?>">
