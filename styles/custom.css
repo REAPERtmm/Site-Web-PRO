@@ -425,14 +425,17 @@ body {
     display: flex;
     background-color: rgb(172, 168, 168);
     align-items: center;
-    margin-bottom: 10%;
+    padding-bottom: 2%;
+
 }
 
 .rate-title {
     background-color: rgb(172, 168, 168);
+    margin-top: 2%;
 }
 
 .rate {
+    display: block;
     padding: 0 2%;
     width: 25%;
 }

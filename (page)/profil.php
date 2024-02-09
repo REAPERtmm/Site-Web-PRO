@@ -23,6 +23,7 @@
 <?php 
     require("../php/database.php");
     require("../php/config.php");
+    require("../php/forceconnect.php");
     header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
     header("Cache-Control: post-check=0, pre-check=0", false);
     header("Pragma: no-cache");
@@ -58,15 +59,16 @@
                 <div class="header_bot">
                     <div class="navbar_link">
                         <a href="../index.html">ACCUEIL </a>
-                        <a href="./(page)/historique.php">HISTORIQUE</a>
-                        <a href="./(page)/Search.php">FAVORIS</a>
-                        <a href="index.html">SAUVEGARDES</a>
-                        <a href="./(page)/account.html">COMPTE</a>
+                        <a href="./historique.php">HISTORIQUE</a>
+                        <a href="./favorite.php">FAVORIS</a>
+                        <a href="./personnaliser.php">SAUVEGARDES</a>
+                        <a href="./account.php">COMPTE</a>
+
                     </div>
                     <div class="navbar_search">
                         <form action="" method="GET" class="search">
                             <input type="search" placeholder="Rechercher un produit" id="search" name="research">
-                            <?php if(isset($_GET['research'])){header("Location: ../Search.php?research=".$_GET['research']);}?>
+                            <?php if(isset($_GET['research'])){header("Location: ./Search.php?research=".$_GET['research']);}?>
                         </form>
                     </div>
                 </div>

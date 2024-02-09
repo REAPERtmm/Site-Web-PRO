@@ -20,35 +20,29 @@
 <body>
     <?php  
     require("../php/database.php");
-    //require("../php/config.php");
+    require("../php/config.php");
+    require("../php/forceconnect.php");
     header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
     header("Cache-Control: post-check=0, pre-check=0", false);
     header("Pragma: no-cache");
     
     $IDUser = $_SESSION["user"]["IDUser"];
-    $IDUser = 1;
-    
-    if (isset($_POST['IDProduct']))
-        {
+
+    if(!isset($_POST["IDCustom"]) || $_POST["IDCustom"] == -1){
+        if(isset($_POST["IDProduit"])){
             $IDProduit = $_POST['IDProduct'];
-        }
-    else
+        } else
         {
             $IDProduit = 1;
         }
-
-    if($_POST["IDCustom"] == -1){
         $query = $db->prepare("INSERT INTO Customs(IDCustom, IDUser, IDProduit) VALUES (NULL, :User, :IDP)");
         $query->execute(['IDP'=>$IDProduit, 'User'=>$IDUser]);
         $IDCustom = $db->lastInsertId();
     } else {
         $IDCustom = $_POST["IDCustom"];
-        $query = $db->prepare("SELECT COUNT(*) FROM Customs WHERE IDCustom=:ID AND IDUser=:User");
-        $query->execute(['ID'=>$IDCustom, 'User'=>$IDUser]);
-        if($query->fetch()["COUNT(*)"] == 0){
-            $query = $db->prepare("INSERT INTO Customs(IDCustom, IDUser, IDProduit) VALUES (NULL, :User, :IDP)");
-            $query->execute(['IDP'=>$IDProduit, 'User'=>$IDUser]);
-        }
+        $query = $db->prepare("SELECT IDProduit FROM Customs WHERE IDCustom=:ID");
+        $query->execute(['ID'=>$IDCustom]);
+        $IDProduit = $query->fetch()["IDProduit"];
     }
 
 
@@ -86,38 +80,32 @@
     ?>
     <header class="unselectable">
         <div class="header">
-            <div class="header-grp">
-                <div class="header_top">
-                    <div class="logo">
-                        <img src="../Assets/logo-removebg-preview.png" alt="Logo" class="logo-img">
-                        <a href="../index.php"><p class="logo-name">SNOWSTORM.GG</p></a>
-                    </div>
-                    <div class="logo">
-                        <a href="./panier.php"><i class="fa-solid fa-cart-shopping fa-beat"></i></a>
-                        <a href="./login.php"><i class="fa-solid fa-user fa-beat"></i></a>
-                        <img src="../Assets/france-flag.webp" alt="France flag" height="40px" width="40px">
-                    </div>
+            <div class="header_top">
+                <div class="logo">
+                    <img src="../Assets/logo-removebg-preview.png" alt="Logo" class="logo-img">
+                    <p class="logo-name">SNOWSTORM.GG</p>
                 </div>
-                
-                <div class="header_bot">
-                    <div class="navbar_link">
-                        <a href="./Product-1.html">NOS PRODUITS</a>
-                        <a href="./personnaliser.php">PERSONNALISER</a>
-                        <a href="./Search.php">GALERIE</a>
-                        <a href="#">SUPPORT/SAV</a>
-                        <a href="#">FAQ</a>
-                        <a href="#">CONTACT</a>
-                    </div>
-                    <div class="navbar_search">
-                        <form action="" method="GET" class="search">
-                            <input type="search" placeholder="Rechercher un produit" id="search" name="research">
-                            <?php if(isset($_GET['research'])){header("Location: ../Search.php?research=".$_GET['research']);}?>
-                        </form>
-                    </div>
+                <div class="logo">
+                    <a href="../(page)/Search.html"><i class="fa-solid fa-cart-shopping fa-beat"></i></a>
+                    <a href="../(page)/login.html"><i class="fa-solid fa-user fa-beat"></i></a>
+                    <img src="../Assets/france-flag.webp" alt="France flag" height="40px" width="40px">
                 </div>
             </div>
-            <div class="header__navbar--toggle">
-                <span class="header__navbar--toggle-icons"></span>
+
+            <div class="header_bot">
+                <div class="navbar_link">
+                    <a href="index.html">NOS PRODUITS</a>
+                    <a href="index.html">PERSONNALISER</a>
+                    <a href="../(page)/Search.html">GALERIE</a>
+                    <a href="./support.php">SUPPORT/SAV</a>
+                    <a href="index.html">FAQ</a>
+                    <a href="./page-contact.html">CONTACT</a>
+                </div>
+                <div class="navbar_search">
+                    <form action="" class="search">
+                        <input type="text" placeholder="Rechercher un produit">
+                    </form>
+                </div>
             </div>
         </div>
     </header>
@@ -369,10 +357,9 @@
   
 
     </div>
-    <?php echo $_POST["IDCustom"];?>
     <form action="" id="form-action" method="POST">
-        <input type="hidden" id="backplate-color" name="backplate-color" value="bbbbbb">
-        <input type="hidden" id="keycaps-color" name="keycaps-color" value="#0000ff">
+        <input type="hidden" id="backplate-color" name="backplate-color" value="<?php if(isset($_POST["backplate-color"])){echo $_POST["backplate-color"];}else{echo "undefine";} ?>">
+        <input type="hidden" id="keycaps-color" name="keycaps-color" value="<?php if(isset($_POST["keycaps-color"])){echo $_POST["keycaps-color"];}else{echo "undefine";} ?>">
         <input type="hidden" id="data" name="data" value="">
         <input type="hidden" name="IDCustom" value=<?php echo $IDCustom;?>>    
     </form>

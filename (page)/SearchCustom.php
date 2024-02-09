@@ -1,30 +1,17 @@
-<?php 
-    require("../php/config.php");
-    require("../php/forceconnect.php");
-include '../php/database.php';
-global $db;
-
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SNOWSTORM.GG</title>
-  
+    <title>E-commerce</title>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  
-    <!-- Favicon -->
     <script src="https://kit.fontawesome.com/d3255ff586.js" crossorigin="anonymous"></script>
-    <!-- Fonts API -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/penguin" rel="stylesheet">
-    <!-- CSS -->
     <link rel="stylesheet" href="../styles/base.css">
-    <link rel="stylesheet" href="../styles/support.css">
+    <link rel="stylesheet" href="../styles/search.css"> 
 </head>
 <body>
 
@@ -60,50 +47,72 @@ global $db;
         </div>
     </header>
 
-    <div class="container">
-        <h1>Envoyer un mail au SAV</h1>
+    <?php 
+        include '../php/database.php';
+        require("../php/config.php");
+        require("../php/forceconnect.php");
+        if(!isset($_GET["ASC"])){ $_GET["ASC"] = "off";};
+        if(!isset($_GET["research"])){ $_GET["research"] = "";};
+        if(!isset($_GET["loadedAmount"])){ $_GET["loadedAmount"] = "4";};
+    ?>
 
-        <form class="form-container" method="POST" action="./verif.php" >
-            <div class="">
-                <label class="form-label" for="nom">Nom</label>
-                <input class="form-input" type="text" name="nom" id="nom" required />
-            </div>
-            
-            <div class="">
-                <label class="form-label" for="pays">Pays</label>
-                <input class="form-input" type="text" name="pays" id="pays" required />
-            </div>
+    <form action="SearchCustom.php" method="get" class="form-galerie" id="form-reload">
+        <div class="IsAsc">
+            <input type="checkbox" name="ASC" id="Checkbox-Asc" <?php if($_GET["ASC"]=="on"){echo "checked";}?>>
+            <div class="Title-Checkbox">Prix croissant</div>
+            <input type="hidden" name="loadedAmount" value="<?php echo $_GET["loadedAmount"]; ?>" id="loadedAmount">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+    <div class="catalogue" id="catalogue">
+        <?php 
+            $_SQL_Search = "%" . $_GET["research"] . "%";
 
-            <div class="">
-                <label class="form-label" for="adresse">Adresse</label>
-                <input class="form-input" type="text" name="adresse" id="adresse" required />
-            </div>
+            if($_GET["ASC"] == "on"){
+                $q = $db->prepare("SELECT Produit.ImgPath, Customs.Nom, Produit.Prix, Customs.IDCustom, Customs.BackplateColor, Customs.KeycapColor, Customs.AvisCreator FROM Customs INNER JOIN Produit ON Produit.IDProduit=Customs.IDProduit WHERE Customs.Nom like :search ORDER BY Prix ASC LIMIT " . $_GET["loadedAmount"]);
+            }else{
+                $q = $db->prepare("SELECT Produit.ImgPath, Customs.Nom, Produit.Prix, Customs.IDCustom, Customs.BackplateColor, Customs.KeycapColor, Customs.AvisCreator FROM Customs INNER JOIN Produit ON Produit.IDProduit=Customs.IDProduit WHERE Customs.Nom like :search ORDER BY Prix DESC LIMIT " . $_GET["loadedAmount"]);
+            }
+            $q->execute([
+                "search" => $_SQL_Search,
+            ]);
+            $q = $q->fetchAll();
 
-            <div class="">
-                <label class="form-label" for="email">Email</label>
-                <input class="form-input" type="email" name="email" id="email" required />
-            </div>
+            foreach ($q as $key => $value) {
+                $prix = floatval($value["Prix"]);
+                switch($value["BackplateColor"]){
+                    case "#ffffff": {$prix += 5; break;}
+                    case "#cd853f": {$prix += 5; break;}
+                }
+                switch($value["KeycapColor"]){
+                    case "#0000ff": {$prix += 91; break;}
+                    case "#ff0000": {$prix += 31; break;}
+                    case "#582900": {$prix += 122; break;}
+                }
 
-            <div class="">
-                <label class="form-label" for="tel">Téléphone</label>
-                <input class="form-input" type="tel" name="tel" id="tel" required />
-            </div>
-            
-            <div class="">
-                <label class="form-label" for="subject">Subject</label>
-                <input class="form-input" type="text" name="subject" id="subject" required />
-            </div>
-            
-            <div class="">
-                <label class="form-label" for="Message">Message</label>
-                <textarea class="form-textarea" id="Message" name="Message" required></textarea>
-            </div>
+                echo '<form action="custom.php" method="post" class="product">';
+                    echo '<button class="img-product">';
+                        echo '<img src="../Assets/' . $value["ImgPath"] . '" alt="image" width="100%" height="100%">';
+                    echo '</button>';
 
-            <input class="form-submit" type="submit" value="Envoyer" name="formsent">
-        </form>
+                    echo '
+                        <input type="hidden" name="IDCustom" value="'.$value["IDCustom"].'">
+                        <input type="hidden" name="keycaps-color" value="'.$value["KeycapColor"].'">
+                        <input type="hidden" name="backplate-color" value="'.$value["BackplateColor"].'">
+                    ';
 
+                    echo '<h1 class="title-product">' . $value["Nom"] . '</h1>';
+                    echo '<i class="price-product">' . $prix . '€</i>';
+                    echo '<p class="Avis">' . $value["AvisCreator"] . '</p>';
+                echo "</form>";
+            }
+        ?>
     </div>
 
+    <input type="button" value="Charger Plus ..." id="btn-load-more" onclick="load_12new()">
+    
+    <script src="../script/ScrollHereOnLoad.js"></script>
+    
     <footer class="footer">
         <div class="footer-container unselectable">
             <img src="../Assets/logo-removebg-preview.png" alt="Logo de Snowstorm" id="footer-img">
@@ -140,8 +149,7 @@ global $db;
             </div>
         </div>
     </footer>
-
-    <script src="../script/app.js"></script>
-
+    
+    <script src="../script/search.js"></script>
 </body>
 </html>

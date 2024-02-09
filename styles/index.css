@@ -120,14 +120,17 @@
 
 
 .offers-compare {
-    color: white;
+    color: black;
     text-decoration: none;
     float: right;
-    padding-right: 5%;
-    padding-bottom: 5%;
+    padding-bottom: 2%;
     padding-top: 2%;
     cursor: pointer;
+    justify-content: center;
+    align-items: center;
 }
+
+
 
 
 .offers-title {

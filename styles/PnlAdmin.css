@@ -1,0 +1,21 @@
+.divProduits{
+    width: 100%;
+}
+
+.Row{
+    width: 90%;
+}
+
+
+.set{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+label{
+    width: 20%;
+}
+input[type="number"], input[type="text"], textarea{
+    width: 80%;
+}
